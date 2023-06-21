@@ -4,6 +4,7 @@
 # Whitelist
 !.gitignore
 !requirements.txt
+!readme.md
 
 !latex/
 latex/**/*.aux
