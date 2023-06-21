@@ -1,0 +1,195 @@
+#+SETUPFILE: header.org
+#+TITLE: Resultados
+
+* Notación
+*fun* = Mínimo local hallado de la función /execute\textunderscore circuit/ con el optimizador
+\newline
+*p* = Número de capas (a mayor número el circuito es más profundo)
+\newline
+*theta* = Lista de parámetros [\beta_{1}, ..., \beta_{p}, \gamma_{1}, ..., \gamma_{p}] del circuito cuántico
+\newline
+*num iterations* = Número de iteraciones del compilador necesarias para hallar el mínimo
+\newline
+*seed\textunderscore simulator* = Semilla utilizada en la ejecución del circuito para fijar la aleatoriedad en /backend.run()/
+\newline
+*X_{ij}* = Se refiere a la arista *i* -> *j*. 1 Si dicha arista es parte del camino resultante, 0 en otro caso
+\newline
+*q_n* = Qubit enésimo
+\newline
+q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01}
+\newpage
+
+* Primer grafo
+[[./img/primer_grafo.png]]
+\newpage
+** Aer - Versión del paper (primer\textunderscore grafo/aer-qaoa.ipynb)
+Pruebas realizadas sobre la versión del código sin la restricción\newline
+    *X_{13} + X_{23} = 1*\newline
+
+Versión equivalente a la de [[[https://www.mdpi.com/1424-8220/22/19/7570/xml][Multi-Objective Routing Optimization for 6G Communication Networks Using a Quantum Approximate Optimization Algorithm-sensors-22-07570-v2]]]
+
+- *Estadísticas:*
+
+  Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los siguientes:
+| / |     <> | >                  |                 > |
+|---+--------+--------------------+-------------------|
+|   | *Qubits* | *Camino*             | *Frecuencia* (1000) |
+|---+--------+--------------------+-------------------|
+|   |  10101 | X_{01}X_{12}X_{23} |               917 |
+|   |  10110 | X_{02}X_{12}X_{23} |                82 |
+|   |  01001 | X_{01}X_{13}       |                 1 |
+|---+--------+--------------------+-------------------|
+\newpage
+
+*** Caso correcto
+
+| / | <>    | >                | >              | >                             |
+|---+-------+------------------+----------------+-------------------------------|
+|   | *fun*   | *theta*            | *num iterations* | *seed\textunderscore simulator* |
+|---+-------+------------------+----------------+-------------------------------|
+|   | 29.63 | [0.7739, 0.9302] | 29             | 10                            |
+|---+-------+------------------+----------------+-------------------------------|
+
+#+CAPTION: seed\textunderscore simulator=10
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_paper_aer_correcto.png]]
+
+Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{12}X_{23} (Camino óptimo)
+
+\newpage
+
+*** Caso erróneo
+
+| / | <>    | >                | >              | >                             |
+|---+-------+------------------+----------------+-------------------------------|
+|   | *fun*   | *theta*            | *num iterations* | *seed\textunderscore simulator* |
+|---+-------+------------------+----------------+-------------------------------|
+|   | 52.79 | [0.6320  0.7177] | 35             | 21                            |
+|---+-------+------------------+----------------+-------------------------------|
+
+#+CAPTION: seed\textunderscore simulator=21
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_paper_aer_erroneo.png]]
+
+Mejor resultado: 10110 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{02}X_{12}X_{23} (Camino incorrecto. Rompe 2 restricciones)
+
+Restricciones rotas: \newline
+    *X_{02}+X_{12}=X_{23}* \newline
+    *X_{01}=X_{12}+X_{13}* \newline
+
+\newpage
+
+*** Caso subóptimo
+
+Obtenido a mano (no se ha encontrado ninguna semilla que diese este resultado)
+
+| / | <>    | >                |
+|---+-------+------------------|
+|   | *fun*   | *theta*            |
+|---+-------+------------------|
+|   | 67.33 | [-0.4811, 1.566] |
+|---+-------+------------------|
+
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_paper_aer_suboptimo.png]]
+
+Mejor resultado: 01001 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{13} (Camino subóptimo, pero no se rompe ninguna restricción)
+
+\newpage
+
+*** Utilizando el parámetro *theta* obtenido en el artículo
+  
+| / | <>    | >                         |
+|---+-------+---------------------------|
+|   | *fun*   | *theta*                     |
+|---+-------+---------------------------|
+|   | 65.40 | [0.28517317, -5.05969577] |
+|---+-------+---------------------------|
+
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_paper_aer_resultado.png]]
+
+Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{12}X_{23} (Camino óptimo)
+
+La gráfica resultante es muy similar a la versión que se intenta replicar. *fun* tiene resultados muy altos, entre 65 y 70 (en comparación con la versión del código con la restricción extra).
+
+\newpage
+
+** Aer simulator con restricción extra  (primer\textunderscore grafo/con\textunderscore restricc/aer-qaoa.ipynb)
+Con respecto a la función de coste del paper se añade la restricción\newline
+    *X_{13} + X_{23} = 1*\newline
+Esto sería, que el camino solo llegue al nodo final *3* por una de las aristas X_{i3} existentes.
+
+- *Estadísticas:*
+
+Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los siguientes:
+
+| / |     <> | >                              |                 > |
+|---+--------+--------------------------------+-------------------|
+|   | *Qubits* | *Camino*                         | *Frecuencia (1000)* |
+|---+--------+--------------------------------+-------------------|
+|   |  10101 | X_{01}X_{12}X_{23}             |               938 |
+|   |  11000 | X_{13}X_{23}                   |                37 |
+|   |  10001 | X_{01}X_{23}                   |                 9 |
+|   |  00011 | X_{01}X_{02}                   |                11 |
+|   |  00100 | X_{12}                         |                 3 |
+|   |  00010 | X_{02}                         |                 1 |
+|   |  11111 | X_{01}X_{02}X_{12}X_{13}X_{23} |                 1 |
+|---+--------+--------------------------------+-------------------|
+
+\newpage
+
+*** Caso correcto
+| / | <>    | >                | >              | >                             |
+|---+-------+------------------+----------------+-------------------------------|
+|   | *fun*   | *theta*            | *num iterations* | *seed\textunderscore simulator* |
+|---+-------+------------------+----------------+-------------------------------|
+|   | 42.29 | [0.5081, 0.9401] | 33             | 3                             |
+|---+-------+------------------+----------------+-------------------------------|
+
+#+CAPTION: seed\textunderscore simulator=3
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_restr_aer_correcto.png]]
+
+Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{12}X_{23} (Camino óptimo)
+
+\newpage
+
+*** Caso "correcto" con ruido
+| / | <>    | >               | >              | >                             |
+|---+-------+-----------------+----------------+-------------------------------|
+|   | *fun*   | *theta*           | *num iterations* | *seed\textunderscore simulator* |
+|---+-------+-----------------+----------------+-------------------------------|
+|   | 90.75 | [0.9962, 1.995] | 27             | 2                             |
+|---+-------+-----------------+----------------+-------------------------------|
+
+#+CAPTION: seed\textunderscore simulator=2
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_restr_aer_correcto-con-ruido.png]]
+
+Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{12}X_{23} (Camino óptimo)
+
+Aunque se obtenga el resultado óptimo (10101) existen otros resultados demasiado altos, e incluso ejecutando el circuito con el mismo *theta* se dan valores distintos. Podría afectar a los resultados de las estadísticas.
+
+Además se ve que encuentra un valor *fun* demasiado alto (90.75)
+
+\newpage
+
+** Provider
+- ibmq\textunderscore lima
+#+CAPTION: num iterations=2
+#+ATTR_LATEX: :scale 0.4
+[[./img/primer_provider_iter-2.png]]
+Solo para comprobar que funciona la ejecución.

@@ -1,0 +1,53 @@
+#+LANGUAGE: es
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [letterpaper]
+\usepackage[spanish,activeacute]
+#+LATEX_HEADER: \usepackage{lmodern} % Ensures we have the right font
+#+LATEX_HEADER: \usepackage{listings} % Syntax highlighting
+#+LATEX_HEADER: \usepackage{lmodern} % Ensures we have the right font
+#+LATEX_HEADER: \usepackage[AUTO]{inputenc}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath, amsthm, amssymb}
+#+LATEX_HEADER: \usepackage[table, xcdraw]{xcolor}
+#+OPTIONS: timestamp:nil title:t toc:t todo:t |:t
+#+OPTIONS: author:nil broken-links:nil c:nil creator:nil
+#+OPTIONS: date:nil e:t email:nil f:t inline:t num:t
+#+AUTHOR: vian
+#+EMAIL: vian@melville
+#+DATE: \today
+#+BEGIN_COMMENT
+Cosas modificables
+Añadir a la plantilla para cambiar el formato
+#+DATE: {{{time(%d/%m/%Y)}}}
+#+END_COMMENT
+
+# % Para comentar regiones
+#+BEGIN_COMMENT
+# % Modo oscuro
+#+LATEX_HEADER: \usepackage{xcolor}
+#+LATEX_HEADER: \pagecolor[rgb]{0,0,0} % page color black
+#+LATEX_HEADER: \color[rgb]{1,1,1} % line color white
+#+END_COMMENT
+
+#+BEGIN_COMMENT
+# % Title and toc in two pages
+#+OPTIONS: timestamp:nil author:nil date:nil email:nil title:nil toc:nil
+#+BEGIN_EXPORT latex
+\begin{titlepage}
+\begin{center}
+% font size: \tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+{\LARGE \textbf{tutyklo supongo}\par} % \par == \n
+{\large segunda parte del titulo\par}
+\vspace{0.4cm}
+{vian\par}
+\vspace{0.2cm}
+\today
+\end{center}
+\vfill
+{\footnotesize Escrito a pie de página}
+\end{titlepage}
+
+\tableofcontents
+\newpage % jump to a new page
+#+END_EXPORT
+#+END_COMMENT

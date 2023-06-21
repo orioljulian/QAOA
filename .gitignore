@@ -1,0 +1,14 @@
+# Ignore everything in root
+/*
+
+# Whitelist
+!.gitignore
+!requirements.txt
+
+!latex/
+latex/**/*.aux
+latex/**/*.log
+latex/**/auto/
+
+!codigo/
+codigo/**/.ipynb_checkpoints/

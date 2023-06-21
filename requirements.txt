@@ -1,0 +1,9 @@
+jupyter
+pylatexenc
+networkx
+qiskit-textbook @ git+https://github.com/qiskit-community/qiskit-textbook.git#subdirectory=qiskit-textbook-src
+qiskit==0.39.2
+qiskit-aer==0.11.1
+qiskit-terra==0.22.2
+qiskit-ibm-provider==0.2.1
+qiskit_ibm_runtime==0.8.0
