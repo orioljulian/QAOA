@@ -21,7 +21,7 @@
 \date{}
 \title{Resultados}
 \hypersetup{
- pdfauthor={vian},
+ pdfauthor={Oriol Julián},
  pdftitle={Resultados},
  pdfkeywords={},
  pdfsubject={},
@@ -34,7 +34,7 @@
 
 
 \section{Notación}
-\label{sec:org49a6e67}
+\label{sec:orgfe1dc44}
 \textbf{fun} = Mínimo local hallado de la función \emph{execute\textunderscore circuit} con el optimizador
 \newline
 \textbf{p} = Número de capas (a mayor número el circuito es más profundo)
@@ -53,13 +53,13 @@ q\textsubscript{4}q\textsubscript{3}q\textsubscript{2}q\textsubscript{1}q\textsu
 \newpage
 
 \section{Primer grafo}
-\label{sec:orgdb0025b}
+\label{sec:org5be0280}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo.png}
 \end{center}
 \newpage
 \subsection{Aer - Versión del paper (primer\textunderscore grafo/aer-qaoa.ipynb)}
-\label{sec:org5b1c373}
+\label{sec:org2e2bfa8}
 Pruebas realizadas sobre la versión del código sin la restricción\newline
     \textbf{X\textsubscript{13} + X\textsubscript{23} = 1}\newline
 
@@ -69,8 +69,9 @@ Versión equivalente a la de [\href{https://www.mdpi.com/1424-8220/22/19/7570/xm
 \item \textbf{Estadísticas:}
 
 Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los siguientes:
-\end{itemize}
-\begin{center}
+\begin{table}[htbp]
+\label{tab:org1e0fbf9}
+\centering
 \begin{tabular}{|r|l|r|}
 \hline
 \textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia} (1000)\\
@@ -80,11 +81,12 @@ Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los
 01001 & X\textsubscript{01}X\textsubscript{13} & 1\\
 \hline
 \end{tabular}
-\end{center}
+\end{table}
+\end{itemize}
 \newpage
 
 \subsubsection{Caso correcto}
-\label{sec:org2ff3d16}
+\label{sec:orga864570}
 
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
@@ -109,7 +111,7 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 \newpage
 
 \subsubsection{Caso erróneo}
-\label{sec:org2c3382c}
+\label{sec:org25d9c91}
 
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
@@ -138,7 +140,7 @@ Restricciones rotas: \newline
 \newpage
 
 \subsubsection{Caso subóptimo}
-\label{sec:org56f36b1}
+\label{sec:org07b4950}
 
 Obtenido a mano (no se ha encontrado ninguna semilla que diese este resultado)
 
@@ -163,7 +165,7 @@ Camino: X\textsubscript{01}X\textsubscript{13} (Camino subóptimo, pero no se ro
 \newpage
 
 \subsubsection{Utilizando el parámetro \textbf{theta} obtenido en el artículo}
-\label{sec:org995b779}
+\label{sec:org7f0d6fc}
 
 \begin{center}
 \begin{tabular}{|r|l|}
@@ -187,8 +189,278 @@ La gráfica resultante es muy similar a la versión que se intenta replicar. \te
 
 \newpage
 
+\subsubsection{Rz(*2), Rzz(*2), Rx(*2)}
+\label{sec:org04240ed}
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+circuit.rz(coef * 2, q_idx)
+circuit.rzz(coef * gamma[p] * 2, q_idxs[0], q_idxs[1])
+circuit.rx(beta[p] * 4, q_idx)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+11010 & X\textsubscript{02}X\textsubscript{13}X\textsubscript{23} & 845\\
+11001 &  & 88\\
+01010 &  & 5\\
+11011 &  & 14\\
+00101 &  & 21\\
+00010 &  & 1\\
+10110 &  & 14\\
+10101 &  & 3\\
+01001 &  & 5\\
+10010 &  & 2\\
+00110 &  & 2\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{coef *= 2}
+\label{sec:org9dc9c63}
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+circuit.rz(2 * coef, q_idx)
+circuit.rzz(2 * coef * gamma[p], q_idxs[0], q_idxs[1])
+circuit.rx(beta[p] * 2, q_idx)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+11010 & X\textsubscript{02}X\textsubscript{13}X\textsubscript{23} & 966\\
+11101 &  & 2\\
+00101 &  & 18\\
+01010 &  & 8\\
+11001 &  & 3\\
+00110 &  & 1\\
+10110 &  & 2\\
+\hline
+\end{tabular}
+\end{center}
+
+Da un mismo error un porcentaje de veces muy alto. Error muy fiable.
+
+\subsubsection{Coef /= 2}
+\label{sec:org64f02f6}
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+circuit.rz(1/2 * coef, q_idx)
+circuit.rzz(1/2 * coef * gamma[p], q_idxs[0], q_idxs[1])
+circuit.rx(beta[p] * 2, q_idx)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+00000 &  & 1000\\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsubsection{\(\beta\) /= 2}
+\label{sec:org569bbe1}
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+circuit.rz(coef, q_idx)
+circuit.rzz(coef * gamma[p], q_idxs[0], q_idxs[1])
+circuit.rx(beta[p], q_idx)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 & \uline{Óptimo} & 986\\
+10110 &  & 14\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{./img/primer_paper_aer_beta-div-2.png}
+\caption{Mejor resultado}
+\end{figure}
+
+\newpage
+
+\subsubsection{\(\gamma\) /= 2}
+\label{sec:org0fc0dca}
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+circuit.rz(coef, q_idx)
+circuit.rzz(coef * gamma[p] / 2, q_idxs[0], q_idxs[1])
+circuit.rx(beta[p] * 2, q_idx)
+\end{lstlisting}
+
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 & \uline{Óptimo} & 1000\\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+
+\subsubsection{\(\beta\) /= 2, \(\gamma\) /= 2}
+\label{sec:org4fa3767}
+\lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+circuit.rz(coef, q_idx)
+circuit.rzz(coef * gamma[p] / 2, q_idxs[0], q_idxs[1])
+circuit.rx(beta[p], q_idx)
+\end{lstlisting}
+
+
+\begin{itemize}
+\item num layers = 1:
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 & \uline{Óptimo} & 1000\\
+\hline
+\end{tabular}
+\end{center}
+
+\item num layers = 2:
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 &  & 960\\
+10001 &  & 28\\
+11001 &  & 12\\
+\hline
+\end{tabular}
+\end{center}
+
+\item num layers = 3:
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 &  & 565\\
+10001 &  & 111\\
+11101 &  & 87\\
+\ldots{} &  & \ldots{}\\
+\hline
+\end{tabular}
+\end{center}
+\end{itemize}
+
+\newpage
+
+\subsubsection{\(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5}
+\label{sec:org9ab8ea0}
+
+\begin{itemize}
+\item num layers = 1:
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 &  & 1000\\
+\hline
+\end{tabular}
+\end{center}
+
+\item num layers = 2:
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 &  & 992\\
+11001 &  & 8\\
+\hline
+\end{tabular}
+\end{center}
+
+\item num layers = 3:
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 &  & 469\\
+11101 &  & 198\\
+11011 &  & 88\\
+\ldots{} &  & \ldots{}\\
+\hline
+\end{tabular}
+\end{center}
+\end{itemize}
+
+\newpage
+
+\subsubsection{Original pero variar num layers}
+\label{sec:org9187522}
+
+\begin{itemize}
+\item num layers = 1: (Igual que \ref{table:estadisticas_primer_aer_normal})
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+10101 &  & 913\\
+10110 &  & 86\\
+01001 &  & 1\\
+\hline
+\end{tabular}
+\end{center}
+
+\item num layers = 2:
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{}
+\hline
+\end{tabular}
+\end{center}
+
+\item num layers = 3:
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia (1000)}\\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{}
+\hline
+\end{tabular}
+\end{center}
+\end{itemize}
+
 \subsection{Aer simulator con restricción extra  (primer\textunderscore grafo/con\textunderscore restricc/aer-qaoa.ipynb)}
-\label{sec:org29963ac}
+\label{sec:orgf13b2ce}
 Con respecto a la función de coste del paper se añade la restricción\newline
     \textbf{X\textsubscript{13} + X\textsubscript{23} = 1}\newline
 Esto sería, que el camino solo llegue al nodo final \textbf{3} por una de las aristas X\textsubscript{i3} existentes.
@@ -218,7 +490,7 @@ Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los
 \newpage
 
 \subsubsection{Caso correcto}
-\label{sec:org6dec763}
+\label{sec:org1b57a85}
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
 \hline
@@ -242,7 +514,7 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 \newpage
 
 \subsubsection{Caso "correcto" con ruido}
-\label{sec:org46fc634}
+\label{sec:org7e9448b}
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
 \hline
@@ -270,7 +542,7 @@ Además se ve que encuentra un valor \textbf{fun} demasiado alto (90.75)
 \newpage
 
 \subsection{Provider}
-\label{sec:org4dc6a18}
+\label{sec:org97b22fc}
 \begin{itemize}
 \item ibmq\textunderscore lima
 \end{itemize}
