@@ -34,7 +34,7 @@
 
 
 \section{Notación}
-\label{sec:org59ce790}
+\label{sec:org5f6e8a3}
 \textbf{fun} = Mínimo local hallado de la función \emph{execute\textunderscore circuit} con el optimizador
 \newline
 \textbf{p} = Número de capas (a mayor número el circuito es más profundo)
@@ -53,13 +53,13 @@ q\textsubscript{4}q\textsubscript{3}q\textsubscript{2}q\textsubscript{1}q\textsu
 \newpage
 
 \section{Primer grafo}
-\label{sec:orgea5ea3f}
+\label{sec:org57f33eb}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo.png}
 \end{center}
 \newpage
 \subsection{Aer - Versión del paper (primer\textunderscore grafo/aer-qaoa.ipynb)}
-\label{sec:org4e2d776}
+\label{sec:orgf8fd1cc}
 Pruebas realizadas sobre la versión del código sin la restricción\newline
     \textbf{X\textsubscript{13} + X\textsubscript{23} = 1}\newline
 
@@ -85,7 +85,7 @@ Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los
 \newpage
 
 \subsubsection{Caso correcto}
-\label{sec:orgf43e8e6}
+\label{sec:orgb25161f}
 
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
@@ -110,7 +110,7 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 \newpage
 
 \subsubsection{Caso erróneo}
-\label{sec:orge2bd810}
+\label{sec:org90c86f6}
 
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
@@ -139,7 +139,7 @@ Restricciones rotas: \newline
 \newpage
 
 \subsubsection{Caso subóptimo}
-\label{sec:org21c8d3c}
+\label{sec:orgd4da142}
 
 Obtenido a mano (no se ha encontrado ninguna semilla que diese este resultado)
 
@@ -164,7 +164,7 @@ Camino: X\textsubscript{01}X\textsubscript{13} (Camino subóptimo, pero no se ro
 \newpage
 
 \subsubsection{Utilizando el parámetro \textbf{theta} obtenido en el artículo}
-\label{sec:org9cfc0ff}
+\label{sec:org90b282c}
 
 \begin{center}
 \begin{tabular}{|r|l|}
@@ -189,7 +189,7 @@ La gráfica resultante es muy similar a la versión que se intenta replicar. \te
 \newpage
 
 \subsubsection{Rz(*2), Rzz(*2), Rx(*2)}
-\label{sec:orga0198ff}
+\label{sec:org1a57da0}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef * 2, q_idx)
@@ -218,7 +218,7 @@ circuit.rx(beta[p] * 4, q_idx)
 \end{center}
 
 \subsubsection{coef *= 2}
-\label{sec:orgd2f0e9c}
+\label{sec:org96619de}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(2 * coef, q_idx)
@@ -245,7 +245,7 @@ circuit.rx(beta[p] * 2, q_idx)
 Da un mismo error un porcentaje de veces muy alto. Error muy fiable.
 
 \subsubsection{Coef /= 2}
-\label{sec:org3b28255}
+\label{sec:orgb1ea214}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(1/2 * coef, q_idx)
@@ -266,7 +266,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsubsection{\(\beta\) /= 2}
-\label{sec:orgba8b678}
+\label{sec:org47f4ce7}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -294,7 +294,7 @@ circuit.rx(beta[p], q_idx)
 \newpage
 
 \subsubsection{\(\gamma\) /= 2}
-\label{sec:orgb50fecd}
+\label{sec:org6056a0f}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -315,7 +315,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsubsection{\(\beta\) /= 2, \(\gamma\) /= 2}
-\label{sec:org2f767cd}
+\label{sec:org435f9d7}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -367,7 +367,7 @@ circuit.rx(beta[p], q_idx)
 \newpage
 
 \subsubsection{\(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5}
-\label{sec:orgf304881}
+\label{sec:org64b3a8e}
 
 \begin{itemize}
 \item num layers = 1:
@@ -411,7 +411,7 @@ circuit.rx(beta[p], q_idx)
 \newpage
 
 \subsubsection{Original pero variar num layers}
-\label{sec:orgdd27800}
+\label{sec:org5effa7d}
 
 Al aumentar el número de capas se obtienen resultados mucho peores (tal vez esté mal implementado)
 \begin{itemize}
@@ -460,7 +460,7 @@ Al aumentar el número de capas se obtienen resultados mucho peores (tal vez est
 \end{itemize}
 
 \subsection{Aer simulator con restricción extra  (primer\textunderscore grafo/con\textunderscore restricc/aer-qaoa.ipynb)}
-\label{sec:org0247eae}
+\label{sec:orgbc480f9}
 Con respecto a la función de coste del paper se añade la restricción\newline
     \textbf{X\textsubscript{13} + X\textsubscript{23} = 1}\newline
 Esto sería, que el camino solo llegue al nodo final \textbf{3} por una de las aristas X\textsubscript{i3} existentes.
@@ -490,7 +490,7 @@ Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los
 \newpage
 
 \subsubsection{Caso correcto}
-\label{sec:orge17fb47}
+\label{sec:orgcea874e}
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
 \hline
@@ -514,7 +514,7 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 \newpage
 
 \subsubsection{Caso "correcto" con ruido}
-\label{sec:orgb7e9047}
+\label{sec:org775b541}
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
 \hline
@@ -542,14 +542,45 @@ Además se ve que encuentra un valor \textbf{fun} demasiado alto (90.75)
 \newpage
 
 \subsection{Provider}
-\label{sec:org83afeb5}
-\begin{itemize}
-\item ibmq\textunderscore lima
-\end{itemize}
+\label{sec:org585f1dc}
+\subsubsection{ibmq\textunderscore lima}
+\label{sec:org4c1e701}
+Solo para comprobar que funciona la ejecución.
+
 \begin{figure}[htbp]
 \centering
 \includegraphics[scale=0.4]{./img/primer_provider_iter-2.png}
 \caption{num iterations=2}
 \end{figure}
-Solo para comprobar que funciona la ejecución.
+
+\newpage
+
+\subsubsection{ibmq\textunderscore manila}
+\label{sec:orgaf02521}
+\(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5
+\begin{center}
+\includegraphics[scale=0.4]{./img/primer_provider_manila.png}
+\end{center}
+\newpage
+
+\subsection{Runtime}
+\label{sec:orgd626a95}
+\subsubsection{ibmq\textunderscore lima}
+\label{sec:org01667dd}
+\(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5
+\begin{center}
+\begin{tabular}{|r|l|r|}
+\hline
+\textbf{fun} & \textbf{theta} & \textbf{num iterations}\\
+\hline
+37.16 & [0.6869, 0.4728] & 26\\
+\hline
+\end{tabular}
+\end{center}
+
+
+Resultado de ejecutar ese \textbf{theta} obtenido con Aer:
+\begin{center}
+\includegraphics[scale=0.4]{./img/primer_runtime_lima.png}
+\end{center}
 \end{document}

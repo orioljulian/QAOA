@@ -396,8 +396,32 @@ Además se ve que encuentra un valor *fun* demasiado alto (90.75)
 \newpage
 
 ** Provider
-- ibmq\textunderscore lima
+*** ibmq\textunderscore lima
+Solo para comprobar que funciona la ejecución.
+
 #+CAPTION: num iterations=2
 #+ATTR_LATEX: :scale 0.4
 [[./img/primer_provider_iter-2.png]]
-Solo para comprobar que funciona la ejecución.
+
+\newpage
+
+*** ibmq\textunderscore manila
+\beta_{0} = 0.5, \gamma_{0} = 0.5
+#+ATTR_LATEX: :scale 0.4
+[[./img/primer_provider_manila.png]]
+\newpage
+
+** Runtime
+*** ibmq\textunderscore lima
+\beta_{0} = 0.5, \gamma_{0} = 0.5
+| / | <>    | >                | >              |
+|---+-------+------------------+----------------|
+|   | *fun*   | *theta*            | *num iterations* |
+|---+-------+------------------+----------------|
+|   | 37.16 | [0.6869, 0.4728] | 26             |
+|---+-------+------------------+----------------|
+
+
+Resultado de ejecutar ese *theta* obtenido con Aer:
+#+ATTR_LATEX: :scale 0.4
+[[./img/primer_runtime_lima.png]]
