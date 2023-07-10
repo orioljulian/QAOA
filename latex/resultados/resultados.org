@@ -1,4 +1,5 @@
 #+SETUPFILE: header.org
+#+OPTIONS: toc:t
 #+TITLE: Resultados
 
 * Notación
@@ -19,7 +20,7 @@
 q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01}
 \newpage
 
-* Primer grafo
+* Primer grafo sin restricción
 [[./img/primer_grafo/primer_grafo.png]]
 \newpage
 ** Aer - Versión del paper (primer\textunderscore grafo/aer-qaoa.ipynb)
@@ -53,7 +54,7 @@ Versión equivalente a la de [[[https://www.mdpi.com/1424-8220/22/19/7570/xml][M
 
 #+CAPTION: seed\textunderscore simulator=10
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_paper_aer_correcto.png]]
+[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_correcto.png]]
 
 Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -72,7 +73,7 @@ Camino: X_{01}X_{12}X_{23} (Camino óptimo)
 
 #+CAPTION: seed\textunderscore simulator=21
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_paper_aer_erroneo.png]]
+[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_erroneo.png]]
 
 Mejor resultado: 10110 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -96,7 +97,7 @@ Obtenido a mano (no se ha encontrado ninguna semilla que diese este resultado)
 |---+-------+------------------|
 
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_paper_aer_suboptimo.png]]
+[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_suboptimo.png]]
 
 Mejor resultado: 01001 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -114,7 +115,7 @@ Camino: X_{01}X_{13} (Camino subóptimo, pero no se rompe ninguna restricción)
 |---+-------+---------------------------|
 
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_paper_aer_resultado.png]]
+[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado.png]]
 
 Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -203,7 +204,7 @@ Da un mismo error un porcentaje de veces muy alto. Error muy fiable.
 
 #+CAPTION: Mejor resultado
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_paper_aer_beta-div-2.png]]
+[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_beta-div-2.png]]
 
 \newpage
 
@@ -331,6 +332,364 @@ Al aumentar el número de capas se obtienen resultados mucho peores (tal vez est
   |   |  00000 |        |                36 |
   |---+--------+--------+-------------------|
 \newpage
+** Aer simulator sin restricción extra y P = 40
+*** Modificadores paper
+#+begin_src python
+  circuit.rz(coef, q_idx)
+  circuit.rzz(coef * gamma[p], q_idxs[0], q_idxs[1])
+  circuit.rx(beta[p] * 2, q_idx)
+#+end_src
+
+- Estadísticas num layers = 1:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10010 |        |               780 |
+  |   |  10001 |        |               200 |
+  |   |  10101 | *Óptimo* |                20 |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 2:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10010 |        |               766 |
+  |   |  10101 | *Óptimo* |               166 |
+  |   |  10111 |        |                23 |
+  |   |  10001 |        |                10 |
+  |   |  10110 |        |                 9 |
+  |   |  01001 |        |                 9 |
+  |   |  11010 |        |                 4 |
+  |   |  00001 |        |                 4 |
+  |   |  11011 |        |                 4 |
+  |   |  00000 |        |                 3 |
+  |   |  10011 |        |                 1 |
+  |   |  01101 |        |                 1 |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 3:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               396 |
+  |   |  01001 |        |               196 |
+  |   |  01101 |        |               154 |
+  |   |  10010 |        |               105 |
+  |   |  00101 |        |                38 |
+  |   |  10001 |        |                32 |
+  |   |  10110 |        |                31 |
+  |   |  00001 |        |                21 |
+  |   |  11001 |        |                 5 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 4:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  01001 |        |               484 |
+  |   |  01101 |        |               198 |
+  |   |  10101 | *Óptimo* |                96 |
+  |   |  10010 |        |                65 |
+  |   |  00001 |        |                47 |
+  |   |  11001 |        |                40 |
+  |   |  01010 |        |                13 |
+  |   |  11101 |        |                12 |
+  |   |  10110 |        |                 9 |
+  |   |  00101 |        |                 8 |
+  |   |  00010 |        |                 5 |
+  |   |  10001 |        |                 5 |
+  |   |  00000 |        |                 4 |
+  |   |  11011 |        |                 4 |
+  |   |  11010 |        |                 3 |
+  |   |  10011 |        |                 2 |
+  |   |  10100 |        |                 2 |
+  |   |  01000 |        |                 1 |
+  |   |  11000 |        |                 1 |
+  |   |  01011 |        |                 1 |
+  |---+--------+--------+-------------------|
+\newpage
+
+*** Modificadores originales
+#+begin_src python
+  circuit.rz(coef * gamma[p] * 2, q_idx)
+  circuit.rzz(coef * gamma[p] * 2, q_idxs[0], q_idxs[1])
+  circuit.rx(beta[p] * 2, q_idx)
+#+end_src
+
+- Estadísticas num layers = 1:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               403 |
+  |   |  10010 |        |               146 |
+  |   |  11001 |        |               103 |
+  |   |  00000 |        |                97 |
+  |   |  01001 |        |                95 |
+  |   |  10000 |        |                74 |
+  |   |  00001 |        |                39 |
+  |   |  10001 |        |                21 |
+  |   |  00101 |        |                10 |
+  |   |  10011 |        |                 5 |
+  |   |  11011 |        |                 4 |
+  |   |  11101 |        |                 2 |
+  |   |  11010 |        |                 1 |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 2:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               194 |
+  |   |  00000 |        |               157 |
+  |   |  10010 |        |               120 |
+  |   |  01001 |        |                72 |
+  |   |  10110 |        |                59 |
+  |   |  00001 |        |                48 |
+  |   |  10000 |        |                23 |
+  |   |  11010 |        |                35 |
+  |   |  10001 |        |                21 |
+  |   |  00010 |        |                43 |
+  |   |  01101 |        |                10 |
+  |   |  11011 |        |                66 |
+  |   |  11101 |        |                21 |
+  |   |  01000 |        |                16 |
+  |   |  10100 |        |                40 |
+  |   |  10111 |        |                10 |
+  |   |  10011 |        |                 8 |
+  |   |  11000 |        |                 4 |
+  |   |  00101 |        |                18 |
+  |   |  01011 |        |                 5 |
+  |   |  00011 |        |                 3 |
+  |   |  11001 |        |                20 |
+  |   |  11111 |        |                 1 |
+  |   |  00100 |        |                 4 |
+  |   |  01010 |        |                 2 |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 3:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10010 |        |               444 |
+  |   |  01001 |        |               206 |
+  |   |  10101 | *Óptimo* |               137 |
+  |   |  00000 |        |                51 |
+  |   |  11101 |        |                29 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+\newpage
+
+** Provider
+*** ibmq\textunderscore lima
+Solo para comprobar que funciona la ejecución.
+
+#+CAPTION: num iterations=2
+#+ATTR_LATEX: :scale 0.4
+[[./img/primer_grafo/sin_restriccion_extra/primer_provider_iter-2.png]]
+
+\newpage
+
+*** ibmq\textunderscore manila
+\beta_{0} = 0.5, \gamma_{0} = 0.5
+#+ATTR_LATEX: :scale 0.4
+[[./img/primer_grafo/sin_restriccion_extra/primer_provider_manila.png]]
+\newpage
+
+** Runtime
+*** ibmq\textunderscore lima
+\beta_{0} = 0.5, \gamma_{0} = 0.5
+| / | <>    | >                | >              |
+|---+-------+------------------+----------------|
+|   | *fun*   | *theta*            | *num iterations* |
+|---+-------+------------------+----------------|
+|   | 37.16 | [0.6869, 0.4728] | 26             |
+|---+-------+------------------+----------------|
+
+
+Resultado de ejecutar ese *theta* obtenido con Aer:
+#+ATTR_LATEX: :scale 0.4
+[[./img/primer_grafo/sin_restriccion_extra/primer_runtime_lima.png]]
+
+\newpage
+* Primer grafo con restricción
+** Aer simulator con restricción extra  (primer\textunderscore grafo/con\textunderscore restricc/aer-qaoa.ipynb)
+Con respecto a la función de coste del paper se añade la restricción\newline
+    *X_{13} + X_{23} = 1*\newline
+Esto sería, que el camino solo llegue al nodo final *3* por una de las aristas X_{i3} existentes.
+
+- *Estadísticas:*
+
+Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los siguientes:
+
+| / |     <> | >                              |                 > |
+|---+--------+--------------------------------+-------------------|
+|   | *Qubits* | *Camino*                         | *Frecuencia (1000)* |
+|---+--------+--------------------------------+-------------------|
+|   |  10101 | X_{01}X_{12}X_{23}             |               938 |
+|   |  11000 | X_{13}X_{23}                   |                37 |
+|   |  10001 | X_{01}X_{23}                   |                 9 |
+|   |  00011 | X_{01}X_{02}                   |                11 |
+|   |  00100 | X_{12}                         |                 3 |
+|   |  00010 | X_{02}                         |                 1 |
+|   |  11111 | X_{01}X_{02}X_{12}X_{13}X_{23} |                 1 |
+|---+--------+--------------------------------+-------------------|
+
+\newpage
+
+*** Caso correcto
+| / | <>    | >                | >              | >                             |
+|---+-------+------------------+----------------+-------------------------------|
+|   | *fun*   | *theta*            | *num iterations* | *seed\textunderscore simulator* |
+|---+-------+------------------+----------------+-------------------------------|
+|   | 42.29 | [0.5081, 0.9401] | 33             | 3                             |
+|---+-------+------------------+----------------+-------------------------------|
+
+#+CAPTION: seed\textunderscore simulator=3
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_grafo/con_restriccion_extra/primer_restr_aer_correcto.png]]
+
+Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{12}X_{23} (Camino óptimo)
+
+\newpage
+
+*** Caso "correcto" con ruido
+| / | <>    | >               | >              | >                             |
+|---+-------+-----------------+----------------+-------------------------------|
+|   | *fun*   | *theta*           | *num iterations* | *seed\textunderscore simulator* |
+|---+-------+-----------------+----------------+-------------------------------|
+|   | 90.75 | [0.9962, 1.995] | 27             | 2                             |
+|---+-------+-----------------+----------------+-------------------------------|
+
+#+CAPTION: seed\textunderscore simulator=2
+#+ATTR_LATEX: :scale 0.5
+[[./img/primer_grafo/con_restriccion_extra/primer_restr_aer_correcto-con-ruido.png]]
+
+Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
+
+Camino: X_{01}X_{12}X_{23} (Camino óptimo)
+
+Aunque se obtenga el resultado óptimo (10101) existen otros resultados demasiado altos, e incluso ejecutando el circuito con el mismo *theta* se dan valores distintos. Podría afectar a los resultados de las estadísticas.
+
+Además se ve que encuentra un valor *fun* demasiado alto (90.75)
+
+\newpage
+
+** Aer simulator con restricción extra y P = 40
+*** Modificadores del paper
+#+begin_src python
+  circuit.rz(coef, q_idx)
+  circuit.rzz(coef * gamma[p], q_idxs[0], q_idxs[1])
+  circuit.rx(beta[p] * 2, q_idx)
+#+end_src
+
+- Estadísticas num layers = 1:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10001 |        |               825 |
+  |   |  10101 | *Óptimo* |               174 |
+  |   |  01010 |        |                 1 |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 2:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               544 |
+  |   |  10001 |        |               152 |
+  |   |  01010 |        |                94 |
+  |   |  01001 |        |                84 |
+  |   |  10010 |        |                62 |
+  |   |  11001 |        |                27 |
+  |   |  10110 |        |                15 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 3:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               693 |
+  |   |  01001 |        |                69 |
+  |   |  10001 |        |                65 |
+  |   |  10010 |        |                42 |
+  |   |  01010 |        |                31 |
+  |   |  00011 |        |                26 |
+  |   |  01011 |        |                20 |
+  |   |  11001 |        |                14 |
+  |   |  00010 |        |                10 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+\newpage
+
+*** Modificadores originales
+#+begin_src python
+  circuit.rz(coef * gamma[p] * 2, q_idx)
+  circuit.rzz(coef * gamma[p] * 2, q_idxs[0], q_idxs[1])
+  circuit.rx(beta[p] * 2, q_idx)
+#+end_src
+
+- Estadísticas num layers = 1:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               630 |
+  |   |  00001 |        |               139 |
+  |   |  11001 |        |                99 |
+  |   |  10001 |        |                39 |
+  |   |  10011 |        |                36 |
+  |   |  01001 |        |                28 |
+  |   |  10010 |        |                14 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 2:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               382 |
+  |   |  10001 |        |               167 |
+  |   |  01001 |        |               105 |
+  |   |  10010 |        |                73 |
+  |   |  00000 |        |                43 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+
+- Estadísticas num layers = 3:
+  | / |     <> | >      |                 > |
+  |---+--------+--------+-------------------|
+  |   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+  |---+--------+--------+-------------------|
+  |   |  10101 | *Óptimo* |               412 |
+  |   |  01001 |        |               134 |
+  |   |  10010 |        |                93 |
+  |   |  10001 |        |                83 |
+  |   |  00001 |        |                81 |
+  |   |    ... |        |               ... |
+  |---+--------+--------+-------------------|
+
+*** Conclusiones y Gamma function
+- Para ambos modificadores los resultados sí parecen mejorar con el número de capas (aunque den resultados muy bajos)
+**** Modificadores del paper
+[[./img/primer_grafo/con_restriccion_extra/primer_p_40_mod-paper_gamma_fun.png]]
+**** Modificadores originales
+[[./img/primer_grafo/con_restriccion_extra/primer_p_40_mod-originales_gamma_fun.png]]
+\newpage
 ** Aer simulator con restricción extra y P = 54
 #+begin_src python
   circuit.rz(coef, q_idx)
@@ -378,106 +737,10 @@ Probar a aumentar el factor de penalización para las restricciones (P = 54).
 
 *** Gamma function
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/primer_grafo/primer_p_54_gamma_fun.png]]
+[[./img/primer_grafo/con_restriccion_extra/primer_p_54_gamma_fun.png]]
 
 \newpage
 
-** Aer simulator con restricción extra  (primer\textunderscore grafo/con\textunderscore restricc/aer-qaoa.ipynb)
-Con respecto a la función de coste del paper se añade la restricción\newline
-    *X_{13} + X_{23} = 1*\newline
-Esto sería, que el camino solo llegue al nodo final *3* por una de las aristas X_{i3} existentes.
-
-- *Estadísticas:*
-
-Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los siguientes:
-
-| / |     <> | >                              |                 > |
-|---+--------+--------------------------------+-------------------|
-|   | *Qubits* | *Camino*                         | *Frecuencia (1000)* |
-|---+--------+--------------------------------+-------------------|
-|   |  10101 | X_{01}X_{12}X_{23}             |               938 |
-|   |  11000 | X_{13}X_{23}                   |                37 |
-|   |  10001 | X_{01}X_{23}                   |                 9 |
-|   |  00011 | X_{01}X_{02}                   |                11 |
-|   |  00100 | X_{12}                         |                 3 |
-|   |  00010 | X_{02}                         |                 1 |
-|   |  11111 | X_{01}X_{02}X_{12}X_{13}X_{23} |                 1 |
-|---+--------+--------------------------------+-------------------|
-
-\newpage
-
-*** Caso correcto
-| / | <>    | >                | >              | >                             |
-|---+-------+------------------+----------------+-------------------------------|
-|   | *fun*   | *theta*            | *num iterations* | *seed\textunderscore simulator* |
-|---+-------+------------------+----------------+-------------------------------|
-|   | 42.29 | [0.5081, 0.9401] | 33             | 3                             |
-|---+-------+------------------+----------------+-------------------------------|
-
-#+CAPTION: seed\textunderscore simulator=3
-#+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_restr_aer_correcto.png]]
-
-Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
-
-Camino: X_{01}X_{12}X_{23} (Camino óptimo)
-
-\newpage
-
-*** Caso "correcto" con ruido
-| / | <>    | >               | >              | >                             |
-|---+-------+-----------------+----------------+-------------------------------|
-|   | *fun*   | *theta*           | *num iterations* | *seed\textunderscore simulator* |
-|---+-------+-----------------+----------------+-------------------------------|
-|   | 90.75 | [0.9962, 1.995] | 27             | 2                             |
-|---+-------+-----------------+----------------+-------------------------------|
-
-#+CAPTION: seed\textunderscore simulator=2
-#+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/primer_restr_aer_correcto-con-ruido.png]]
-
-Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
-
-Camino: X_{01}X_{12}X_{23} (Camino óptimo)
-
-Aunque se obtenga el resultado óptimo (10101) existen otros resultados demasiado altos, e incluso ejecutando el circuito con el mismo *theta* se dan valores distintos. Podría afectar a los resultados de las estadísticas.
-
-Además se ve que encuentra un valor *fun* demasiado alto (90.75)
-
-\newpage
-
-** Provider
-*** ibmq\textunderscore lima
-Solo para comprobar que funciona la ejecución.
-
-#+CAPTION: num iterations=2
-#+ATTR_LATEX: :scale 0.4
-[[./img/primer_grafo/primer_provider_iter-2.png]]
-
-\newpage
-
-*** ibmq\textunderscore manila
-\beta_{0} = 0.5, \gamma_{0} = 0.5
-#+ATTR_LATEX: :scale 0.4
-[[./img/primer_grafo/primer_provider_manila.png]]
-\newpage
-
-** Runtime
-*** ibmq\textunderscore lima
-\beta_{0} = 0.5, \gamma_{0} = 0.5
-| / | <>    | >                | >              |
-|---+-------+------------------+----------------|
-|   | *fun*   | *theta*            | *num iterations* |
-|---+-------+------------------+----------------|
-|   | 37.16 | [0.6869, 0.4728] | 26             |
-|---+-------+------------------+----------------|
-
-
-Resultado de ejecutar ese *theta* obtenido con Aer:
-#+ATTR_LATEX: :scale 0.4
-[[./img/primer_grafo/primer_runtime_lima.png]]
-
-\newpage
 * Grafo Zhiqiang (Con aer)
 [[./img/zhiqiang_grafo/zhiqiang_grafo.png]]
 ** Modificadores originales
@@ -537,10 +800,12 @@ Resultado de ejecutar ese *theta* obtenido con Aer:
   |---+--------+--------+-------------------|
 
 **** Gamma function
+
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
 [[./img/zhiqiang_grafo/modificadores_originales/zhiqiang_p_20_gamma_fun.png]]
 
 \newpage
+
 *** P=40
 
 - Estadísticas num layers = 1:
@@ -618,6 +883,7 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
   |---+--------+--------+-------------------|
   
 **** Gamma function
+
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
 [[./img/zhiqiang_grafo/modificadores_originales/zhiqiang_p_40_gamma_fun.png]]
 \newpage
@@ -680,9 +946,11 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 
 \newpage
 **** Gamma function
+
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
 [[./img/zhiqiang_grafo/modificadores_paper/zhiqiang_p_20_gamma_fun.png]]
 \newpage
+
 *** P=40
 - Estadísticas num layers = 1:
   | / |     <> | >      |                 > |
@@ -761,6 +1029,7 @@ El óptimo ni siquiera aparece (*0%*)
   |---+--------+--------+-------------------|
 
 **** Gamma function
+
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
 [[./img/zhiqiang_grafo/modificadores_paper/zhiqiang_p_40_gamma_fun.png]]
 \newpage

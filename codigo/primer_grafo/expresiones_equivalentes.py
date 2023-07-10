@@ -1,7 +1,6 @@
 import itertools
 
-
-def are_equal(e1, e2, nbits=5):
+def are_equal(e1, e2, nbits=5, p=27):
     n = nbits
     is_wrong = False
     for z in itertools.product([-1, 1], repeat=n):
@@ -9,7 +8,7 @@ def are_equal(e1, e2, nbits=5):
         for i in range(n):
             vars[f"z_{i}"] = z[i]
 
-        res1 = eval(e1, dict({"P": 27}, **vars))
+        res1 = eval(e1, dict({"P": p}, **vars))
         res2 = eval(e2, vars)
         if res1 != res2:
             is_wrong = True
@@ -28,7 +27,7 @@ P * ((1 - z_0)/2 + (1 - z_1)/2 - 1)**2 + \
 P * ((1 - z_0)/2 - (1 - z_2)/2 - (1 - z_3)/2)**2 + \
 P * ((1 - z_1)/2 + (1 - z_2)/2 - (1 - z_4)/2)**2"
 
-exp2 = "\
+exp_27 = "\
  11   * z_0 \
 -17.5 * z_1 \
 -28   * z_2 \
@@ -50,14 +49,18 @@ P * ((1 - z_3)/2 + (1 - z_4)/2 - 1)**2 + \
 P * ((1 - z_0)/2 - (1 - z_2)/2 - (1 - z_3)/2)**2 + \
 P * ((1 - z_1)/2 + (1 - z_2)/2 - (1 - z_4)/2)**2"
 
-exp2_mas_restricc = "11 * z_0 - 17.5 * z_1 - 28 * z_2 - 17 * z_3 + 11.5 * z_4 \
+exp_27_mas_restricc = "\
+11 * z_0 - 17.5 * z_1 - 28 * z_2 - 17 * z_3 + 11.5 * z_4 \
 + 13.5 * (z_0*z_1 + z_1*z_2 + z_2*z_3 - z_0*z_2 - z_0*z_3 + z_3*z_4 \
         - z_1*z_4 - z_2*z_4) \
 + 13.5 * (z_0**2 + z_1**2 + z_2**2 + z_3**2 + z_4**2) \
-+ 26.5 "
++ 26.5"
 
 if __name__ == "__main__":
-    print("exp_orig == exp2: ", end="")
-    are_equal(exp_orig, exp2)
-    print("exp_orig_mas_restricc == exp2_mas_restricc: ", end="")
-    are_equal(exp_orig_mas_restricc, exp2_mas_restricc)
+    # Sin restriccion extra
+    print("exp_orig == exp_27: ", end="")
+    are_equal(exp_orig, exp_27, p=27)
+
+    # Con restriccion extra
+    print("exp_orig_mas_restricc == exp_27_mas_restricc: ", end="")
+    are_equal(exp_orig_mas_restricc, exp_27_mas_restricc, p=27)
