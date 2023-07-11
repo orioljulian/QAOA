@@ -3,7 +3,8 @@
 
 # Whitelist
 !.gitignore
-!requirements.txt
+!requirements_qiskit.txt
+!requirements_dwave.txt
 !readme.md
 
 !latex/
