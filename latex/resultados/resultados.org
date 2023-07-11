@@ -525,26 +525,55 @@ Con respecto a la función de coste del paper se añade la restricción\newline
     *X_{13} + X_{23} = 1*\newline
 Esto sería, que el camino solo llegue al nodo final *3* por una de las aristas X_{i3} existentes.
 
-- *Estadísticas:*
+_Modificadores del paper_
 
-Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los siguientes:
+- Estadísticas num layers = 1:
+| / |     <> | >      |                 > |
+|---+--------+--------+-------------------|
+|   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+|---+--------+--------+-------------------|
+|   |  10101 | *Óptimo* |               938 |
+|   |  11000 |        |                37 |
+|   |  10001 |        |                 9 |
+|   |  00011 |        |                11 |
+|   |  00100 |        |                 3 |
+|   |  00010 |        |                 1 |
+|   |  11111 |        |                 1 |
+|---+--------+--------+-------------------|
 
-| / |     <> | >                              |                 > |
-|---+--------+--------------------------------+-------------------|
-|   | *Qubits* | *Camino*                         | *Frecuencia (1000)* |
-|---+--------+--------------------------------+-------------------|
-|   |  10101 | X_{01}X_{12}X_{23}             |               938 |
-|   |  11000 | X_{13}X_{23}                   |                37 |
-|   |  10001 | X_{01}X_{23}                   |                 9 |
-|   |  00011 | X_{01}X_{02}                   |                11 |
-|   |  00100 | X_{12}                         |                 3 |
-|   |  00010 | X_{02}                         |                 1 |
-|   |  11111 | X_{01}X_{02}X_{12}X_{13}X_{23} |                 1 |
-|---+--------+--------------------------------+-------------------|
+- Estadísticas num layers = 2:
+| / |     <> | >      |                 > |
+|---+--------+--------+-------------------|
+|   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+|---+--------+--------+-------------------|
+|   |  10101 | *Óptimo* |               646 |
+|   |  01010 |        |               159 |
+|   |  10001 |        |                58 |
+|   |  01001 |        |                42 |
+|   |  10010 |        |                28 |
+|   |  00100 |        |                19 |
+|   |  11011 |        |                18 |
+|   |    ... |        |               ... |
+|---+--------+--------+-------------------|
+
+- Estadísticas num layers = 3:
+| / |     <> | >      |                 > |
+|---+--------+--------+-------------------|
+|   | *Qubits* | *Camino* | *Frecuencia (1000)* |
+|---+--------+--------+-------------------|
+|   |  10101 | *Óptimo* |               848 |
+|   |  10001 |        |                67 |
+|   |  10010 |        |                25 |
+|   |  01001 |        |                16 |
+|   |  01010 |        |                10 |
+|   |  10110 |        |                 6 |
+|   |  11101 |        |                 4 |
+|   |    ... |        |               ... |
+|---+--------+--------+-------------------|
 
 \newpage
 
-*** Caso correcto
+*** Caso correcto num layers = 1
 | / | <>    | >                | >              | >                             |
 |---+-------+------------------+----------------+-------------------------------|
 |   | *fun*   | *theta*            | *num iterations* | *seed\textunderscore simulator* |
@@ -562,7 +591,7 @@ Camino: X_{01}X_{12}X_{23} (Camino óptimo)
 
 \newpage
 
-*** Caso "correcto" con ruido
+*** Caso "correcto" con ruido num layers = 1
 | / | <>    | >               | >              | >                             |
 |---+-------+-----------------+----------------+-------------------------------|
 |   | *fun*   | *theta*           | *num iterations* | *seed\textunderscore simulator* |
@@ -583,6 +612,10 @@ Aunque se obtenga el resultado óptimo (10101) existen otros resultados demasiad
 Además se ve que encuentra un valor *fun* demasiado alto (90.75)
 
 \newpage
+
+*** Gamma function
+Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
+[[./img/primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun.png]]
 
 ** Aer simulator con restricción extra y P = 40
 *** Modificadores del paper
@@ -1009,7 +1042,7 @@ El óptimo ni siquiera aparece (*0%*)
   |   | *Qubits* | *Camino* | *Frecuencia* (1000) |
   |---+--------+--------+-------------------|
   |   |   0101 |        |               661 |
-  |   |   1010 |        |               337 |
+  |   |   1010 | *Óptimo* |               337 |
   |   |   0100 |        |                 1 |
   |   |   1101 |        |                 1 |
   |---+--------+--------+-------------------|
@@ -1035,5 +1068,5 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 \newpage
 
 *** Conclusiones
-- Mejora muy clara con el aumento de capas (con 3 se acierta un *92.8%*).
+- Mejora muy clara con el aumento de capas (con P=20 y 3 capas se acierta un *92.8%*).
 
