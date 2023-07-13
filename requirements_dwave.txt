@@ -1,5 +1,7 @@
 jupyter
 networkx
+matplotlib
 
 dwave-ocean-sdk==6.4.1
 # $ dwave setup
+# check connection: $ dwave ping --client qpu
