@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{qaoa_paper_original}
+E.~Farhi, J.~Goldstone, and S.~Gutmann.
+\newblock A quantum approximate optimization algorithm, 2014.
+
+\bibitem{quantum_annealing}
+A.~Rajak, S.~Suzuki, A.~Dutta, and B.~K. Chakrabarti.
+\newblock Quantum annealing: an overview.
+\newblock {\em Philosophical Transactions of the Royal Society A: Mathematical,
+  Physical and Engineering Sciences}, 381(2241), dec 2022.
+
+\end{thebibliography}

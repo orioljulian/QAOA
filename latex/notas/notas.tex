@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\title{Notas}
+\author{Oriol Julián}
+
+\begin{document}
+
+\maketitle{}
+\tableofcontents{}
+
+\newpage
+\section{D-Wave}
+\label{sec:dwave}
+
+Estos sistemas utilizan Quantum Annealing, para encontrar el \textbf{estado fundamental \ref{subsec:estado_fundamental}} (\textbf{ground state}) del sistema cuántico, que viene dado por su hamiltoniano.
+% TODO: Insertar referencia a de dónde viene el hamiltoniano
+Este es el motivo de que no se trate como modelo de computación de propósito general, ya que D-Wave es una herramienta diseñada para resolver específicamente problemas de optimización.
+
+\subsection{Quantum Annealing}
+\label{sec:quantum_annealing}
+
+Según se discute en \cite{quantum_annealing}, el paradigma de Quantum Annealing está orientado a buscar el \textbf{estado fundamental} de un modelo Ising genérico, el cual es definido por su hamiltoniano.
+% TODO: Hablar sobre relación entre quantum annealing y computación adiabática?
+% TODO: Ver cómo se cita correctamente la introducción de ese paper
+% TODO: Definir modelo Ising
+\\ Esto puede aplicarse, convenientemente, para encontrar el mínimo de una función.
+
+\newpage
+\section{QAOA}
+\label{sec:qaoa}
+
+Definido originalmente en \cite{qaoa_paper_original}. Se trata de un algoritmo cuántico que aproxima soluciones óptimas a problemas de optimización combinatoria binaria.
+% TODO: Definir problemas de optimización combinatoria binaria
+\\ La idea general de QAOA se basa en preparar un estado \(\lvert\psi(\vec{\beta}, \vec{\gamma})\rangle\) tal que, con los valores adecuados \( (\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \), el estado \(\lvert\psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}})\rangle\) encuentre la solución al problema.
+\\ Para esto se definen dos operadores unitarios, que describen el comportamiento del sistema:
+
+\begin{equation}
+  \label{eq:qaoa_unitaries}
+  \begin{aligned}
+    & U(B, \beta_i) = e^{-i \beta_i B} \\
+    & U(C, \gamma_j) = e^{-i \gamma_j C} \\
+  \end{aligned}
+\end{equation}
+
+Donde, siguiendo la notación del paper original, \textit{B} y \textit{C} son dos operadores lineales nombrados \textbf{mixer hamiltonian} y \textbf{problem hamiltonian}, respectivamente.
+\\ La operación \(U(X) = e^{-i X}\) sirve para garantizar la unitariedad del operador ya que, como se verá en su definición, \textit{B} y \textit{C} no son necesariamente unitarios
+\footnote{En computación cuántica los operadores lineales deben ser unitarios. Tiene relación con la idea
+  \(\sum_{i \in \{0, 1\}^{n} } {P(\ket{i})} = 1\),
+  donde \textit{n} es el número de qubits del sistema,
+  \(\ket{i}\) itera sobre los posibles resultados de medir en la base computacional del sistema y
+  \(P(\ket{i})\) se refiere a la probabilidad de medir i sobre dicha base.}.
+\\ Tanto la noción de hamiltoniano como la construcción de un operador unitario proceden de la ecuación de Schrödinger de la mecánica cuántica.
+% TODO: Hablar del segundo postulado del libro y su resolución. Añadir el QC-textbook como bibliografía.
+
+\subsection{Construcción de \(\lvert\psi(\vec{\beta}, \vec{\gamma})\rangle\)}
+Para preparar este estado se utilizan los parámetros
+\begin{align*}
+  \vec{\beta} = [\beta_0, \beta_1, ..., \beta_{p-1}] \\
+  \vec{\gamma} = [\gamma_0, \gamma_1, ..., \gamma_{p-1}] \\
+\end{align*}
+
+Donde \( \beta_i, \gamma_i \in \rm{I\!R} \) y \textit{p} es el número de capas del algoritmo.
+\\ A partir de estos parámetros y los operadores definidos en \ref{eq:qaoa_unitaries} se construye el estado.
+\[
+  \lvert\psi(\vec{\beta}, \vec{\gamma})\rangle = U(B, \gamma_{p-1})U(C, \beta_{p-1})U(B, \gamma_{p-2})U(C, \beta_{p-2}) ... U(B, \gamma_0)U(C, \beta_0) \ket{\psi_0}
+\]
+Donde \(\ket{\psi_0}\) es el estado inicial del sistema.
+
+\newpage
+\section{Apéndice}
+\label{sec:apendice}
+
+\subsection{Estado fundamental}
+\label{subsec:estado_fundamental}
+La energía de un sistema cuántico en el estado \( \ket{\psi} \) viene dada por \[ E(\ket{\psi}) = \expval{H}{\psi} \]
+
+Dada esta definición el estado fundamental se refiere al estado \(\ket{\psi^*}\) de menor energía del sistema.
+  \[ \ket{\psi^*} = min_{\ket{\psi} \in Q} E(\ket{\psi}) \]
+
+
+\bibliographystyle{abbrv}
+\bibliography{bibliografia}  % bibliografia.bib
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
