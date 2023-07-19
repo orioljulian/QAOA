@@ -1070,7 +1070,9 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 *** Conclusiones
 - Mejora muy clara con el aumento de capas (con P=20 y 3 capas se acierta un *92.8%*).
 
+\newpage
 * DWave
+Ejecuciones con 1024 medidas
 ** Primer grafo
 [[./img/primer_grafo/primer_grafo.png]]
 
