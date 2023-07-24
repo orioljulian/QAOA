@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\title{Quantum Approximation Optimization Algorithm}
+\author{Oriol Julián}
+
+\begin{document}
+
+\maketitle{}
+
+\section{Introducción}
+\label{sec:qaoa-introduccion}
+Notación: \(p \equiv layers\)
+
+La profundidad crece linealmente con p veces el nº de restricciones. (Es aumento lineal, obvio).
+
+n = nº de bits
+m = nº de cláusulas
+
+\subsection{Describir un problema de optimización combinatoria}
+
+\textbf{Función objetivo:}
+\begin{align*}
+  C(z) = \sum_{\alpha = 1}^{m} C_\alpha(z) \\
+  \textnormal{ dde } z = z_1z_2...z_n \textnormal{ y } z_i\in \{0, 1\} \\
+   C_{\alpha}(z) = \begin{cases}
+                     1 \textnormal{ si z satisface } C_\alpha \\
+                     0 \textnormal{ en otro caso}
+                   \end{cases}
+\end{align*}
+
+\subsection{Operadores unitarios y vector inicial}
+Se trabaja en un espacio de Hilbert de $2^n$ dimensiones. Base computacional: $\ket{z}$
+
+Se define un operador:
+\[ U(C, \gamma) = e^{-i \gamma C} = \prod_{\alpha = 1}^{m} e^{-i \gamma C_\alpha} \]
+
+Page 2: ``All of the terms in this product commute beacuse they are diagonal in the computational basis and each term's locality is the locality of the clause $\alpha$.``
+
+Como C tiene autovalores enteros, se puede restringir $\gamma \in [0, 2\pi]$
+\\ Se define otro operador unitario $U(B, \beta)$ dde:
+\begin{align*}
+  &B = \sum_{j = 1}^n \sigma_j^x &&\\
+  &U(B, \beta) = e^{-i \beta B} = \prod_{j=1}^n e^{-i \beta \sigma_j^x}
+\end{align*}
+Donde $\beta \in [0, \pi]$
+
+El estado inicial se define como:
+\[
+  \ket{s} = \frac{1}{\sqrt{2^n}} \sum_z\ket{z}
+  = (\frac{1}{\sqrt{2}} (\ket{0} + \ket{1}))^{\otimes n}
+  = H^{\otimes n} \ket{0}^{\otimes n}
+\]
+
+\subsection{Definir estado}
+Para cualquier $p \geq 1$ y $\gamma \equiv \gamma_1 ... \gamma_p$ y $\beta \equiv \beta_1 ... \beta_p$
+\[
+  \ket{\gamma, \beta} = U(B, \beta_p)U(C, \gamma_p) ... U(B, \beta_1)U(C, \gamma_1)\ket{s}
+\]
+Este estado se puede producir con un circuito de profundidad $mp + p$ como mucho.
+
+Sea $F_p$ el valor esperado de C
+\[ F_p(\gamma, \beta) = \bra{\gamma, \beta}C\ket{\gamma, \beta} \]
+Sea $M_p$ el máximo de $F_p$ sobre los ángulos
+\[ M_p = \max_{\gamma, \beta} F_p(\gamma, \beta) \]
+Nótese que la maximización en $p-1$ se puede ver como una restricción para $p$, por lo que
+\[ M_p \geq M_{p-1} \]
+Luego se verá que
+\[ \lim_{p \rightarrow \infty} M_p = \max_z C(z) \]
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
