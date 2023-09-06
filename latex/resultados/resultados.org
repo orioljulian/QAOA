@@ -592,6 +592,7 @@ Camino: X_{01}X_{12}X_{23} (Camino óptimo)
 \newpage
 
 *** Caso "correcto" con ruido num layers = 1
+#+CAPTION: captionada
 | / | <>    | >               | >              | >                             |
 |---+-------+-----------------+----------------+-------------------------------|
 |   | *fun*   | *theta*           | *num iterations* | *seed\textunderscore simulator* |

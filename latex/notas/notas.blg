@@ -3,10 +3,9 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: notas.aux
 The style file: abbrv.bst
 Database file #1: bibliografia.bib
-Warning--I didn't find a database entry for "quantum-annealing"
 You've used 2 entries,
             2118 wiz_defined-function locations,
-            510 strings with 4084 characters,
+            509 strings with 4067 characters,
 and the built_in function-call counts, 599 in all, are:
 = -- 50
 > -- 41
@@ -45,4 +44,3 @@ warning$ -- 0
 while$ -- 4
 width$ -- 3
 write$ -- 21
-(There was 1 warning)

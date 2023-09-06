@@ -34,7 +34,7 @@
 
 
 \section{Notación}
-\label{sec:org4435e05}
+\label{sec:org971a5b9}
 \textbf{fun} = Mínimo local hallado de la función \emph{execute\textunderscore circuit} con el optimizador
 \newline
 \textbf{p} = Número de capas (a mayor número el circuito es más profundo)
@@ -53,13 +53,13 @@ q\textsubscript{4}q\textsubscript{3}q\textsubscript{2}q\textsubscript{1}q\textsu
 \newpage
 
 \section{Primer grafo sin restricción}
-\label{sec:org03b5539}
+\label{sec:org10bc7e9}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo/primer_grafo.png}
 \end{center}
 \newpage
 \subsection{Aer - Versión del paper (primer\textunderscore grafo/aer-qaoa.ipynb)}
-\label{sec:orge28623c}
+\label{sec:orgbd8f06a}
 Pruebas realizadas sobre la versión del código sin la restricción\newline
     \textbf{X\textsubscript{13} + X\textsubscript{23} = 1}\newline
 
@@ -85,7 +85,7 @@ Realizando la ejecución 1000 veces se han obtenido como caminos resultantes los
 \newpage
 
 \subsubsection{Caso correcto}
-\label{sec:org0632927}
+\label{sec:orgdce2d85}
 
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
@@ -110,7 +110,7 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 \newpage
 
 \subsubsection{Caso erróneo}
-\label{sec:org0aea08b}
+\label{sec:orgf8d62c5}
 
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
@@ -139,7 +139,7 @@ Restricciones rotas: \newline
 \newpage
 
 \subsubsection{Caso subóptimo}
-\label{sec:org188a7a9}
+\label{sec:orgcbe93dc}
 
 Obtenido a mano (no se ha encontrado ninguna semilla que diese este resultado)
 
@@ -164,7 +164,7 @@ Camino: X\textsubscript{01}X\textsubscript{13} (Camino subóptimo, pero no se ro
 \newpage
 
 \subsubsection{Utilizando el parámetro \textbf{theta} obtenido en el artículo}
-\label{sec:org7a88f69}
+\label{sec:org7f6b227}
 
 \begin{center}
 \begin{tabular}{|r|l|}
@@ -189,7 +189,7 @@ La gráfica resultante es muy similar a la versión que se intenta replicar. \te
 \newpage
 
 \subsubsection{Rz(*2), Rzz(*2), Rx(*2)}
-\label{sec:orgb533084}
+\label{sec:org67d58bc}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef * 2, q_idx)
@@ -218,7 +218,7 @@ circuit.rx(beta[p] * 4, q_idx)
 \end{center}
 
 \subsubsection{coef *= 2}
-\label{sec:org4c1e786}
+\label{sec:org509f86f}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(2 * coef, q_idx)
@@ -245,7 +245,7 @@ circuit.rx(beta[p] * 2, q_idx)
 Da un mismo error un porcentaje de veces muy alto. Error muy fiable.
 
 \subsubsection{Coef /= 2}
-\label{sec:orgb1c8ec1}
+\label{sec:orgabb8c99}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(1/2 * coef, q_idx)
@@ -266,7 +266,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsubsection{\(\beta\) /= 2}
-\label{sec:orgd284288}
+\label{sec:org4e7b0ec}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -294,7 +294,7 @@ circuit.rx(beta[p], q_idx)
 \newpage
 
 \subsubsection{\(\gamma\) /= 2}
-\label{sec:org6a1290c}
+\label{sec:org1fc1f33}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -315,7 +315,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsubsection{\(\beta\) /= 2, \(\gamma\) /= 2}
-\label{sec:org1ca2c33}
+\label{sec:org63bfb7b}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -367,7 +367,7 @@ circuit.rx(beta[p], q_idx)
 \newpage
 
 \subsubsection{\(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5}
-\label{sec:orgdbaeee4}
+\label{sec:org1201cfd}
 
 \begin{itemize}
 \item num layers = 1:
@@ -411,7 +411,7 @@ circuit.rx(beta[p], q_idx)
 \newpage
 
 \subsubsection{Original pero variar num layers}
-\label{sec:orgea54b49}
+\label{sec:org1869737}
 
 Al aumentar el número de capas se obtienen resultados mucho peores (tal vez esté mal implementado)
 \begin{itemize}
@@ -460,9 +460,9 @@ Al aumentar el número de capas se obtienen resultados mucho peores (tal vez est
 \end{itemize}
 \newpage
 \subsection{Aer simulator sin restricción extra y P = 40}
-\label{sec:org473d7b2}
+\label{sec:org6522d62}
 \subsubsection{Modificadores paper}
-\label{sec:org74079b6}
+\label{sec:org4d38c7d}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -559,7 +559,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsubsection{Modificadores originales}
-\label{sec:orged5acda}
+\label{sec:orga1a6173}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef * gamma[p] * 2, q_idx)
@@ -645,9 +645,9 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsection{Provider}
-\label{sec:org57c19fe}
+\label{sec:org65e6586}
 \subsubsection{ibmq\textunderscore lima}
-\label{sec:org563fbe1}
+\label{sec:orgc051b29}
 Solo para comprobar que funciona la ejecución.
 
 \begin{figure}[htbp]
@@ -659,7 +659,7 @@ Solo para comprobar que funciona la ejecución.
 \newpage
 
 \subsubsection{ibmq\textunderscore manila}
-\label{sec:org57610b7}
+\label{sec:orgc2b07c5}
 \(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5
 \begin{center}
 \includegraphics[scale=0.4]{./img/primer_grafo/sin_restriccion_extra/primer_provider_manila.png}
@@ -667,9 +667,9 @@ Solo para comprobar que funciona la ejecución.
 \newpage
 
 \subsection{Runtime}
-\label{sec:org577c2e4}
+\label{sec:orgbceff6b}
 \subsubsection{ibmq\textunderscore lima}
-\label{sec:org1f08f05}
+\label{sec:orgd98e5ef}
 \(\beta\)\textsubscript{0} = 0.5, \(\gamma\)\textsubscript{0} = 0.5
 \begin{center}
 \begin{tabular}{|r|l|r|}
@@ -689,9 +689,9 @@ Resultado de ejecutar ese \textbf{theta} obtenido con Aer:
 
 \newpage
 \section{Primer grafo con restricción}
-\label{sec:orgc97e474}
+\label{sec:org68585df}
 \subsection{Aer simulator con restricción extra  (primer\textunderscore grafo/con\textunderscore restricc/aer-qaoa.ipynb)}
-\label{sec:orgfaf6fd1}
+\label{sec:org8f3ae61}
 Con respecto a la función de coste del paper se añade la restricción\newline
     \textbf{X\textsubscript{13} + X\textsubscript{23} = 1}\newline
 Esto sería, que el camino solo llegue al nodo final \textbf{3} por una de las aristas X\textsubscript{i3} existentes.
@@ -760,7 +760,7 @@ Esto sería, que el camino solo llegue al nodo final \textbf{3} por una de las a
 \newpage
 
 \subsubsection{Caso correcto num layers = 1}
-\label{sec:org989e96f}
+\label{sec:org4131c74}
 \begin{center}
 \begin{tabular}{|r|l|r|r|}
 \hline
@@ -784,8 +784,10 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 \newpage
 
 \subsubsection{Caso "correcto" con ruido num layers = 1}
-\label{sec:orgbe3d65f}
-\begin{center}
+\label{sec:orgaf841c6}
+\begin{table}[htbp]
+\caption{captionada}
+\centering
 \begin{tabular}{|r|l|r|r|}
 \hline
 \textbf{fun} & \textbf{theta} & \textbf{num iterations} & \textbf{seed\textunderscore simulator}\\
@@ -793,7 +795,7 @@ Camino: X\textsubscript{01}X\textsubscript{12}X\textsubscript{23} (Camino óptim
 90.75 & [0.9962, 1.995] & 27 & 2\\
 \hline
 \end{tabular}
-\end{center}
+\end{table}
 
 \begin{figure}[htbp]
 \centering
@@ -812,16 +814,16 @@ Además se ve que encuentra un valor \textbf{fun} demasiado alto (90.75)
 \newpage
 
 \subsubsection{Gamma function}
-\label{sec:org0ef83df}
+\label{sec:org0fe23cf}
 Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num layers = 1 y \(\beta\) = 1.0
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun.png}
 \end{center}
 
 \subsection{Aer simulator con restricción extra y P = 40}
-\label{sec:orge4b4b92}
+\label{sec:org620e228}
 \subsubsection{Modificadores del paper}
-\label{sec:org8d12e9a}
+\label{sec:org1e3aafd}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -884,7 +886,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 
 \subsubsection{Modificadores originales}
-\label{sec:org9d55006}
+\label{sec:org79ffdbb}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef * gamma[p] * 2, q_idx)
@@ -945,25 +947,25 @@ circuit.rx(beta[p] * 2, q_idx)
 \end{itemize}
 
 \subsubsection{Conclusiones y Gamma function}
-\label{sec:orga9733bb}
+\label{sec:org355de8b}
 \begin{itemize}
 \item Para ambos modificadores los resultados sí parecen mejorar con el número de capas (aunque den resultados muy bajos)
 \end{itemize}
 \begin{enumerate}
 \item Modificadores del paper
-\label{sec:orgc43be0c}
+\label{sec:org602ba0e}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo/con_restriccion_extra/primer_p_40_mod-paper_gamma_fun.png}
 \end{center}
 \item Modificadores originales
-\label{sec:org047d71f}
+\label{sec:org03aef46}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo/con_restriccion_extra/primer_p_40_mod-originales_gamma_fun.png}
 \end{center}
 \newpage
 \end{enumerate}
 \subsection{Aer simulator con restricción extra y P = 54}
-\label{sec:org1d8848f}
+\label{sec:org562bbaa}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -1020,7 +1022,7 @@ Probar a aumentar el factor de penalización para las restricciones (P = 54).
 \newpage
 
 \subsubsection{Gamma function}
-\label{sec:org94edb97}
+\label{sec:org33b0248}
 Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num layers = 1 y \(\beta\) = 1.0
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo/con_restriccion_extra/primer_p_54_gamma_fun.png}
@@ -1029,12 +1031,12 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 \newpage
 
 \section{Grafo Zhiqiang (Con aer)}
-\label{sec:orgfa610ef}
+\label{sec:orgae63ca4}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/zhiqiang_grafo/zhiqiang_grafo.png}
 \end{center}
 \subsection{Modificadores originales}
-\label{sec:orgd91571f}
+\label{sec:org46a75f7}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef * gamma[p] * 2, q_idx)
@@ -1043,7 +1045,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \end{lstlisting}
 
 \subsubsection{P=20}
-\label{sec:org6cd9a03}
+\label{sec:orgf5d0f9a}
 
 \begin{itemize}
 \item Estadísticas num layers = 1:
@@ -1108,7 +1110,7 @@ circuit.rx(beta[p] * 2, q_idx)
 
 \begin{enumerate}
 \item Gamma function
-\label{sec:orgaf3d6b1}
+\label{sec:org37e91f3}
 
 Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num layers = 1 y \(\beta\) = 1.0
 \begin{center}
@@ -1119,7 +1121,7 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 \end{enumerate}
 
 \subsubsection{P=40}
-\label{sec:org76193fa}
+\label{sec:org82096cc}
 
 \begin{itemize}
 \item Estadísticas num layers = 1:
@@ -1211,7 +1213,7 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 
 \begin{enumerate}
 \item Gamma function
-\label{sec:orgbaa22ab}
+\label{sec:orgba03a16}
 
 Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num layers = 1 y \(\beta\) = 1.0
 \begin{center}
@@ -1221,7 +1223,7 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 \end{enumerate}
 
 \subsubsection{Conclusiones}
-\label{sec:org6f9037b}
+\label{sec:orgfc72854}
 \begin{itemize}
 \item A diferencia de "primer grafo" con P=20 los resultados mejoran al aumentar el número de capas, aunque siguen siendo muy malos resultados.
 \item Los resultados de la función con respecto a \(\gamma\) son muy ruidosos, puede ser el motivo de tan malos resultados.
@@ -1232,7 +1234,7 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 \newpage
 
 \subsection{Modificadores del paper}
-\label{sec:org3a3e5ac}
+\label{sec:org453c51b}
 \lstset{language=Python,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 circuit.rz(coef, q_idx)
@@ -1241,7 +1243,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \end{lstlisting}
 
 \subsubsection{P=20}
-\label{sec:orga9a8f60}
+\label{sec:orgb34a8a6}
 \begin{itemize}
 \item Estadísticas num layers = 1:
 \begin{center}
@@ -1296,7 +1298,7 @@ circuit.rx(beta[p] * 2, q_idx)
 \newpage
 \begin{enumerate}
 \item Gamma function
-\label{sec:orgb38523c}
+\label{sec:org93d6f09}
 
 Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num layers = 1 y \(\beta\) = 1.0
 \begin{center}
@@ -1306,7 +1308,7 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 \end{enumerate}
 
 \subsubsection{P=40}
-\label{sec:orgf2289a7}
+\label{sec:org04d9aa9}
 \begin{itemize}
 \item Estadísticas num layers = 1:
 \begin{center}
@@ -1404,7 +1406,7 @@ El óptimo ni siquiera aparece (\textbf{0\%})
 
 \begin{enumerate}
 \item Gamma function
-\label{sec:org13f822b}
+\label{sec:org67fd110}
 
 Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num layers = 1 y \(\beta\) = 1.0
 \begin{center}
@@ -1414,17 +1416,17 @@ Variación de execute\textunderscore circuit con respecto a \(\gamma\) con num l
 \end{enumerate}
 
 \subsubsection{Conclusiones}
-\label{sec:org2c59d25}
+\label{sec:orgbc2a77c}
 \begin{itemize}
 \item Mejora muy clara con el aumento de capas (con P=20 y 3 capas se acierta un \textbf{92.8\%}).
 \end{itemize}
 
 \newpage
 \section{DWave}
-\label{sec:org2aeb021}
+\label{sec:orgd7e336e}
 Ejecuciones con 1024 medidas
 \subsection{Primer grafo}
-\label{sec:org9e11ab6}
+\label{sec:org36476b8}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/primer_grafo/primer_grafo.png}
 \end{center}
@@ -1451,7 +1453,7 @@ Sampleset:
 
 \newpage
 \subsection{Segundo grafo}
-\label{sec:org635e51d}
+\label{sec:org8bae427}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/segundo_grafo.png}
 \end{center}
@@ -1490,7 +1492,7 @@ Sampleset:
 
 \newpage
 \subsection{Zhiqiang grafo}
-\label{sec:orga28f268}
+\label{sec:org7f5ddfe}
 \begin{center}
 \includegraphics[width=.9\linewidth]{./img/zhiqiang_grafo/zhiqiang_grafo.png}
 \end{center}
