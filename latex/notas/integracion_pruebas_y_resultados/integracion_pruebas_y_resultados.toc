@@ -1,4 +1,3 @@
 \babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}Primer grafo}{2}{}%
-\contentsline {subsection}{\numberline {1.1}Resultados de Qiskit}{2}{}%
-\contentsline {subsubsection}{\numberline {1.1.1}Primer grafo}{2}{}%
+\contentsline {section}{\numberline {1}Primer grafo}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Resultados de Qiskit}{3}{}%
