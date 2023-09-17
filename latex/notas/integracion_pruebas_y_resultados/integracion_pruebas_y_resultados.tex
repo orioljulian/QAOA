@@ -13,7 +13,7 @@
 
 \newpage
 
-% TODO: Mostrar resultados en tablas comparativas, agrupando por grafo y cambiando los modificadores (al menos una vez para enseñar qué cambio hay) y tal vez de forma anecdótica la modificación de P (lagrange_multiplier en DWave). Después de mostrar las diferencias entre distintas versiones de Qiskit, mostrar la que mejor quede con el caso de DWave. También mostrar las diferentes métricas (max statistics, global y gamma function)
+% TODOO: Mostrar resultados en tablas comparativas, agrupando por grafo y cambiando los modificadores (al menos una vez para enseñar qué cambio hay) y tal vez de forma anecdótica la modificación de P (lagrange_multiplier en DWave). Después de mostrar las diferencias entre distintas versiones de Qiskit, mostrar la que mejor quede con el caso de DWave. También mostrar las diferentes métricas (max statistics, global y gamma function)
 En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados obtenidos entre métricas distintas, se han realizado los siguientes tipos de pruebas:
 \begin{itemize}
 \item \textbf{Estadística máxima:}
@@ -52,8 +52,7 @@ A continuación se mostrarán los resultados de ejecución utilizando ambos para
 
 \subsection{Resultados de Qiskit}
 \label{sec:resultados-de-qiskit}
-
-% TODO: Hablar aquí sobre la diferencia entre los modificadores y la restricción extra
+% TODOO: Hablar aquí sobre la diferencia entre los modificadores y la restricción extra
 En las siguientes muestras se ha buscado replicar los resultados del artículo. Esto ha sido probado ya que, empleando los parámetros \(\beta = 0.28517317\) y \(\gamma = -5.05969577 \) dados como óptimos, se obtiene un gráfico muy similar al dado: \\
 
 \begin{figure}[htbp]
@@ -66,7 +65,6 @@ En las siguientes muestras se ha buscado replicar los resultados del artículo. 
   }
   \caption{} \label{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
 \end{figure}
-% TODOO: Al mostrar la primera tabla discutir que la diferencia de porcentaje en el camino óptimo entre estadísticas max y global se debe al ruido propio del algoritmo (no se si será ruido)
 
 De esta forma, se tiene que los resultados del artículo deberían ser equivalentes a los obtenidos en esta instancia del algoritmo.
 
@@ -84,10 +82,10 @@ De esta forma, se tiene que los resultados del artículo deberían ser equivalen
 \end{table}
 
 El primer resultado notable en la tabla \ref{tab:primer_paper_aer_estadisticas} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente. \\
-% TODO: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
+% TODOOOOO: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
 Además, la gran diferencia entre los resultados dados por la estadística máxima y la estadística global denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la figura \ref{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}. \\
 
-El resultado de la función gamma es el siguiente:  % TODO: Hablar del resultado de P=1 100% de acierto con \beta = 0.1 \gamma = 0.5
+El resultado de la función gamma es el siguiente:
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.5]{primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}
@@ -99,41 +97,36 @@ Se puede ver que existen un gran número de mínimos locales, lo cual dificulta 
 % TODO: Comparar esta función gamma con la que aparece en MAX-CUT, esto estará en el anexo
 Este proceso de inicializar los parámetros con valores concretos no sería una solución válida, ya que se trata de una metodología no automática en la que, para ejecutar correctamente el algoritmo, se necesitaría conocer antes su propio resultado. Además la ejecución correcta sucede para \(p = 1\), pero al igual que el caso por defecto (\(\beta = 1.0 \ \gamma = 1.0\)), no escala correctamente al aumentar el número de capas.
 
+
+\subsection{Resultados de D-Wave}
+\label{sec:resultados-de-qiskit}
+Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistemas de D-Wave se ha obtenido el resultado de la tabla \ref{tab:primer_paper_dwave_estadisticas}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{Camino} & \textbf{Energía} & \textbf{Número de ocurrencias} \\ \hline
+    10101 (\textbf{Óptimo}) & 11 & 348 \\ \hline
+    01001 & 12 & 373 \\ \hline
+    10010 & 12 & 294 \\ \hline
+    00000 & 54 &   4 \\ \hline
+    00001 & 58 &   1 \\ \hline
+    10000 & 59 &   1 \\ \hline
+    00101 & 60 &   1 \\ \hline
+    10100 & 61 &   1 \\ \hline
+    01010 & 69 &   1 \\ \hline
+  \end{tabular}
+  \caption{Resultados de la ejecución del grafo del artículo en D-Wave}
+  \label{tab:primer_paper_dwave_estadisticas}
+\end{table}
+
+La energía se refiere al coste de dicho camino de acuerdo con la función de coste utilizada. Se puede ver cómo, aunque se encuentre el camino óptimo un menor número de veces que en QAOA, existe una mayor coherencia en los resultados. Esto es así porque los caminos con mayores ocurrencias son los que tienen menor energía, mientras en las ejecuciones de Qiskit se pueden ver ejemplos, como es el camino 00111 en la figura \ref{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado} con un gran número de ocurrencias pero también una energía elevada.
+\footnote{En la ejecución de Qiskit, la energía del camino ``00111'' es 150. Esto se debe a que se rompen varias restricciones presentes en la función de coste. Este valor puede variar dependiendo del multiplicador de Lagrange empleado
+  % TODO: Citar multiplicador de lagrange del anexo
+  y las restricciones utilizadas.}
+
 \end{document}
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
-
-
-%\begin{table}[htbp]
-%  \centering
-%  \begin{tabular}{|c|r|r|l|}  % r == right, l == left, c == center
-%    \hline
-%    \textbf{Qubits} & \textbf{Camino} & \textbf{Frecuencia} & Izda \\
-%    \hline
-%    10101 & hola & 917 & a \\
-%    10110 & hola & 82 & a \\
-%    01001 & hola & 1 & a \\
-%    \hline
-%  \end{tabular}
-%  \label{tab:ejemplo}
-%  \caption{captionada}
-%\end{table}
-%Tabla referenciada: \ref{tab:ejemplo}
-
-
-% Estadística global - 1000 Ejecuciones
-% p = 1
-% (10101, 0.3934208984375), (10001, 0.202630859375), (00101, 0.046755859375), (10110, 0.0414072265625), (11001, 0.0325322265625), (00001, 0.0323759765625), (11101, 0.0298798828125), (10100, 0.0293173828125), (10111, 0.028814453125), (10010, 0.028650390625), (10000, 0.0264873046875), (10011, 0.022994140625), (00111, 0.0122685546875), (00011, 0.00875390625), (01001, 0.0068291015625), (00000, 0.0066201171875), (11011, 0.0057099609375), (00010, 0.005537109375), (00100, 0.0050537109375), (11100, 0.00461328125), (11000, 0.00444921875), (01101, 0.00444921875), (00110, 0.004314453125), (11111, 0.0042646484375), (11010, 0.0037236328125), (01011, 0.0023720703125), (01111, 0.0014287109375), (01000, 0.0012861328125), (11110, 0.001181640625), (01100, 0.000876953125), (01010, 0.0006611328125), (01110, 0.00033984375)
-% p = 2
-% (10101, 0.2415595703125), (11101, 0.070884765625), (10010, 0.0695712890625), (10110, 0.0518125), (10111, 0.0484501953125), (10100, 0.0441484375), (10001, 0.042072265625), (11001, 0.041841796875), (00101, 0.0410712890625), (10000, 0.0338740234375), (11011, 0.0330869140625), (10011, 0.0314609375), (00001, 0.0296787109375), (01001, 0.029171875), (01101, 0.025927734375), (11010, 0.0247734375), (00000, 0.0241962890625), (11000, 0.0150498046875), (11111, 0.012685546875), (00010, 0.0102998046875), (00100, 0.010203125), (00011, 0.0091279296875), (01000, 0.0080107421875), (11110, 0.0078564453125), (11100, 0.0067919921875), (01010, 0.006466796875), (00110, 0.006359375), (00111, 0.0056845703125), (01011, 0.005462890625), (01110, 0.0045048828125), (01111, 0.004162109375), (01100, 0.003751953125)
-% p = 3
-% (10101, 0.1882373046875), (10001, 0.080751953125), (00000, 0.0567353515625), (11011, 0.0492470703125), (10010, 0.04919140625), (11101, 0.040828125), (00101, 0.040388671875), (01010, 0.0368203125), (10111, 0.0362744140625), (10100, 0.0331396484375), (00001, 0.0328369140625), (01001, 0.0325888671875), (01101, 0.0325283203125), (00010, 0.0288515625), (11010, 0.0272529296875), (11001, 0.0245712890625), (10110, 0.0243203125), (01011, 0.021787109375), (00111, 0.020544921875), (11111, 0.0191328125), (11000, 0.01771484375), (10011, 0.0156787109375), (01000, 0.0151181640625), (00100, 0.014013671875), (10000, 0.012255859375), (11100, 0.010666015625), (00011, 0.007697265625), (01111, 0.007365234375), (00110, 0.0067744140625), (01110, 0.006265625), (11110, 0.0057197265625), (01100, 0.004701171875)
-
-
-% Estadística máxima
-% {10110: 75, 10101: 925}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
