@@ -34,7 +34,8 @@ En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados ob
   se ve condicionada por todos los resultados, no únicamente por el camino con valor máximo.
   
 \item \textbf{Función gamma:}
-  Se ha utilizado para comprobar la forma general que tiene la función \textit{execute\_circuit}, a minimizar por el optimizador clásico. Para ello se han realizado circuitos de una sola capa y se ha mantenido el parámetro \(\beta=1\). Se ha decidido así porque dicho parámetro se encarga del ángulo de rotación de los operadores \(\sigma_{x}\), de construcción trivial en comparación con los operadores dependientes de \(\gamma\).  % TODO: Referenciar punto del apéndice donde se hable de esto
+  Se ha utilizado para comprobar la forma general que tiene la función \textit{execute\_circuit}, a minimizar por el optimizador clásico. Para ello se han realizado circuitos de una sola capa y se ha mantenido el parámetro \(\beta=1\). Se ha decidido así porque dicho parámetro se encarga del ángulo de rotación de los operadores \(\sigma_{x}\), de construcción trivial en comparación con los operadores dependientes de \(\gamma\).
+  % TODO: Referenciar punto del apéndice donde se hable sobre la construcción de las puertas Rx y Rz
   Al variar \(\gamma\) y graficar la función resultante se puede intuir la probabilidad de encontrar mínimos locales en lugar del mínimo global. Esto se traduce como la posibilidad de encontrar un resultado subóptimo para el problema, es decir, que el algoritmo falle.
 \end{itemize}
 
@@ -51,7 +52,10 @@ A continuación se mostrarán los resultados de ejecución utilizando ambos para
 \end{figure}
 
 \subsection{Resultados de Qiskit}
-\label{sec:resultados-de-qiskit}
+\label{sec:primer-resultados-qiskit}
+
+\subsubsection{Solución del artículo}
+\label{sec:primer-resultados-qiskit-paper}
 % TODOO: Hablar aquí sobre la diferencia entre los modificadores y la restricción extra
 En las siguientes muestras se ha buscado replicar los resultados del artículo. Esto ha sido probado ya que, empleando los parámetros \(\beta = 0.28517317\) y \(\gamma = -5.05969577 \) dados como óptimos, se obtiene un gráfico muy similar al dado: \\
 
@@ -97,9 +101,26 @@ Se puede ver que existen un gran número de mínimos locales, lo cual dificulta 
 % TODO: Comparar esta función gamma con la que aparece en MAX-CUT, esto estará en el anexo
 Este proceso de inicializar los parámetros con valores concretos no sería una solución válida, ya que se trata de una metodología no automática en la que, para ejecutar correctamente el algoritmo, se necesitaría conocer antes su propio resultado. Además la ejecución correcta sucede para \(p = 1\), pero al igual que el caso por defecto (\(\beta = 1.0 \ \gamma = 1.0\)), no escala correctamente al aumentar el número de capas.
 
+\subsubsection{Modificaciones a la solución del artículo}
+\label{sec:primer-resultados-qiskit-modificaciones}
+Partiendo de la solución del paper descrita en la sección \ref{sec:primer-resultados-qiskit-paper}, se han realizado cambios a la función de coste y a la construcción del circuito cuántico con el fin de encontrar el mejor resultado. Esto se ha realizado para poder comparar el rendimiento de la mejor solución encontrada con el rendimiento del algoritmo de Quantum Annealing de D-Wave.
+
+Las modificaciones empleadas han sido las siguientes:
+\begin{itemize}
+\item Incrementar el valor del parámetro P (correspondiente al modificador de Lagrange)
+  % TODO: Citar multiplicador de lagrange del anexo
+  al construir la función de coste, para así aumentar la penalización en caso de fallo.
+
+\item Al construir el circuito cuántico, utilizar para los operadores lineales los ángulos obtenidos teóricamente, en lugar de los vistos en el artículo.
+  % TODOOO: ¿Explicar que no entiendo por qué están esos parámetros? ¿qué pongo?
+
+\item Añadir una restricción a la función de coste, que especifique que solo se puede acceder al último nodo por una de las aristas que lleguen a este.
+  % TODO: Esto seguramente no se explique aquí
+\end{itemize}
+
 
 \subsection{Resultados de D-Wave}
-\label{sec:resultados-de-qiskit}
+\label{sec:primer-resultados-dwave}
 Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistemas de D-Wave se ha obtenido el resultado de la tabla \ref{tab:primer_paper_dwave_estadisticas}
 
 \begin{table}[htbp]
