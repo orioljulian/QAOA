@@ -5,7 +5,6 @@
 \graphicspath{{/home/vian/0_uam/1_TFG/latex/resultados/img/}}
 
 \title{integracion, pruebas y resultados}
-\author{Yo}
 
 \begin{document}
 \maketitle{}
@@ -23,14 +22,14 @@ En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados ob
     Se ejecuta el optimizador clásico para hallar los parámetros óptimos (esto supone la ejecución del circuito cuántico el número de veces necesario para que el optimizador encuentre un mínimo local).
   \item
     Se ejecuta el circuito una vez más con los parámetros óptimos.
-  \item \label{it:estadistica_max}
-    Se obtiene el camino dado por el algoritmo para recorrer el grafo y se añade dicho camino a un diccionario para su posterior revisión. En el caso de la figura \ref{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
+  \item \label{it:5-definicion_estadistica_max}
+    Se obtiene el camino dado por el algoritmo para recorrer el grafo y se añade dicho camino a un diccionario para su posterior revisión. En el caso de la figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
     el resultado sería \textit{10101}, es decir, el camino con mayor valor.
   \end{enumerate}
   
 \item \textbf{Estadística global:}
-  A diferencia de la estrategia previamente explicada, al realizar el paso \ref{it:estadistica_max} se toman todos los caminos resultantes de la ejecución del circuito con los parámetros \(\beta_{opt}\) y \(\gamma_{opt}\).
-  De esta forma, una ejecución como la dada en la figura \ref{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
+  A diferencia de la estrategia previamente explicada, al realizar el paso \ref{it:5-definicion_estadistica_max} se toman todos los caminos resultantes de la ejecución del circuito con los parámetros \(\beta_{opt}\) y \(\gamma_{opt}\).
+  De esta forma, una ejecución como la dada en la figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
   se ve condicionada por todos los resultados, no únicamente por el camino con valor máximo.
   
 \item \textbf{Función gamma:}
@@ -43,19 +42,17 @@ A continuación se mostrarán los resultados de ejecución utilizando ambos para
 
 \newpage
 \section{Primer grafo}
-\label{sec:primer-grafo}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.75]{primer_grafo/primer_grafo}
-  \caption{Grafo del artículo original} \label{fig:primer_grafo/primer_grafo}
+  \caption{Grafo del artículo original}
 \end{figure}
 
 \subsection{Resultados de Qiskit}
-\label{sec:primer-resultados-qiskit}
 
 \subsubsection{Solución del artículo}
-\label{sec:primer-resultados-qiskit-paper}
+\label{sec:5-primer-paper-resultados_qiskit}
 % TODOO: Hablar aquí sobre la diferencia entre los modificadores y la restricción extra
 En las siguientes muestras se ha buscado replicar los resultados del artículo. Esto ha sido probado ya que, empleando los parámetros \(\beta = 0.28517317\) y \(\gamma = -5.05969577 \) dados como óptimos, se obtiene un gráfico muy similar al dado: \\
 
@@ -67,7 +64,7 @@ En las siguientes muestras se ha buscado replicar los resultados del artículo. 
   \subfigure[Resultado obtenido]{
     \includegraphics[width=0.475\textwidth]{primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
   }
-  \caption{} \label{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
+  \caption{} \label{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
 \end{figure}
 
 De esta forma, se tiene que los resultados del artículo deberían ser equivalentes a los obtenidos en esta instancia del algoritmo.
@@ -82,19 +79,18 @@ De esta forma, se tiene que los resultados del artículo deberían ser equivalen
     p = 3 & 63.4\% & 18.82\% \\ \hline
   \end{tabular}
   \caption{Resultados de la ejecución de la versión de QAOA del artículo}
-  \label{tab:primer_paper_aer_estadisticas}
+  \label{tab:5-primer-paper-aer_estadisticas}
 \end{table}
 
-El primer resultado notable en la tabla \ref{tab:primer_paper_aer_estadisticas} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente. \\
+El primer resultado notable en la tabla \ref{tab:5-primer-paper-aer_estadisticas} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente. \\
 % TODOOOOO: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
-Además, la gran diferencia entre los resultados dados por la estadística máxima y la estadística global denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la figura \ref{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}. \\
+Además, la gran diferencia entre los resultados dados por la estadística máxima y la estadística global denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}. \\
 
 El resultado de la función gamma es el siguiente:
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.5]{primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}
   \caption{Función gamma. Caso del artículo}
-  \label{fig:primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}
 \end{figure}
 
 Se puede ver que existen un gran número de mínimos locales, lo cual dificulta la tarea del optimizador clásico. Esto se corrobora ya que, al inicializar los parámetros como \(\beta = 1.0 \ \gamma = 0.5\), para \(p = 1\) se obtiene el camino óptimo el 100\% de las ejecuciones. \\
@@ -102,8 +98,7 @@ Se puede ver que existen un gran número de mínimos locales, lo cual dificulta 
 Este proceso de inicializar los parámetros con valores concretos no sería una solución válida, ya que se trata de una metodología no automática en la que, para ejecutar correctamente el algoritmo, se necesitaría conocer antes su propio resultado. Además la ejecución correcta sucede para \(p = 1\), pero al igual que el caso por defecto (\(\beta = 1.0 \ \gamma = 1.0\)), no escala correctamente al aumentar el número de capas.
 
 \subsubsection{Modificaciones a la solución del artículo}
-\label{sec:primer-resultados-qiskit-modificaciones}
-Partiendo de la solución del paper descrita en la sección \ref{sec:primer-resultados-qiskit-paper}, se han realizado cambios a la función de coste y a la construcción del circuito cuántico con el fin de encontrar el mejor resultado. Esto se ha realizado para poder comparar el rendimiento de la mejor solución encontrada con el rendimiento del algoritmo de Quantum Annealing de D-Wave.
+Partiendo de la solución del artículo descrita en la sección \ref{sec:5-primer-paper-resultados_qiskit}, se han realizado cambios a la función de coste y a la construcción del circuito cuántico con el fin de encontrar el mejor resultado. Esto se ha realizado para poder comparar el rendimiento de la mejor solución encontrada con el rendimiento del algoritmo de Quantum Annealing de D-Wave.
 
 Las modificaciones empleadas han sido las siguientes:
 \begin{itemize}
@@ -120,8 +115,7 @@ Las modificaciones empleadas han sido las siguientes:
 
 
 \subsection{Resultados de D-Wave}
-\label{sec:primer-resultados-dwave}
-Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistemas de D-Wave se ha obtenido el resultado de la tabla \ref{tab:primer_paper_dwave_estadisticas}
+Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistemas de D-Wave se ha obtenido el resultado de la tabla \ref{tab:5-primer-dwave_estadisticas}
 
 \begin{table}[htbp]
   \centering
@@ -139,10 +133,10 @@ Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistem
     01010 & 69 &   1 \\ \hline
   \end{tabular}
   \caption{Resultados de la ejecución del grafo del artículo en D-Wave}
-  \label{tab:primer_paper_dwave_estadisticas}
+  \label{tab:5-primer-dwave_estadisticas}
 \end{table}
 
-La energía se refiere al coste de dicho camino de acuerdo con la función de coste utilizada. Se puede ver cómo, aunque se encuentre el camino óptimo un menor número de veces que en QAOA, existe una mayor coherencia en los resultados. Esto es así porque los caminos con mayores ocurrencias son los que tienen menor energía, mientras en las ejecuciones de Qiskit se pueden ver ejemplos, como es el camino 00111 en la figura \ref{fig:primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado} con un gran número de ocurrencias pero también una energía elevada.
+La energía se refiere al coste de dicho camino de acuerdo con la función de coste utilizada. Se puede ver cómo, aunque se encuentre el camino óptimo un menor número de veces que en QAOA, existe una mayor coherencia en los resultados. Esto es así porque los caminos con mayores ocurrencias son los que tienen menor energía, mientras en las ejecuciones de Qiskit se pueden ver ejemplos, como es el camino 00111 en la figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado} con un gran número de ocurrencias pero también una energía elevada.
 \footnote{En la ejecución de Qiskit, la energía del camino ``00111'' es 150. Esto se debe a que se rompen varias restricciones presentes en la función de coste. Este valor puede variar dependiendo del multiplicador de Lagrange empleado
   % TODO: Citar multiplicador de lagrange del anexo
   y las restricciones utilizadas.}
