@@ -2,6 +2,7 @@
 \usepackage[spanish]{babel}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage{amsmath}
 \graphicspath{{/home/vian/0_uam/1_TFG/latex/resultados/img/}}
 
 \title{integracion, pruebas y resultados}
@@ -12,7 +13,6 @@
 
 \newpage
 
-% TODOO: Mostrar resultados en tablas comparativas, agrupando por grafo y cambiando los modificadores (al menos una vez para enseñar qué cambio hay) y tal vez de forma anecdótica la modificación de P (lagrange_multiplier en DWave). Después de mostrar las diferencias entre distintas versiones de Qiskit, mostrar la que mejor quede con el caso de DWave. También mostrar las diferentes métricas (max statistics, global y gamma function)
 En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados obtenidos entre métricas distintas, se han realizado los siguientes tipos de pruebas:
 \begin{itemize}
 \item \textbf{Estadística máxima:}
@@ -53,7 +53,6 @@ A continuación se mostrarán los resultados de ejecución utilizando ambos para
 
 \subsubsection{Solución del artículo}
 \label{sec:5-primer-paper-resultados_qiskit}
-% TODOO: Hablar aquí sobre la diferencia entre los modificadores y la restricción extra
 En las siguientes muestras se ha buscado replicar los resultados del artículo. Esto ha sido probado ya que, empleando los parámetros \(\beta = 0.28517317\) y \(\gamma = -5.05969577 \) dados como óptimos, se obtiene un gráfico muy similar al dado: \\
 
 \begin{figure}[htbp]
@@ -82,15 +81,15 @@ De esta forma, se tiene que los resultados del artículo deberían ser equivalen
   \label{tab:5-primer-paper-aer_estadisticas}
 \end{table}
 
-El primer resultado notable en la tabla \ref{tab:5-primer-paper-aer_estadisticas} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente. \\
-% TODOOOOO: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
+El primer resultado a resaltar en la tabla \ref{tab:5-primer-paper-aer_estadisticas} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente. \\
+% FIXMEEEEE: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
 Además, la gran diferencia entre los resultados dados por la estadística máxima y la estadística global denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}. \\
 
 El resultado de la función gamma es el siguiente:
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.5]{primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}
-  \caption{Función gamma. Caso del artículo}
+  \caption{Función gamma. Caso del artículo} \label{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}
 \end{figure}
 
 Se puede ver que existen un gran número de mínimos locales, lo cual dificulta la tarea del optimizador clásico. Esto se corrobora ya que, al inicializar los parámetros como \(\beta = 1.0 \ \gamma = 0.5\), para \(p = 1\) se obtiene el camino óptimo el 100\% de las ejecuciones. \\
@@ -100,20 +99,53 @@ Este proceso de inicializar los parámetros con valores concretos no sería una 
 \subsubsection{Modificaciones a la solución del artículo}
 Partiendo de la solución del artículo descrita en la sección \ref{sec:5-primer-paper-resultados_qiskit}, se han realizado cambios a la función de coste y a la construcción del circuito cuántico con el fin de encontrar el mejor resultado. Esto se ha realizado para poder comparar el rendimiento de la mejor solución encontrada con el rendimiento del algoritmo de Quantum Annealing de D-Wave.
 
+% FIXMEEE: Quitar de aquí y poner donde toque (directamente con los resultados)
 Las modificaciones empleadas han sido las siguientes:
 \begin{itemize}
-\item Incrementar el valor del parámetro P (correspondiente al modificador de Lagrange)
-  % TODO: Citar multiplicador de lagrange del anexo
-  al construir la función de coste, para así aumentar la penalización en caso de fallo.
-
 \item Al construir el circuito cuántico, utilizar para los operadores lineales los ángulos obtenidos teóricamente, en lugar de los vistos en el artículo.
-  % TODOOO: ¿Explicar que no entiendo por qué están esos parámetros? ¿qué pongo?
-
-\item Añadir una restricción a la función de coste, que especifique que solo se puede acceder al último nodo por una de las aristas que lleguen a este.
-  % TODO: Esto seguramente no se explique aquí
+  % TODOO: ¿Explicar la diferencia en los modificadores? Hay que explicarlo
 \end{itemize}
+% ENDFIXME
 
+\paragraph{P=40}
+% TODOOO: Repetir estas ejecuciones y hacer función gamma, por ahora salen demasiado mal como para mostrarlas
+Incrementar el valor del parámetro P (correspondiente al modificador de Lagrange)
+% TODO: Citar multiplicador de lagrange del anexo
+al construir la función de coste, para así aumentar la penalización en caso de fallo.
 
+\paragraph{Restricción extra}
+Añadir una restricción a la función de coste, que especifique que solo se puede acceder al último nodo por una de las aristas que lleguen a este.
+% TODOO: Esto seguramente no se explique aquí, en algún sitio hablar sobre la restricción extra. SI SE QUITA LA FORMULA QUITARLA DE LA CITA DE LA TABLA DE ABAJO
+\begin{equation}
+  \label{eq:5-primer-restriccion_extra}
+  X_{13} + X_{23} = 1
+\end{equation}
+
+% TODOOO: Añadir estadísticas globales y repetir estadísticas máximas, tal vez con más capas tb
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    p = 1 & 93.8\% & ?\% \\ \hline
+    p = 2 & 64.6\% & ?\% \\ \hline
+    p = 3 & 84.8\% & ?\% \\ \hline
+  \end{tabular}
+  \caption{Resultados de la ejecución de QAOA añadiendo la restricción de la fórmula \ref{eq:5-primer-restriccion_extra}}
+  \label{tab:5-primer-restriccion_extra-aer_estadisticas}
+\end{table}
+
+% FIXMEE: Cuando se vean los resultados de estadísticas globales habrá que cambiarlo
+Los resultados (\textit{tabla \ref{tab:5-primer-restriccion_extra-aer_estadisticas}}) presentan una ligera mejora con respecto a los presentes en la \textit{tabla \ref{tab:5-primer-paper-aer_estadisticas}}. \\
+
+La función gamma resultante (\textit{figura \ref{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}}) toma, en comparación con la original (\textit{figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}}), unos valores elevados. Se distingue un incremento en la diferencia entre los mínimos globales y los mínimos locales (y no globales).
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.5]{primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}
+  \caption{Función gamma. Con restricción extra} \label{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}
+\end{figure}
+  
+\newpage{}
 \subsection{Resultados de D-Wave}
 Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistemas de D-Wave se ha obtenido el resultado de la tabla \ref{tab:5-primer-dwave_estadisticas}
 
