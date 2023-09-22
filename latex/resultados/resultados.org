@@ -21,7 +21,7 @@ q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01}
 \newpage
 
 * Primer grafo sin restricción
-[[./img/primer_grafo/primer_grafo.png]]
+[[../img/primer_grafo/primer_grafo.png]]
 \newpage
 ** Aer - Versión del paper (primer\textunderscore grafo/aer-qaoa.ipynb)
 Pruebas realizadas sobre la versión del código sin la restricción\newline
@@ -54,7 +54,7 @@ Versión equivalente a la de [[[https://www.mdpi.com/1424-8220/22/19/7570/xml][M
 
 #+CAPTION: seed\textunderscore simulator=10
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_correcto.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_paper_aer_correcto.png]]
 
 Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -73,7 +73,7 @@ Camino: X_{01}X_{12}X_{23} (Camino óptimo)
 
 #+CAPTION: seed\textunderscore simulator=21
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_erroneo.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_paper_aer_erroneo.png]]
 
 Mejor resultado: 10110 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -97,7 +97,7 @@ Obtenido a mano (no se ha encontrado ninguna semilla que diese este resultado)
 |---+-------+------------------|
 
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_suboptimo.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_paper_aer_suboptimo.png]]
 
 Mejor resultado: 01001 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -115,7 +115,7 @@ Camino: X_{01}X_{13} (Camino subóptimo, pero no se rompe ninguna restricción)
 |---+-------+---------------------------|
 
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado.png]]
 
 Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -204,7 +204,7 @@ Da un mismo error un porcentaje de veces muy alto. Error muy fiable.
 
 #+CAPTION: Mejor resultado
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/sin_restriccion_extra/primer_paper_aer_beta-div-2.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_paper_aer_beta-div-2.png]]
 
 \newpage
 
@@ -493,14 +493,14 @@ Solo para comprobar que funciona la ejecución.
 
 #+CAPTION: num iterations=2
 #+ATTR_LATEX: :scale 0.4
-[[./img/primer_grafo/sin_restriccion_extra/primer_provider_iter-2.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_provider_iter-2.png]]
 
 \newpage
 
 *** ibmq\textunderscore manila
 \beta_{0} = 0.5, \gamma_{0} = 0.5
 #+ATTR_LATEX: :scale 0.4
-[[./img/primer_grafo/sin_restriccion_extra/primer_provider_manila.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_provider_manila.png]]
 \newpage
 
 ** Runtime
@@ -516,7 +516,7 @@ Solo para comprobar que funciona la ejecución.
 
 Resultado de ejecutar ese *theta* obtenido con Aer:
 #+ATTR_LATEX: :scale 0.4
-[[./img/primer_grafo/sin_restriccion_extra/primer_runtime_lima.png]]
+[[../img/primer_grafo/sin_restriccion_extra/primer_runtime_lima.png]]
 
 \newpage
 * Primer grafo con restricción
@@ -583,7 +583,7 @@ _Modificadores del paper_
 
 #+CAPTION: seed\textunderscore simulator=3
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/con_restriccion_extra/primer_restr_aer_correcto.png]]
+[[../img/primer_grafo/con_restriccion_extra/primer_restr_aer_correcto.png]]
 
 Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -602,7 +602,7 @@ Camino: X_{01}X_{12}X_{23} (Camino óptimo)
 
 #+CAPTION: seed\textunderscore simulator=2
 #+ATTR_LATEX: :scale 0.5
-[[./img/primer_grafo/con_restriccion_extra/primer_restr_aer_correcto-con-ruido.png]]
+[[../img/primer_grafo/con_restriccion_extra/primer_restr_aer_correcto-con-ruido.png]]
 
 Mejor resultado: 10101 (q_{4}q_{3}q_{2}q_{1}q_{0} = X_{23}X_{13}X_{12}X_{02}X_{01})
 
@@ -616,7 +616,7 @@ Además se ve que encuentra un valor *fun* demasiado alto (90.75)
 
 *** Gamma function
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun.png]]
+[[../img/primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun.png]]
 
 ** Aer simulator con restricción extra y P = 40
 *** Modificadores del paper
@@ -720,9 +720,9 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 *** Conclusiones y Gamma function
 - Para ambos modificadores los resultados sí parecen mejorar con el número de capas (aunque den resultados muy bajos)
 **** Modificadores del paper
-[[./img/primer_grafo/con_restriccion_extra/primer_p_40_mod-paper_gamma_fun.png]]
+[[../img/primer_grafo/con_restriccion_extra/primer_p_40_mod-paper_gamma_fun.png]]
 **** Modificadores originales
-[[./img/primer_grafo/con_restriccion_extra/primer_p_40_mod-originales_gamma_fun.png]]
+[[../img/primer_grafo/con_restriccion_extra/primer_p_40_mod-originales_gamma_fun.png]]
 \newpage
 ** Aer simulator con restricción extra y P = 54
 #+begin_src python
@@ -771,12 +771,12 @@ Probar a aumentar el factor de penalización para las restricciones (P = 54).
 
 *** Gamma function
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/primer_grafo/con_restriccion_extra/primer_p_54_gamma_fun.png]]
+[[../img/primer_grafo/con_restriccion_extra/primer_p_54_gamma_fun.png]]
 
 \newpage
 
 * Grafo Zhiqiang (Con aer)
-[[./img/zhiqiang_grafo/zhiqiang_grafo.png]]
+[[../img/zhiqiang_grafo/zhiqiang_grafo.png]]
 ** Modificadores originales
 #+begin_src python
   circuit.rz(coef * gamma[p] * 2, q_idx)
@@ -836,7 +836,7 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 **** Gamma function
 
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/zhiqiang_grafo/modificadores_originales/zhiqiang_p_20_gamma_fun.png]]
+[[../img/zhiqiang_grafo/modificadores_originales/zhiqiang_p_20_gamma_fun.png]]
 
 \newpage
 
@@ -919,7 +919,7 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 **** Gamma function
 
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/zhiqiang_grafo/modificadores_originales/zhiqiang_p_40_gamma_fun.png]]
+[[../img/zhiqiang_grafo/modificadores_originales/zhiqiang_p_40_gamma_fun.png]]
 \newpage
 
 *** Conclusiones
@@ -982,7 +982,7 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 **** Gamma function
 
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/zhiqiang_grafo/modificadores_paper/zhiqiang_p_20_gamma_fun.png]]
+[[../img/zhiqiang_grafo/modificadores_paper/zhiqiang_p_20_gamma_fun.png]]
 \newpage
 
 *** P=40
@@ -1065,7 +1065,7 @@ El óptimo ni siquiera aparece (*0%*)
 **** Gamma function
 
 Variación de execute\textunderscore circuit con respecto a \gamma con num layers = 1 y \beta = 1.0
-[[./img/zhiqiang_grafo/modificadores_paper/zhiqiang_p_40_gamma_fun.png]]
+[[../img/zhiqiang_grafo/modificadores_paper/zhiqiang_p_40_gamma_fun.png]]
 \newpage
 
 *** Conclusiones
@@ -1075,7 +1075,7 @@ Variación de execute\textunderscore circuit con respecto a \gamma con num layer
 * DWave
 Ejecuciones con 1024 medidas
 ** Primer grafo
-[[./img/primer_grafo/primer_grafo.png]]
+[[../img/primer_grafo/primer_grafo.png]]
 
 Sampleset:
 | / | <> |      > |      > |      > |      > |      > |      > |       > |       > |
@@ -1096,7 +1096,7 @@ Sampleset:
 
 \newpage
 ** Segundo grafo
-[[./img/segundo_grafo.png]]
+[[../img/segundo_grafo.png]]
 
 Sampleset:
 | / |  <> |      > |      > |      > |      > |      > |      > | >   |      > |      > |       > | >   |
@@ -1129,7 +1129,7 @@ Sampleset:
 
 \newpage
 ** Zhiqiang grafo
-[[./img/zhiqiang_grafo/zhiqiang_grafo.png]]
+[[../img/zhiqiang_grafo/zhiqiang_grafo.png]]
 
 Sampleset:
 | / | <> |      > |      > |      > |      > |      > |       > |       > |
