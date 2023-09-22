@@ -58,10 +58,10 @@ En las siguientes muestras se ha buscado replicar los resultados del artículo. 
 \begin{figure}[htbp]
   \centering
   \subfigure[Resultado del artículo]{
-    \includegraphics[width=0.475\textwidth]{primer_grafo/sin_restriccion_extra/primer_paper_orig_resultado}
+    \includegraphics[width=0.44\textwidth]{primer_grafo/sin_restriccion_extra/primer_paper_orig_resultado}
   }
   \subfigure[Resultado obtenido]{
-    \includegraphics[width=0.475\textwidth]{primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
+    \includegraphics[width=0.51\textwidth]{primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
   }
   \caption{} \label{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}
 \end{figure}
@@ -127,18 +127,20 @@ Añadir una restricción a la función de coste, que especifique que solo se pue
   \begin{tabular}{|c|r|r|}
     \hline
     \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1 & 93.8\% & ?\% \\ \hline
-    p = 2 & 64.6\% & ?\% \\ \hline
-    p = 3 & 84.8\% & ?\% \\ \hline
+    p = 1 & 93.8\% & 37.83\% \\ \hline
+    p = 2 & 64.6\% & 26.16\% \\ \hline
+    p = 3 & 84.8\% & 27.82\% \\ \hline
+    p = 4 & 56.0\% & 23.47\% \\ \hline
+    p = 5 & 88.1\% & 46.40\% \\ \hline
+    p = 6 & 88.1\% & 21.83\% \\ \hline
   \end{tabular}
   \caption{Resultados de la ejecución de QAOA añadiendo la restricción de la fórmula \ref{eq:5-primer-restriccion_extra}}
   \label{tab:5-primer-restriccion_extra-aer_estadisticas}
 \end{table}
 
-% FIXMEE: Cuando se vean los resultados de estadísticas globales habrá que cambiarlo
-Los resultados (\textit{tabla \ref{tab:5-primer-restriccion_extra-aer_estadisticas}}) presentan una ligera mejora con respecto a los presentes en la \textit{tabla \ref{tab:5-primer-paper-aer_estadisticas}}. \\
+Los resultados (\textit{tabla \ref{tab:5-primer-restriccion_extra-aer_estadisticas}}) presentan una ligera mejora con respecto a los presentes en la \textit{tabla \ref{tab:5-primer-paper-aer_estadisticas}}, tanto para las estadísticas máximas como globales. \\
 
-La función gamma resultante (\textit{figura \ref{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}}) toma, en comparación con la original (\textit{figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}}), unos valores elevados. Se distingue un incremento en la diferencia entre los mínimos globales y los mínimos locales (y no globales).
+La función gamma resultante (\textit{figura \ref{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}}) toma, en comparación con la original (\textit{figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}}), unos valores elevados. Se distingue un incremento en la diferencia entre los mínimos globales y los mínimos locales (no globales).
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.5]{primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}
