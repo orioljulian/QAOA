@@ -8,6 +8,7 @@
 \title{integracion, pruebas y resultados}
 
 \begin{document}
+
 \maketitle{}
 \tableofcontents{}
 
@@ -40,13 +41,13 @@ En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados ob
 
 A continuación se mostrarán los resultados de ejecución utilizando ambos paradigmas, esto es, QAOA y Quantum Annealing, además de explorar el rendimiento de las ejecuciones en Qiskit variando los métodos para construir la función de coste.
 
-\newpage
+% TODOOOO: Los resultados en general están demasiado mal. Sigo con Zhiqiang y luego veo qué se hace aquí. Los modificadores originales (correctos "teóricamente") dan una función gamma muy extraña, con muchos "baches"
 \section{Primer grafo}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.75]{primer_grafo/primer_grafo}
-  \caption{Grafo del artículo original}
+  \caption{Primer grafo. Artículo \cite{multi-objective_routing_optimization}}
 \end{figure}
 
 \subsection{Resultados de Qiskit}
@@ -82,7 +83,7 @@ De esta forma, se tiene que los resultados del artículo deberían ser equivalen
 \end{table}
 
 El primer resultado a resaltar en la tabla \ref{tab:5-primer-paper-aer_estadisticas} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente. \\
-% FIXMEEEEE: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
+% FIXMEEEE: Esto tiene que estar mal, lo muestro de todas formas? (el hecho de que al aumentar p empeore el algoritmo)
 Además, la gran diferencia entre los resultados dados por la estadística máxima y la estadística global denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la figura \ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_aer_resultado}. \\
 
 El resultado de la función gamma es el siguiente:
@@ -147,7 +148,6 @@ La función gamma resultante (\textit{figura \ref{fig:5-primer_grafo/con_restric
   \caption{Función gamma. Con restricción extra} \label{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}
 \end{figure}
   
-\newpage{}
 \subsection{Resultados de D-Wave}
 Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistemas de D-Wave se ha obtenido el resultado de la tabla \ref{tab:5-primer-dwave_estadisticas}
 
@@ -166,7 +166,7 @@ Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistem
     10100 & 61 &   1 \\ \hline
     01010 & 69 &   1 \\ \hline
   \end{tabular}
-  \caption{Resultados de la ejecución del grafo del artículo en D-Wave}
+  \caption{Resultados de la ejecución del primer grafo en D-Wave}
   \label{tab:5-primer-dwave_estadisticas}
 \end{table}
 
@@ -175,7 +175,26 @@ La energía se refiere al coste de dicho camino de acuerdo con la función de co
   % TODO: Citar multiplicador de lagrange del anexo
   y las restricciones utilizadas.}
 
+\section{Tercer grafo}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.75]{zhiqiang_grafo/zhiqiang_grafo}
+  \caption{Tercer grafo. Artículo \cite{solving_shortest_path_with_qaoa}}
+\end{figure}
+
+\subsection{Resultados de Qiskit}
+% TODOOOOOO: Por hacer
+
+\subsection{Resultados de D-Wave}
+% TODOOOOOO: Por hacer
+
+% Si no funciona C-c C-c: BibTeX (compilar Bibtex antes)
+\bibliographystyle{plain}
+\bibliography{bibliografia}  % bibliografia.bib
+
 \end{document}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
