@@ -157,14 +157,14 @@ Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistem
     \hline
     \textbf{Camino} & \textbf{Energía} & \textbf{Número de ocurrencias} \\ \hline
     10101 (\textbf{Óptimo}) & 11 & 348 \\ \hline
-    01001 & 12 & 373 \\ \hline
-    10010 & 12 & 294 \\ \hline
-    00000 & 54 &   4 \\ \hline
-    00001 & 58 &   1 \\ \hline
-    10000 & 59 &   1 \\ \hline
-    00101 & 60 &   1 \\ \hline
-    10100 & 61 &   1 \\ \hline
-    01010 & 69 &   1 \\ \hline
+    10010                   & 12 & 373 \\ \hline
+    01001                   & 12 & 294 \\ \hline
+    00000                   & 54 &   4 \\ \hline
+    10000                   & 58 &   1 \\ \hline
+    00001                   & 59 &   1 \\ \hline
+    10100                   & 60 &   1 \\ \hline
+    00101                   & 61 &   1 \\ \hline
+    01010                   & 69 &   1 \\ \hline
   \end{tabular}
   \caption{Resultados de la ejecución del primer grafo en D-Wave}
   \label{tab:5-primer-dwave_estadisticas}
@@ -184,10 +184,35 @@ La energía se refiere al coste de dicho camino de acuerdo con la función de co
 \end{figure}
 
 \subsection{Resultados de Qiskit}
-% TODOOOOOO: Por hacer
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    % TODOOOOOO: Por hacer datos
+    p = 1 & 0.6\% & 5.9\% \\ \hline
+    p = 2 & 30.7\% & 16.9\% \\ \hline
+    p = 3 & ?\% & ?\% \\ \hline
+  \end{tabular}
+  \caption{Resultados de la ejecución de QAOA del tercer grafo}
+\end{table}
+
+% TODOOOOOO: Por hacer comentarios
 
 \subsection{Resultados de D-Wave}
-% TODOOOOOO: Por hacer
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{Camino} & \textbf{Energía} & \textbf{Número de ocurrencias} \\ \hline
+    1010 (\textbf{Óptimo}) &  7 & 776 \\ \hline
+    0101                   & 12 & 247 \\ \hline
+    0010                   & 46 &   1 \\ \hline
+  \end{tabular}
+  \caption{Resultados de la ejecución del tercer grafo en D-Wave}
+\end{table}
+
+Al igual que en anteriores ejecuciones utilizando Quantum Annealing, se mantiene la coherencia en los resultados. El resultado más producido es el camino óptimo, mientras que el segundo camino más producido es el otro único camino válido (sin romper ninguna restricción).
 
 % Si no funciona C-c C-c: BibTeX (compilar Bibtex antes)
 \bibliographystyle{plain}
