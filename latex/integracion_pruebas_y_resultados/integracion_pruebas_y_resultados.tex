@@ -189,15 +189,25 @@ La energía se refiere al coste de dicho camino de acuerdo con la función de co
   \begin{tabular}{|c|r|r|}
     \hline
     \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    % TODOOOOOO: Por hacer datos
     p = 1 & 0.6\% & 5.9\% \\ \hline
     p = 2 & 30.7\% & 16.9\% \\ \hline
-    p = 3 & ?\% & ?\% \\ \hline
+    p = 3 & 93.8\% & 26.0\% \\ \hline
   \end{tabular}
   \caption{Resultados de la ejecución de QAOA del tercer grafo}
 \end{table}
 
-% TODOOOOOO: Por hacer comentarios
+A diferencia de las ejecuciones del primer grafo (tabla \ref{tab:5-primer-paper-aer_estadisticas}), aquí se ve una clara mejora con el aumento del número de capas.
+
+Además, para el caso \(p = 3\) se aprecia una distancia mucho mayor a la habitual entre la estadística máxima y global. A efectos prácticos se toma como medida de fiabilidad la estadística máxima, ya que significa que se ha encontrado el camino óptimo el 93.8\% de las ejecuciones realizadas.
+
+El resultado de la función gamma es el siguiente:
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.5]{zhiqiang_grafo/modificadores_paper/zhiqiang_p_20_gamma_fun}
+  \caption{Función gamma. P=20}
+\end{figure}
+% TODOOOOOO: Comentar función gamma
+% TODOOOOOO: Hacer p=40
 
 \subsection{Resultados de D-Wave}
 \begin{table}[htbp]

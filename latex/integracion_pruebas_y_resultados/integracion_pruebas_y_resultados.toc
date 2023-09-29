@@ -7,5 +7,5 @@
 \contentsline {paragraph}{Restricción extra}{5}{}%
 \contentsline {subsection}{\numberline {1.2}Resultados de D-Wave}{5}{}%
 \contentsline {section}{\numberline {2}Tercer grafo}{6}{}%
-\contentsline {subsection}{\numberline {2.1}Resultados de Qiskit}{7}{}%
+\contentsline {subsection}{\numberline {2.1}Resultados de Qiskit}{6}{}%
 \contentsline {subsection}{\numberline {2.2}Resultados de D-Wave}{7}{}%
