@@ -189,11 +189,11 @@ La energía se refiere al coste de dicho camino de acuerdo con la función de co
   \begin{tabular}{|c|r|r|}
     \hline
     \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1 & 0.6\% & 5.9\% \\ \hline
+    p = 1 &  0.6\% &  5.9\% \\ \hline
     p = 2 & 30.7\% & 16.9\% \\ \hline
     p = 3 & 93.8\% & 26.0\% \\ \hline
   \end{tabular}
-  \caption{Resultados de la ejecución de QAOA del tercer grafo}
+  \caption{Resultados de la ejecución de QAOA del tercer grafo. P=20}
 \end{table}
 
 A diferencia de las ejecuciones del primer grafo (tabla \ref{tab:5-primer-paper-aer_estadisticas}), aquí se ve una clara mejora con el aumento del número de capas.
@@ -204,10 +204,23 @@ El resultado de la función gamma es el siguiente:
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.5]{zhiqiang_grafo/modificadores_paper/zhiqiang_p_20_gamma_fun}
-  \caption{Función gamma. P=20}
+  \caption{Función gamma del tercer grafo. P=20}
 \end{figure}
 % TODOOOOOO: Comentar función gamma
-% TODOOOOOO: Hacer p=40
+
+\subsection{Resultados de Qiskit}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    p = 1 &    0\% &  7.43\% \\ \hline
+    p = 2 & 40.3\% & 14.69\% \\ \hline
+    p = 3 & 62.0\% &  21.9\% \\ \hline
+  \end{tabular}
+  \caption{Resultados de la ejecución de QAOA del tercer grafo. P=40}
+\end{table}
+% TODOOOOOO: Comentar P=40
 
 \subsection{Resultados de D-Wave}
 \begin{table}[htbp]
@@ -224,9 +237,8 @@ El resultado de la función gamma es el siguiente:
 
 Al igual que en anteriores ejecuciones utilizando Quantum Annealing, se mantiene la coherencia en los resultados. El resultado más producido es el camino óptimo, mientras que el segundo camino más producido es el otro único camino válido (sin romper ninguna restricción).
 
-% Si no funciona C-c C-c: BibTeX (compilar Bibtex antes)
-\bibliographystyle{plain}
-\bibliography{bibliografia}  % bibliografia.bib
+\bibliographystyle{abbrv}
+\bibliography{bibliografia}
 
 \end{document}
 
