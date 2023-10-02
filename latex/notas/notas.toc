@@ -1,7 +1,0 @@
-\babel@toc {spanish}{}\relax 
-\contentsline {section}{\numberline {1}D-Wave}{2}{}%
-\contentsline {subsection}{\numberline {1.1}Quantum Annealing}{2}{}%
-\contentsline {section}{\numberline {2}QAOA}{3}{}%
-\contentsline {subsection}{\numberline {2.1}Construcción de \(\lvert \psi (\vec {\beta }, \vec {\gamma })\rangle \)}{3}{}%
-\contentsline {section}{\numberline {3}Apéndice}{4}{}%
-\contentsline {subsection}{\numberline {3.1}Estado fundamental}{4}{}%
