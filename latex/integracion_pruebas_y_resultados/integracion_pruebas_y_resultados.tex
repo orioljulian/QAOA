@@ -206,9 +206,26 @@ El resultado de la función gamma es el siguiente:
   \includegraphics[scale=0.5]{zhiqiang_grafo/modificadores_paper/zhiqiang_p_20_gamma_fun}
   \caption{Función gamma del tercer grafo. P=20}
 \end{figure}
-% TODOOOOOO: Comentar función gamma
+A diferencia de las funciones gamma del grafo para el problema de MAX-CUT y el primer grafo de QAOA, en esta gráfica se ve mucho más ruido.
 
-\subsection{Resultados de Qiskit}
+Esto se compara también con la gráfica resultante de ejecutar este mismo problema utilizando, para los operadores lineales del circuito, los ángulos obtenidos teóricamente (en lugar de basarse en los obtenidos del artículo).
+% TODOOOOO: Insertar gamma function con modificadores originales y citarla aquí
+% TODOO: ¿Explicar la diferencia en los modificadores? Hay que explicarlo
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    p = 1 &  0.1\% &  9.79\% \\ \hline
+    p = 2 & 10.0\% & 20.20\% \\ \hline
+    p = 3 & 38.1\% & 19.47\% \\ \hline
+    p = 4 &  0.7\% &     ?\% \\ \hline  % el 99.3\% de resultados ha sido 0101 (en lugar de 1010)
+  \end{tabular}
+  \caption{Resultados de la ejecución de QAOA del tercer grafo. Ángulos teóricos}
+\end{table}
+
+% FIXMEEEEEE: Tal vez quitar? No es significativo. Si se queda comentar la tabla.
 \begin{table}[htbp]
   \centering
   \begin{tabular}{|c|r|r|}
@@ -220,7 +237,6 @@ El resultado de la función gamma es el siguiente:
   \end{tabular}
   \caption{Resultados de la ejecución de QAOA del tercer grafo. P=40}
 \end{table}
-% TODOOOOOO: Comentar P=40
 
 \subsection{Resultados de D-Wave}
 \begin{table}[htbp]
