@@ -1,5 +1,6 @@
 import itertools
 
+
 def are_equal(e1, e2, nbits=5, p=27):
     n = nbits
     is_wrong = False
@@ -33,10 +34,11 @@ exp_27 = "\
 -28   * z_2 \
 -17   * z_3 \
 +11.5 * z_4 \
-+13.5 * (- z_0*z_2 + z_1*z_2 + z_2*z_3 - z_2*z_4 + z_0*z_1 - z_0*z_3 \
-         - z_1*z_4) \
++13.5 * (+ z_0*z_1 - z_0*z_2 - z_0*z_3 + z_1*z_2 \
+         - z_1*z_4 + z_2*z_3 - z_2*z_4) \
 +(13.5*(z_0**2 + z_1**2 + z_2**2) + 6.75*(z_3**2 + z_4**2)) \
 +26.5"
+
 
 exp_orig_mas_restricc = "\
 5*(1 - z_0)/2 + \
@@ -55,6 +57,7 @@ exp_27_mas_restricc = "\
         - z_1*z_4 - z_2*z_4) \
 + 13.5 * (z_0**2 + z_1**2 + z_2**2 + z_3**2 + z_4**2) \
 + 26.5"
+
 
 if __name__ == "__main__":
     # Sin restriccion extra
