@@ -1,0 +1,7 @@
+     fun: 77.56768520781128
+   maxcv: 0.0
+ message: 'Optimization terminated successfully.'
+    nfev: 44
+  status: 1
+ success: True
+       x: array([1.01634847, 2.08889945, 1.23336836, 0.99084778])
