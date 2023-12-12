@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{physics}
+
+\title{Diseño}
+
+\begin{document}
+
+\maketitle{}
+
+\section{Problemas de optimización combinatoria}
+
+Un problema de optimización combinatoria se define con la siguiente función de coste:
+\begin{align*}
+  C(z) = \sum_{\alpha = 1}^{m} C_\alpha(z) \\
+  \textnormal{ dde } z = z_1z_2...z_n \textnormal{ y } z_i\in \{0, 1\} \\
+   C_{\alpha}(z) = \begin{cases}
+     1 \textnormal{ si z satisface } C_\alpha \\
+     0 \textnormal{ en otro caso}
+   \end{cases}
+\end{align*}
+
+En este caso el objetivo será encontrar el \textbf{mínimo global} de esta función. Para esto mismo se debe encontrar una cadena de bits de tamaño \textit{n} que cumplan para la mayor cantidad de cláusulas $C_\alpha(z) = 0$.
+
+Para que sean aplicados a algoritmos cuánticos estos problemas no pueden tener restricciones añadidas, por lo que el espacio de resultados posibles será de $2^n$ combinaciones.
+
+\subsection{Añadir restricciones}
+
+Si el problema que se está intentando representar tiene restricciones de la forma $A(z) = B(z)$ la forma de añadirlas a la función de coste sería $C*(z) = C(z) + P*(A(z)-B(z))^2$, donde
+\begin{align*}
+  P*(A(z) - B(z))^2 \begin{cases}
+    = 0 \textnormal{ si se cumple la restricción } \\
+    \ge P \textnormal{ en otro caso }
+  \end{cases}
+\end{align*}
+
+El parámetro P se denomina \textit{modificador de Lagrange} y tiene un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > max_zC(z)$
+
+\section{Formulación de QAOA}
+El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de C(z).
+
+La base computacional se representa como $\{\ket{z} : z = \{0, 1\}^n\}$.
+
+El circuito para QAOA consiste en un \textbf{estado inicial} del circuito y dos tipos de operadores unitarios denominados \textbf{problem hamiltonian} y \textbf{mixer hamiltonian}.
+
+\subsection{Estado inicial}
+El estado inicial del qubit se define como
+\begin{align*}
+  \ket{\psi_0} = \frac{1}{\sqrt{2^n}} \sum_z\ket{z}
+  = (\frac{1}{\sqrt{2}} (\ket{0} + \ket{1}))^{\otimes n}
+  = H^{\otimes n} \ket{0}^{\otimes n}
+\end{align*}
+
+Este estado inicial se construye añadiendo operadores de Hadamard a \textit{n} qubits inicializados a $\ket{0}$, lo que genera un estado equiprobable, donde la probabilidad de obtener una cualquier cadena de \textit{n} bits al medir el estado sería en cualquier caso $\frac{1}{2^n}$
+
+\subsection{Mixer hamiltonian}
+
+Denotado $U(H_m, \beta)$, este operador unitario depende de dos parámetros:
+\begin{itemize}
+\item $\beta$: Parámetro de entrada en el algoritmo de QAOA  % TODOO: Añadir cita de donde se definan gamma y beta
+\item $H_m$: Hamiltoniano no necesariamente unitario, que se construye a partir de puertas Pauli-X ($\sigma^x$).  % TODOO: Mejorar explicación
+\end{itemize}
+
+\begin{align*}
+  &H_m = \sum_{i=0}^{n-1}\sigma^x_{i} &&\\
+  &U(H_m, \beta) = e^{-i \beta H_m} = \prod_{j=0}^{n-1}e^{-i \beta \sigma^x_j}
+\end{align*}
+% TODOO: Añadir puertas R_x y definirlas a pie de pagina
+
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

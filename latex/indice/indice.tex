@@ -1,0 +1,82 @@
+\documentclass{report}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{hyperref}  % hyperlinks
+\graphicspath{{/home/vian/0_uam/1_TFG/latex/img/}}
+
+\title{Estudio de la aplicación de algoritmos cuánticos de optimización con las tecnologías cuánticas actuales}
+
+\begin{document}
+
+\maketitle{}
+\tableofcontents{}
+
+\newpage
+
+\chapter{Introducción}
+Explicación sobre la computación cuántica, concretamente orientada a problemas de optimización. Mencionar su posible supremacía para la ejecución de ciertos problemas con respecto a la computación clásica. También explicar el concepto de era NISQ y la utilidad durante la misma de algoritmos híbridos.
+
+Explicar diferencia entre Quantum Annealing y QAOA (D-Wave vs ordenadores cuánticos generalistas para resolver problemas de optimización)
+
+\chapter{Estado del arte}
+El artículo del que se ha partido.
+
+Mostrar también aquí el resultado de la gráfica que ahora mismo está en la sección \ref{sec:integracion_pruebas_y_resultados}.
+
+\chapter{Diseño}
+Formular el problema de \textbf{shortest path}
+Cómo se aplica el algoritmo QAOA a un problema de \textbf{shortest path} genérico. O problema de optimización genérico? Igual esto mejor.
+
+Cómo pasar de problema de tipo Ising a tipo QUBO, luego explicar esto cómo se aplica en QAOA y D-Wave
+
+También hablar sobre la formulación de MAX-CUT, para el caso de Qiskit
+
+\chapter{Desarrollo}
+Aplicar el algoritmo QAOA a cada uno de los tres grafos. Construir las funciones de coste y mostrar el hamiltoniano resultante.
+
+Cómo llamar a los grafos?? Estaría bien decir primero, segundo y tercero o algo así?
+\section{Grafo de planificación de red simple}
+
+\section{Grafo de MAX-CUT simple}
+
+\section{Grafo de doble operador Pauli}  % TODO: Sacado del artículo, ver el porqué
+
+\chapter{Integración, pruebas y resultados}
+\label{sec:integracion_pruebas_y_resultados}
+
+\section{Primer grafo}
+
+\subsection{QAOA}
+
+\subsubsection{Simulador}
+
+\subsubsection{Ordenador cuántico real}
+
+\subsection{Quantum Annealing}
+
+\section{Tutorial de Qiskit}
+Aquí se debería mostrar el problema aplicado a D-Wave también?
+
+\section{Zhiqiang grafo}
+
+\subsection{QAOA}
+
+\subsubsection{Simulador}
+
+\subsubsection{Ordenador cuántico real}
+
+\subsection{Quantum Annealing}
+
+\chapter{Conclusiones y trabajo futuro}
+
+\chapter{Bibliografía}
+
+\chapter{Apéndice}
+
+\section{Cómo ejecutar con Runtime}
+\section{Por qué funciona el método de pasar de problema de tipo Ising a tipo QUBO}
+
+
+\end{document}
