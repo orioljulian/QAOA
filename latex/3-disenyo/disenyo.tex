@@ -2,6 +2,8 @@
 \usepackage[spanish]{babel}
 \usepackage{amsmath}
 \usepackage{physics}
+\usepackage{enumitem}
+\setlist[enumerate]{label*=\arabic*.}
 
 \title{Diseño}
 
@@ -10,37 +12,38 @@
 \maketitle{}
 
 \section{Problemas de optimización combinatoria}
+\label{sec:3-problemas de optimizacion combinatoria}
 
 Un problema de optimización combinatoria se define con la siguiente función de coste:
 \begin{align*}
-  f(z) = \sum_{\alpha = 1}^{m} f_\alpha(z) \\
-  \textnormal{ dde } z = z_1z_2...z_n \textnormal{ y } z_i\in{\{0, 1\}} \\
-   f_{\alpha}(z) = \begin{cases}
-     1 \textnormal{ si z satisface } f_\alpha \\
+  f(x) = \sum_{\alpha = 1}^{m} f_\alpha(x) \\
+  \textnormal{ dde } x = x_1x_2...x_n \textnormal{ y } x_i\in{\{0, 1\}} \\
+   f_{\alpha}(x) = \begin{cases}
+     1 \textnormal{ si x satisface } f_\alpha \\
      0 \textnormal{ en otro caso}
    \end{cases}
 \end{align*}
 
-En este caso el objetivo será encontrar el \textbf{mínimo global} de esta función. Para esto mismo se debe encontrar una cadena de bits de tamaño \textit{n} que cumplan para la mayor cantidad de cláusulas $f_\alpha(z) = 0$.
+En este caso el objetivo será encontrar el \textbf{mínimo global} de esta función. Para esto mismo se debe encontrar una cadena de bits de tamaño \textit{n} que cumplan para la mayor cantidad de cláusulas $f_\alpha(x) = 0$.
 
 Para que sean aplicados a algoritmos cuánticos estos problemas no pueden tener restricciones añadidas, por lo que el espacio de resultados posibles será de $2^n$ combinaciones.
 
 \subsection{Añadir restricciones}
 
-Si el problema que se está intentando representar tiene restricciones de la forma $A(z) = B(z)$ la forma de añadirlas a la función de coste sería $f'(z) = f(z) + P*(A(z)-B(z))^2$, donde
+Si el problema que se está intentando representar tiene restricciones de la forma $A(x) = B(x)$ la forma de añadirlas a la función de coste sería $f'(x) = f(x) + P*(A(x)-B(x))^2$, donde
 \begin{align*}
-  P*(A(z) - B(z))^2 \begin{cases}
+  P*(A(x) - B(x))^2 \begin{cases}
     = 0 \textnormal{ si se cumple la restricción } \\
     \ge P \textnormal{ en otro caso }
   \end{cases}
 \end{align*}
 
-El parámetro P se denomina \textit{modificador de Lagrange} y tiene un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > max_zf(z)$
+El parámetro P se denomina \textit{modificador de Lagrange} y tiene un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > \max_xf(x)$
 
-\section{Formulación de QAOA}
-El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de \textit{f(z)}.
+\section{Circuito de QAOA}
+El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de \textit{f(x)}.
 
-La base computacional se representa como $\{\ket{z} : z \in \{0, 1\}^n\}$.
+La base computacional se representa como $\{\ket{x} : x \in \{0, 1\}^n\}$.
 
 La idea general de QAOA se basa en preparar un estado \(\lvert \psi(\vec{\beta}, \vec{\gamma})\rangle\) tal que, con los valores adecuados \( (\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \), el estado \(\lvert\psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}})\rangle\) encuentre la solución al problema. Los parámetros de dicho estado son:
 \begin{align*}
@@ -58,7 +61,7 @@ Estos se combinan de la siguiente forma:
 \subsection{Estado inicial}
 El estado inicial del qubit se define como
 \begin{align*}
-  \ket{\psi_0} = \frac{1}{\sqrt{2^n}} \sum_z\ket{z}
+  \ket{\psi_0} = \frac{1}{\sqrt{2^n}} \sum_x\ket{x}
   = (\frac{1}{\sqrt{2}} (\ket{0} + \ket{1}))^{\otimes n}
   = H^{\otimes n} \ket{0}^{\otimes n}
 \end{align*}
@@ -69,15 +72,15 @@ Este estado inicial se construye añadiendo operadores de Hadamard a \textit{n} 
 
 Los operadores se definen como:
 \begin{align*}
-  U(B, \beta_i) = e^{-i \beta_i B} \\
-  U(C, \gamma_i) = e^{-i \gamma_i C} \\
+  U(B, \beta) = e^{-i \beta B} \\
+  U(C, \gamma) = e^{-i \gamma C} \\
 \end{align*}
 
 La operación \(U(X) = e^{-i X}\) sirve para garantizar la unitariedad del operador ya que, como se verá en su definición, \textit{B} y \textit{C} no son necesariamente unitarios
 \footnote{En computación cuántica los operadores lineales deben ser unitarios. Tiene relación con la idea
-  $\sum_{\ket{z}} {P(\ket{z})} = 1$,
-  donde $\ket{z}$ itera sobre los vectores de la base computacional del sistema y
-  \(P(\ket{z})\) se refiere a la probabilidad de medir i sobre dicha base.}.
+  $\sum_{\ket{x}} {P(\ket{x})} = 1$,
+  donde $\ket{x}$ itera sobre los vectores de la base computacional del sistema y
+  \(P(\ket{x})\) se refiere a la probabilidad de medir i sobre dicha base.}.
 
 Tanto la noción de hamiltoniano como la construcción de un operador unitario proceden de la ecuación de Schrödinger de la mecánica cuántica.
 % TODO: Hablar en el apéndice sobre el segundo postulado del libro y su resolución. Añadir el QC-textbook como bibliografía.
@@ -92,9 +95,52 @@ Tanto la noción de hamiltoniano como la construcción de un operador unitario p
 Como se puede ver únicamente depende de la cantidad de qubits del sistema.
 
 \subsubsection{Operador \textit{C}}
-\textit{C} se define a partir de la función de coste clásica del problema a resolver \textit{f(z)} y se construye utilizando puertas Pauli-Z ($\sigma^z$).
+\label{sec:3-operador c}
+\textit{C} debe ser un operador diagonal  % TODO: Citar del apéndice para explicar qué es un operador diagonal en |x>
+en la base computacional \(\ket{x}\) con los valores de la función objetivo. De esta forma, siendo \(\ket{x}\) un vector en la base computacional se cumple que \(\forall \ket{x} = [x_1x_2...x_n], \bra{x}C\ket{x} = f(x)\). Se define a partir de la función de coste clásica del problema a resolver y se construye utilizando puertas Pauli-Z ($\sigma^z$).
+
+Para obtener este operador se parte de una función de la forma \(f(x)\), donde \(x=x_1x_2...x_n\) y \(x_i\in{0, 1}\) (como la definida en la sección \ref{sec:3-problemas de optimizacion combinatoria}). Para construirlo la función utilizada debe tener como entrada variables con valor \(\{-1, 1\}\), en lugar de \(\{0, 1\}\), para lo que se debe realizar un cambio de variable:
+\begin{align*}
+  &f(x) \rightarrow C(z) \\
+  &x_i \rightarrow \frac{1 - z_i}{2}
+\end{align*}
+
+De esta forma \(z_i = \begin{cases}
+  1 \text{ si } x_i = 0 \\
+  -1 \text{ si } x_i = 1
+\end{cases}\).
+% TODO: Citar del apéndice la explicación de que cambiar z\in{-1, 1} por \sigma^z construye un operador diagonal en |x>.
+La forma de pasar de la función \textit{C(z)} al operador \textit{C} es sustituyendo las variables \(z_i\) por puertas \(\sigma^z_i\).
+
+\section{Algoritmo de QAOA}
+La estructura general del algoritmo es la siguiente:
+\begin{enumerate}
+\item Inicializar \(\vec{\beta}\) y \(\vec{\gamma}\) a valores arbitrarios.
+\item Repetir hasta que se cumpla cierto criterio de convergencia, obteniendo \(\vec{\beta_{opt}}, \vec{\gamma_{opt}}\)
+  \label{it:3-algoritmo_repetir}
+  \begin{enumerate}
+  \item Construir el circuito correspondiente al estado \(\lvert\psi(\vec{\beta}, \vec{\gamma})\rangle\)
+  \item Medir el estado en la base computacional, lo que devuelve una cadena de bits \(\{0, 1\}^n\)
+  \item Computar el valor esperado de C: \( \langle \psi(\vec{\beta}, \vec{\gamma}) \rvert C \lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle \).
+    Esto puede ser calculado de manera equivalente evaluando la cadena de bits, obtenida de medir el estado, con la función de coste clásica \textit{f(x)}.
+  \item Hallar nuevos \(\vec{\beta_{new}}, \vec{\gamma_{new}}\) usando un algoritmo clásico de optimización y volver al paso \ref{it:3-algoritmo_repetir}.
+  \end{enumerate}
+\item Calcular el valor esperado: \( \langle \psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \rvert C \lvert \psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \rangle \). Este valor aproximará \(\min_{x}f(x)\)
+\end{enumerate}
+
+Para el estado construido se cumple que para un número de capas \(p \rightarrow \infty\):
+\begin{align*}
+  \min_{\beta, \gamma} \langle \psi(\vec{\beta}, \vec{\gamma}) \rvert C \lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle = \min_{x} f(x)
+\end{align*}
+Esto es equivalente a decir que el estado fundamental del sistema corresponde al valor mínimo de la función de coste.  % TODO: \ref{sec:6-apendice-estado_fundamental}
+
+De esta forma, el optimizador clásico llamará en repetidas iteraciones a una función \textit{execute\_circuit} con una entrada \((\vec{\beta}, \vec{\gamma})\) que devolverá como salida un valor mayor o igual al mínimo de la función de coste. Este resultado es el que el optimizador debe minimizar.
+
+En este caso el optimizador clásico que se utilizará es COBYLA (Constrained Optimization BY Linear Approximation), de la librería de \textit{Python} \textit{scipy.minimize}.  % TODOO: Citar de alguna fuente
+
 
 \end{document}
+
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
