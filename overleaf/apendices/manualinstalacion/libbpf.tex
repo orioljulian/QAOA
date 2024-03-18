@@ -1,0 +1,38 @@
+En este apartado se describe la instalación del cortafuegos.
+\\Cambiar de usuario a root.
+\begin{center}
+    \textbf{sudo su}
+\end{center}
+Descarga una copia local del repositorio git.
+\begin{center}
+    \textbf{git clone https://github.com/igallar98/GuardianBot.git
+\\cd GuardianBot}
+\end{center}
+Instala los requisitos de python: 
+\begin{center}
+    \textbf{pip3 install -r requirements.txt}
+\end{center}
+Compilación y creación de la contraseña maestra.
+
+\begin{center}
+    \textbf{bash install.sh}
+\end{center}
+Para iniciar asegúrese de que está en super usuario (sudo su).
+\begin{center}
+    \textbf{bash start.sh}
+\end{center}
+Accede a http://[IP]:4020 y usa la contraseña configurada en la instalación. La dirección IP puede ser la privada o la pública del servidor.
+
+Para iniciar en modo manual, en caso de que quiera seleccionar la interfaz de forma manual o haya un error en el script de inicio automático:
+
+\textbf{
+cd xdp
+\\sudo mount -t bpf bpf /sys/fs/bpf/
+\\ulimit -l unlimited
+\\sudo ./xdp\_loader --auto-mode --dev [INTERFAZ] --force --progsec xdp\_pass
+\\sudo ./xdp\_stats --dev [INTERFAZ] \&
+\\cd ../interface
+\\sudo python3 run.py \&
+}
+\\Cambiar [INTERFAZ] por la interfaz que desea usar.
+

@@ -106,10 +106,48 @@ De esta forma, el hamiltoniano del problema es el siguiente:
    &Rz_1z_4(-13.5 * 2\gamma) \cdot Rz_2z_3(+13.5 * 2\gamma) \cdot Rz_2z_4(-13.5 * 2\gamma)
 \end{align*}
 
-% TODOO: Dibujar aquí el circuito y explicar la diferencia entre esto y el paper (*2*gamma)
+Con el operador \(U(B, \beta)\) y el vector inicial, definidos en la sección \ref{sec:3-circuito de qaoa},  % TODO: Citar
+y el operador \(U(C, \gamma)\) obtenido se puede construir el circuito cuántico.
 
+\begin{itemize}
+\item \textbf{Circuito obtenido ($p=1$):}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.27]{circuits/primer/primer_circuit_2gamma_p-1.png}
+  \end{figure}
 
+\item \textbf{Circuito del artículo ($p=1$):}
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.3]{circuits/paper/paper_circuit.png}
+  \end{figure}
+\end{itemize}
+
+\subsection{Diferencias con el artículo}
+El circuito obtenido teóricamente difiere del que se puede ver en la sección 2.2 del artículo \cite{multi-objective_routing_optimization}. \\
+En la sección anterior se obtienen operadores con la forma \(Rz(n*2\gamma)\), mientras que en la imagen del circuito en el artículo aparecen como \(Rz(n)\).
+
+Debido a esto, y como se busca replicar los resultados del artículo, se modifica el hamiltoniano para que sea igual al de la imagen.
+
+% TODOO: explicar el porqué del *2 puede ser válido, pero el gamma no
+%        C y 2*C tendrían el mismo estado fundamental, pero con distinta energía).
+%        \gamma es incorrecto, demostrado con la construcción usando QAOAAnsatz.
+%        *2:
+%        \begin{align*}
+%          \frac{g(z)}{2} = & \frac{11}{2}z_0 - \frac{17.5}{2}z_1 - \frac{28}{2}z_2 - \frac{17}{2}z_3 + \frac{11.5}{2}z_4 + \\
+%                           & \frac{13.5}{2}(z_0z_1 - z_0z_2 - z_0z_3 + z_1z_2 - z_1z_4 + z_2z_3 - z_2z_4) + \\
+%                           & \frac{80.5}{2} \\
+%          \frac{f(X)}{2} = &2.5X_{01} + 4X_{02} + 1X_{12} + 3.5X_{13} + 2X_{23} + &&\\
+%                           &\frac{P}{2}(X_{01} + X_{02} - 1)^2 + \frac{P}{2}(X_{01} - X_{12} - X_{13})^2 + \frac{P}{2}(X_{02} + X_{12} - X_{23})^2
+%        \end{align*}
+
+\newpage
 \bibliographystyle{abbrv}
 \bibliography{bibliografia}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

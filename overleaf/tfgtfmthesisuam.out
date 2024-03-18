@@ -1,0 +1,18 @@
+\BOOKMARK [0][-]{chapter.1}{Introducción}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Estado del arte}{}% 2
+\BOOKMARK [1][-]{section.2.1}{QAOA}{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.1.1}{Computación adiabática cuántica}{section.2.1}% 4
+\BOOKMARK [0][-]{chapter.3}{Diseño}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Problemas de optimización combinatoria}{chapter.3}% 6
+\BOOKMARK [2][-]{subsection.3.1.1}{Añadir restricciones}{section.3.1}% 7
+\BOOKMARK [1][-]{section.3.2}{Circuito de QAOA}{chapter.3}% 8
+\BOOKMARK [2][-]{subsection.3.2.1}{Estado inicial}{section.3.2}% 9
+\BOOKMARK [2][-]{subsection.3.2.2}{Problem hamiltonian y mixing hamiltonian}{section.3.2}% 10
+\BOOKMARK [1][-]{section.3.3}{Algoritmo de QAOA}{chapter.3}% 11
+\BOOKMARK [0][-]{chapter.4}{Desarrollo}{}% 12
+\BOOKMARK [1][-]{section.4.1}{Tutorial de Qiskit - Max Cut}{chapter.4}% 13
+\BOOKMARK [1][-]{section.4.2}{Grafo simple - Camino más corto}{chapter.4}% 14
+\BOOKMARK [2][-]{subsection.4.2.1}{Diferencias con el artículo}{section.4.2}% 15
+\BOOKMARK [0][-]{chapter.5}{Integración, pruebas y resultados}{}% 16
+\BOOKMARK [0][-]{chapter.6}{Conclusiones y trabajo futuro}{}% 17
+\BOOKMARK [0][-]{section*.22}{Bibliografía}{}% 18

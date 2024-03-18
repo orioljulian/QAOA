@@ -41,6 +41,7 @@ Si el problema que se está intentando representar tiene restricciones de la for
 El parámetro P se denomina \textit{modificador de Lagrange} y tiene un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > \max_xf(x)$
 
 \section{Circuito de QAOA}
+\label{sec:3-circuito de qaoa}
 El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de \textit{f(x)}.
 
 La base computacional se representa como $\{\ket{x} : x \in \{0, 1\}^n\}$.
@@ -109,8 +110,7 @@ De esta forma \(z_i = \begin{cases}
   1 \text{ si } x_i = 0 \\
   -1 \text{ si } x_i = 1
 \end{cases}\).
-% TODO: Citar del apéndice la explicación de que cambiar z\in{-1, 1} por \sigma^z construye un operador diagonal en |x>.
-La forma de pasar de la función \textit{C(z)} al operador \textit{C} es sustituyendo las variables \(z_i\) por puertas \(\sigma^z_i\).
+La forma de pasar de la función \textit{C(z)} al operador \textit{C} es sustituyendo las variables \(z_i\) por puertas \(\sigma^z_i\). Esto es debido a que los autovalores de \(\sigma^z\) son $\{-1, 1\}$.  % TODO: Citar del apéndice la explicación de que cambiar z\in{-1, 1} por \sigma^z construye un operador diagonal en |x>.
 
 \section{Algoritmo de QAOA}
 La estructura general del algoritmo es la siguiente:

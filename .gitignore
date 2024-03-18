@@ -15,5 +15,13 @@ latex/**/*.blg
 latex/**/*.toc
 latex/**/auto/
 
+!overleaf/
+overleaf/**/*.aux
+overleaf/**/*.log
+overleaf/**/*.bbl
+overleaf/**/*.blg
+overleaf/**/*.toc
+overleaf/**/auto/
+
 !codigo/
 codigo/**/.ipynb_checkpoints/
