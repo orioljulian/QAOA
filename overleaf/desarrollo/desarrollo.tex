@@ -1,12 +1,11 @@
 \section{Tutorial de Qiskit - Max Cut}
 \label{sec:4-tutorial de qiskit}
 
-Para asegurar una implementación correcta del algoritmo QAOA primero se aplica al problema presentado en el tutorial de Qiskit.
-\cite{qiskit_tutorial_antiguo}
+Para asegurar una implementación correcta del algoritmo QAOA primero se aplica al problema presentado en el tutorial de Qiskit \cite{qiskit_tutorial_antiguo}.
 % TODO: Citar el link al cuaderno de jupyter (en github)
 Este problema consiste en resolver MAX-CUT para el grafo \ref{fig:4-qiskit grafo}, que consiste en, asignando un valor 0 o 1 a cada nodo maximizar la cantidad de aristas entre nodos de distinto valor.
 
-\begin{figure}{fig:4-qiskit grafo}{}
+\begin{figure}[htbp]{fig:4-qiskit grafo}{}
   \centering
   \includegraphics[scale=0.75]{qiskit-grafo/qiskit-grafo}
 \end{figure}
@@ -24,7 +23,7 @@ Se parte de este caso por tratarse de uno sencillo. Esto es porque la cantidad d
 
 \end{itemize}
 
-Como \textit{QAOA} sirve para encontrar el mínimo de una función, se tomará la ecuación [\ref{eq:4-tutorial qiskit objetivo}] $*-1$.
+Como \textit{QAOA} sirve para encontrar el mínimo de una función, se tomará la ecuación (\ref{eq:4-tutorial qiskit objetivo}) $*-1$.
 
 De esta forma se tiene que la función de coste a minimizar para este problema en particular es la siguiente:
 
@@ -58,9 +57,22 @@ De esta forma:
           &= \prod_{(i, j) \in E} Rz_iz_j(\gamma)
 \end{align*}
 
-\paragraph{Circuito obtenido.}
 Con el operador \(U(B, \beta)\) y el vector inicial, definidos en la sección \ref{sec:3-circuito de qaoa}, y el operador \(U(C, \gamma)\) obtenido se puede construir el circuito cuántico.
-% TODO: insertar imagen del circuito
+
+\begin{figure}[htbp]{}{ Circuito obtenido ($p=1$) }
+  \centering
+  \includegraphics[scale=0.6]{circuits/qiskit/qiskit-circuit-2gamma-p1}
+\end{figure}
+
+\begin{figure}[htbp]{fig:4-qiskit_tutorial_circuito}{ Circuito del tutorial ($p=1$) }
+  \centering
+  \includegraphics[scale=0.6]{circuits/qiskit/tutorial-qiskit-circuit-2gamma-p1}
+\end{figure}
+
+\subsection{Diferencias con el tutorial}
+
+El circuito de ejemplo \ref{fig:4-qiskit_tutorial_circuito} corresponde a desarrollar los mismos cálculos solo que con $f'(x) = 2*f(x)$. \\
+Aunque las puertas \textit{Rzz} tengan coeficientes distintos ambas son correctas. Esto es porque ambos circuitos resultantes tienen un mismo estado fundamental, solo que uno lo tiene con el doble de energía que el otro. En otras palabras ambas funciones $f'$ y $f$ tienen un mismo $x$ que las minimiza.
 
 \section{Grafo simple - Camino más corto}
 \label{sec:4-primer grafo}
@@ -70,7 +82,12 @@ Con el operador \(U(B, \beta)\) y el vector inicial, definidos en la sección \r
   \includegraphics[scale=0.75]{primer-grafo/primer-grafo}
 \end{figure}
 
-Con este grafo se pretenden analizar los resultados obtenidos en la sección 2.2 (\textit{Single-Objective Quantum Routing Optimization}) del artículo \cite{multi-objective_routing_optimization}.
+En la sección \ref{sec:4-tutorial de qiskit} se consiguieron replicar los cálculos teóricos de una instancia de QAOA simple, sin restricciones y poco profunda. Por ello el siguiente problema a resolver aumenta su complejidad, añadiendo restricciones y aumentando la cantidad de qubits del sistema. \\
+En esta sección se pretenden imitar los resultados obtenidos en la sección 2.2 (\textit{Single-Objective Quantum Routing Optimization}) del artículo \cite{multi-objective_routing_optimization}.
+
+% Tras conseguir replicar correctamente la base teórica de QAOA para un grafo simple en la sección \ref{sec:4-tutorial de qiskit}, el siguiente problema a procesar aumenta en su complejidad, por lo que se 
+
+% Con este grafo se pretenden analizar los resultados obtenidos en la sección 2.2 (\textit{Single-Objective Quantum Routing Optimization}) del artículo \cite{multi-objective_routing_optimization}.
 
 El problema a resolver es encontrar el camino más corto que conecte los nodos \textit{0} y \textit{3}.
 \begin{itemize}
@@ -152,25 +169,18 @@ De forma similar a la sección \ref{sec:4-tutorial de qiskit} se obtiene el hami
 
 Con el operador \(U(B, \beta)\) y el vector inicial, definidos en la sección \ref{sec:3-circuito de qaoa}, y el operador \(U(C, \gamma)\) obtenido se puede construir el circuito cuántico.
 
-\begin{itemize}
-\item \textbf{ Circuito obtenido ($p=1$): }
+\begin{figure}[htbp]{}{ Circuito obtenido ($p=1$) }
+  \centering
+  \includegraphics[scale=0.27]{circuits/primer/primer-circuit-2gamma-p1}
+\end{figure}
 
-  \begin{figure}[htbp]{}{}
-    \centering
-    \includegraphics[scale=0.27]{circuits/primer/primer-circuit-2gamma-p1}
-  \end{figure}
-
-
-\item \textbf{Circuito del artículo ($p=1$):}
-
-  \begin{figure}[htbp]{}{}
-    \centering
-    \includegraphics[scale=0.3]{circuits/paper/paper-circuit}
-  \end{figure}
-\end{itemize}
+\begin{figure}[htbp]{fig:4-primer_paper_circuito}{ Circuito del artículo ($p=1$) }
+  \centering
+  \includegraphics[scale=0.3]{circuits/paper/paper-circuit}
+\end{figure}
 
 \subsection{Diferencias con el artículo}
-El circuito obtenido teóricamente difiere del que se puede ver en la sección 2.2 del artículo \cite{multi-objective_routing_optimization}. \\
+El circuito \ref{fig:4-primer_paper_circuito} obtenido teóricamente difiere del que se puede ver en la sección 2.2 del artículo \cite{multi-objective_routing_optimization}. \\
 En la sección anterior se obtienen operadores con la forma \(Rz(n*2\gamma)\), mientras que en la imagen del circuito en el artículo aparecen como \(Rz(n)\).
 
 Debido a esto, y como se busca replicar los resultados del artículo, se modifica el hamiltoniano para que sea igual al de la imagen.
