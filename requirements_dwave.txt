@@ -1,8 +1,8 @@
-# Python 3.8.17
-jupyter
-networkx
-matplotlib
+# Python 3.8.19
+jupyter==1.0.0
+networkx==3.1
+matplotlib==3.7.5
+dwave-ocean-sdk==6.9.0
 
-dwave-ocean-sdk==6.4.1
 # $ dwave setup
 # check connection: $ dwave ping --client qpu

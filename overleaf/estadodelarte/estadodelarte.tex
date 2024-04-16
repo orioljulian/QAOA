@@ -1,19 +1,6 @@
-\section{QAOA}
+\section{QAOA}{estadodelarte/qaoa}
 
-% TODOO: También explicarlo de la forma de: https://www.youtube.com/watch?v=vs7Om4h1WPY
-% TODO: Hablar sobre la resolución de $e^{-i \alpha H}$ de la ecuación de Schrodinger
-
-\subsection{Computación adiabática cuántica}
-
-La computación cuántica adiabática (\textbf{AQC}) es, en contraposición con el enfoque en los circuitos, un paradigma basado en el teorema adiabático.  % TODO: Citar definición del teorema adiabático??
-
-Sea un sistema cuántico dado por un hamiltoniano dependiente del tiempo $H(t) = (1-\frac{t}{T})H_s + \frac{t}{T}H_c$, siendo $H_s$ un hamiltoniano con un estado fundamental conocido, $H_c$ un hamiltoniano cuyo estado fundamental se quiere conocer y $T$ el tiempo total.
-
-En este caso el teorema adiabático afirma que si el estado inicial es el estado fundamental de $H_s$ y se avanza el tiempo lentamente el sistema se mantendrá en el estado fundamental de $H(\alpha)$. Esto significa que al llegar a $t=T$ el sistema se encontrará en el estado fundamental de $H_c$.
-
-El paradigma seguido por los ordenadores de D-Wave, Quantum Annealing, es una implementación de AQC.
-
-% TODO: Comparación entre AQC y QAOA: https://www.mustythoughts.com/quantum-approximate-optimization-algorithm-explained
+\section{Computación adiabática cuántica}{estadodelarte/aqc}
 
 %%% Local Variables:
 %%% mode: latex
