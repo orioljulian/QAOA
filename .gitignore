@@ -21,6 +21,15 @@ overleaf/**/*.log
 overleaf/**/*.bbl
 overleaf/**/*.blg
 overleaf/**/*.toc
+overleaf/**/*.acn
+overleaf/**/*.glo
+overleaf/**/*.idx
+overleaf/**/*.ilg
+overleaf/**/*.ind
+overleaf/**/*.ist
+overleaf/**/*.lof
+overleaf/**/*.lot
+overleaf/**/*.out
 overleaf/**/auto/
 
 !codigo/
