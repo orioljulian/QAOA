@@ -10,7 +10,7 @@ Este problema consiste en resolver MAX-CUT para el grafo \ref{fig:4-qiskit grafo
   \includegraphics[scale=0.75]{qiskit-grafo/qiskit-grafo}
 \end{figure}
 
-Se parte de este caso por tratarse de uno sencillo. Esto es porque la cantidad de qubits es pequeña y no existen restricciones en este problema, por lo que el espacio de estados válidos disponibles es de $2^n$, siendo \textit{n} el número de qubits del sistema. Estas condiciones hacen que el algoritmo trabaje sobre un circuito pequeño, lo que reduce el ruido, y fácil de implementar.
+Se parte de este caso por tratarse de uno sencillo. Esto es porque la cantidad de qubits es pequeña y no existen restricciones en este problema, por lo que el espacio de estados válidos disponibles es de $2^n$, siendo \textit{n} el número de qubits del sistema. Estas condiciones hacen que el algoritmo trabaje sobre un circuito pequeño, lo que reduce el ruido y facilita su implementación.
 
 \begin{itemize}
 \item \textbf{Formulación:} \\
@@ -85,11 +85,7 @@ Aunque las puertas \textit{Rzz} tengan coeficientes distintos ambas son correcta
 En la sección \ref{sec:4-tutorial de qiskit} se consiguieron replicar los cálculos teóricos de una instancia de QAOA simple, sin restricciones y poco profunda. Por ello el siguiente problema a resolver aumenta su complejidad, añadiendo restricciones y aumentando la cantidad de qubits del sistema. \\
 En esta sección se pretenden imitar los resultados obtenidos en la sección 2.2 (\textit{Single-Objective Quantum Routing Optimization}) del artículo \cite{multi-objective_routing_optimization}.
 
-% Tras conseguir replicar correctamente la base teórica de QAOA para un grafo simple en la sección \ref{sec:4-tutorial de qiskit}, el siguiente problema a procesar aumenta en su complejidad, por lo que se 
-
-% Con este grafo se pretenden analizar los resultados obtenidos en la sección 2.2 (\textit{Single-Objective Quantum Routing Optimization}) del artículo \cite{multi-objective_routing_optimization}.
-
-El problema a resolver es encontrar el camino más corto que conecte los nodos \textit{0} y \textit{3}.
+El problema consiste en encontrar el camino más corto que conecte los nodos \textit{0} y \textit{3}.
 \begin{itemize}
 \item \textbf{Objetivo:}
 
@@ -138,7 +134,7 @@ Estas nuevas variables ($z$) van a tomar valores -1 y 1 y cada variable $z_k$ es
 $X_{01}$ corresponde con $z_0$,
 $X_{02}$ corresponde con $z_1$,
 $X_{12}$ corresponde con $z_2$,
-$X_{13}$ corresponde con $z_3$,
+$X_{13}$ corresponde con $z_3$ y
 $X_{23}$ corresponde con $z_4$.
 
 Como ya se ha visto en la sección  % TODO: Citar sección correspondiente de Diseño
@@ -180,6 +176,7 @@ Con el operador \(U(B, \beta)\) y el vector inicial, definidos en la sección \r
 \end{figure}
 
 \subsection{Diferencias con el artículo}
+\label{sec:4-primer grafo diferencias con el articulo}
 El circuito \ref{fig:4-primer_paper_circuito} obtenido teóricamente difiere del que se puede ver en la sección 2.2 del artículo \cite{multi-objective_routing_optimization}. \\
 En la sección anterior se obtienen operadores con la forma \(Rz(n*2\gamma)\), mientras que en la imagen del circuito en el artículo aparecen como \(Rz(n)\).
 
