@@ -1,6 +1,7 @@
 import itertools
 import numpy as np
 
+
 def are_equal(e1, e2, nbits=4, p=20):
     n = nbits
     is_wrong = False
@@ -20,9 +21,11 @@ def are_equal(e1, e2, nbits=4, p=20):
             min_val = res1
             min_bits = z
     if not is_wrong:
-        print("Las expresiones son equivalentes, min=" + str(min_val), min_bits)
+        print("Las expresiones son equivalentes, min=" + str(min_val),
+              min_bits)
 
-exp_orig="\
+
+exp_orig = "\
 3*(1-z_0)/2 + \
 6*(1-z_1)/2 + \
 9*(1-z_2)/2 + \
@@ -33,10 +36,15 @@ P*((1 - z_0)/2 - (1 - z_2)/2)**2 + \
 P*((1 - z_1)/2 - (1 - z_3)/2)**2 \
 "
 
+# exp_20 = "\
+# -1.5*z_0 - 3*z_1 - 4.5*z_2 - 0.5*z_3 + \
+# 10*z_0*z_1 - 10*z_0*z_2 - 10*z_1*z_3 + 10*z_2*z_3 + \
+# 10*z_0**2 + 10*z_1**2 + 10*z_2**2 + 10*z_3**2 + 9.5 \
+# "
 exp_20 = "\
 -1.5*z_0 - 3*z_1 - 4.5*z_2 - 0.5*z_3 + \
-10*z_0*z_1 - 10*z_0*z_2 - 10*z_1*z_3 + 10*z_2*z_3 + \
-10*z_0**2 + 10*z_1**2 + 10*z_2**2 + 10*z_3**2 + 49.5 \
+10*(z_0*z_1 - z_0*z_2 - z_1*z_3 + z_2*z_3) + \
+49.5 \
 "
 
 exp_40 = "\

@@ -1,8 +1,8 @@
-En los últimos años, se encuentra en el centro de la discusión el avance que supone la computación cuántica. Al respecto se suele mencionar la revolución en el campo de la encriptación que supondría el algoritmo de Shor \cite{Shor_algorithm}, que impediría utilizar algoritmos que se basen en que la factorización en primos de un entero es NP. No obstante, este no es el único caso en el que la computación cuántica podría significar una diferencia con respecto a la computación clásica, ya que en el campo de la optimización combinatoria  % TODOO: Explicar qué es la optimización combinatoria
-de problemas también se proponen varios algoritmos alternativos que permitirían una mejora en la complejidad.
+En los últimos años, se encuentra en el centro de la discusión el avance que supone la computación cuántica. Al respecto se suele mencionar la revolución en el campo de la encriptación que supondría el algoritmo de Shor (\cite{Shor_algorithm}), que impediría utilizar algoritmos que se basen en que la factorización en primos de un entero es NP\@. No obstante, este no es el único caso en el que la computación cuántica podría significar una diferencia con respecto a la computación clásica, ya que en el campo de la optimización combinatoria  % TODOO: Explicar qué es la optimización combinatoria
+de problemas también se proponen varios algoritmos alternativos que permitirían una mejora en la escalabilidad.
 
-Esta superioridad, es todavía teórica, ya que en la era NISQ (Noisy Intermediate-Scale Quantum era \cite{Quantum_computing_in_the_NISQ_era_and_beyond}) no es posible el uso de procesadores cuánticos con muchos qubits y poco ruido  % TODOO: Decir qué es el ruido
-en sus ejecuciones. Esto provoca la aparición de algoritmos híbridos, como QAOA \cite{qaoa_paper_original} o VQE, que combinan la ejecución de circuitos cuánticos pequeños con el pre y postprocesamiento en un ordenador clásico.
+Esta superioridad, es todavía teórica, ya que en la era NISQ (Noisy Intermediate-Scale Quantum era~\cite{Quantum_computing_in_the_NISQ_era_and_beyond}) no es posible el uso de procesadores cuánticos con muchos qubits y poco ruido  % TODOO: Decir qué es el ruido
+en sus ejecuciones. Esto provoca la aparición de algoritmos híbridos, como QAOA~\cite{qaoa_paper_original} o VQE, que combinan la ejecución de circuitos cuánticos pequeños con el pre y post-procesamiento en un ordenador clásico.
 
 Esto provoca la aparición de algoritmos híbridos, en los que un procesador cuántico genera un estado cuántico a través de un circuito parametrizado según un conjunto de variables obtenidas de un procesador clásico.
 
@@ -21,6 +21,11 @@ Tanto el algoritmo QAOA como el algoritmo de quantum annealing tienen como utili
 Aunque sirvan para el mismo propósito, las técnicas que se utilizan son completamente diferentes.
 \begin{itemize}
 \item El algoritmo QAOA está pensado para ser aplicado en computadores cuánticos de uso generalista basados en puertas, los cuales son el proyecto más ambicioso a día de hoy dentro del campo de la computación cuántica, que servirían para resolver cualquier tipo de problema al ser sistemas Turing completos. 
-\item Los computadores en los que se aplica quantum annealing, como es el caso de los proporcionados por D-Wave  % TODO: Algo de bibliografía?
-  , no son Turing-completos y tienen como única utilidad resolver problemas utilizando este algoritmo. Este es el motivo por el que parece haber una superioridad tan grande entre D-Wave, que comercializa sistemas con más de 5000 qubits, y los ssistemas de uso generalista, que no alcanzan los 1000 qubits manteniendo un funcionamiento tolerante a fallos \footnote{Es importante recalcar que el auténtico problema de estos computadores no es aumentar el número de qubits, sino aumentarlo sin incrementar el ruido del sistema.}.
+\item Los computadores en los que se aplica quantum annealing, como es el caso de los proporcionados por D-Wave% TODO: Algo de bibliografía?
+, no son Turing-completos y tienen como única utilidad resolver problemas utilizando este algoritmo. Este es el motivo por el que parece haber una superioridad tan grande entre D-Wave, que comercializa sistemas con más de 5000 qubits, y los sistemas de uso generalista, que no alcanzan los 1000 qubits manteniendo un funcionamiento tolerante a fallos\footnote{Es importante recalcar que el auténtico problema de estos computadores no es aumentar el número de qubits, sino aumentarlo sin incrementar el ruido del sistema.}.
 \end{itemize}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

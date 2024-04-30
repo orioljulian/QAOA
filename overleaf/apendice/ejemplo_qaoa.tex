@@ -1,0 +1,108 @@
+En esta sección se muestra un ejemplo práctico simple, para facilitar la comprensión de la función de los dos operadores de QAOA\@.
+
+\section{Ejemplo de modificación de fases\label{sec:8-ejemplo de modificacion de fases}}
+
+En un espacio de Hilbert de $2^2$ dimensiones, dado un hamiltoniano $H$ definido de la siguiente forma:
+
+\begin{align*}
+  H = \begin{bmatrix}
+    3 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 2 & 0 \\
+    0 & 0 & 0 & 4
+  \end{bmatrix} = 3*\ket{00}\bra{00} + 1*\ket{01}\bra{01} + 2*\ket{10}\bra{10} + 4*\ket{11}\bra{11}
+\end{align*}
+
+Como $H$ es diagonal en la base computacional se puede calcular $U(H, \gamma)$ como se explica en la \textit{sección~\ref{eq:8-funcion A diagonalizable}}
+
+El estado de mínima energía de $H$ sería $\min_{x \in {\{0, 1\}}^2}{\bra{x}H\ket{x}}$, por lo que el estado es $\ket{x} = \ket{01}$, con energía 1.
+De esta forma, el \textbf{problem hamiltonian} sería $U(H, \gamma) = e^{-i \gamma H}$. Tomando un valor de $\gamma = 0.1$, el resultado de aplicarlo a un estado en superposición equiprobable $\ket{\psi}$ es el siguiente:
+
+\begin{align*}
+  &\ket{\psi} = \frac{1}{2}*(\ket{00} + \ket{01} + \ket{10} + \ket{11}) \\
+  &\gamma = 0.1 \\
+  &U(H, \gamma) \ket{\psi} =
+    \begin{bmatrix}
+      e^{-i * 0.1 * 3} & 0                & 0                & 0 \\
+      0                & e^{-i * 0.1 * 1} & 0                & 0 \\
+      0                & 0                & e^{-i * 0.1 * 2} & 0 \\
+      0                & 0                & 0                & e^{-i * 0.1 * 4}
+    \end{bmatrix}
+    *\frac{1}{2}
+    \begin{bmatrix}
+      1 \\
+      1 \\
+      1 \\
+      1
+    \end{bmatrix} = \frac{1}{2}
+    \begin{bmatrix}
+      e^{-i * 0.3} \\
+      e^{-i * 0.1} \\
+      e^{-i * 0.2} \\
+      e^{-i * 0.4}
+    \end{bmatrix}
+\end{align*}
+
+Como se puede ver las fases relativas  % TODO: Citar explicación de fases relativas?
+en $\ket{\psi}$ son de 0 para todos los valores, mientras que para $U(H, \gamma) \ket{\psi}$ el estado de mayor fase relativa es $\ket{01}$.
+
+También es importante recalcar que las probabilidades de medición de los valores no han sido modificadas. Es el caso de 01:
+
+\begin{align*}
+  P_{\psi}(01) = \bra{\psi}M_{01}^\dagger M_{01}\ket{\psi} = \bra{\psi}M_{01}\ket{\psi} = |\frac{1}{2}*e^{-0.1i}|^2 = \frac{1}{4}
+\end{align*}
+
+Donde $M_{01} = \bra{01}\ket{01}$ es un operador de medición para el valor 01.
+Se han tomado las definiciones del postulado de la medición explicado en~\cite{Nielsen_Chuang_2010}.
+
+
+\section{Ejemplo de modificación de probabilidades}
+Tomando el resultado de la \textit{sección~\ref{sec:8-ejemplo de modificacion de fases}} se puede ver cómo el operador \textbf{mixer hamiltonian} aumenta la probabilidad de medición de 01.
+
+\begin{align*}
+  &\sigma^x = \begin{bmatrix}
+    0 & 1 \\
+    1 & 0
+  \end{bmatrix}, I = \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+  \end{bmatrix} \\
+  &\beta = 0.1 \\
+  &B = \sigma^x \otimes I + I \otimes \sigma^x = \begin{bmatrix}
+    0 & 1 & 1 & 0 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 1 \\
+    0 & 1 & 1 & 0
+  \end{bmatrix} \\
+  &U(B, \beta) = e^{-i \beta B} = \begin{bmatrix}
+    {\cos(\beta)}^2       & -i*\sin(\beta)\cos(\beta) & -i*\sin(\beta)\cos(\beta) & -{\sin(\beta)}^2      \\
+    -i*\sin(\beta)\cos(\beta) & {\cos(\beta)}^2       & -{\sin(\beta)}^2      & -i*\sin(\beta)\cos(\beta) \\
+    -i*\sin(\beta)\cos(\beta) & -{\sin(\beta)}^2      & {\cos(\beta)}^2       & -i*\sin(\beta)\cos(\beta) \\
+    -{\sin(\beta)}^2      & -i*\sin(\beta)\cos(\beta) & -i*\sin(\beta)\cos(\beta) & {\cos(\beta)}^2
+  \end{bmatrix} = \\
+  &= \begin{bmatrix}
+    0.99     & -0.0993j & -0.0993j & -0.01    \\
+    -0.0993j & 0.99     & -0.01    & -0.0993j \\
+    -0.0993j & -0.01    & 0.99     & -0.0993j \\
+    -0.01    & -0.0993j & -0.0993j & 0.99     \\
+  \end{bmatrix} \\
+  &U(B, \beta)* \frac{1}{2} \begin{bmatrix}
+    e^{-i * 0.3} \\
+    e^{-i * 0.1} \\
+    e^{-i * 0.2} \\
+    e^{-i * 0.4}
+  \end{bmatrix} = \begin{bmatrix}
+    0.4535 -0.2424i \\
+    0.4536 -0.1416i \\
+    0.4462 -0.191i  \\
+    0.4364 -0.2894i  \\
+    \end{bmatrix}
+\end{align*}
+
+Donde $\sigma^x$ es conocida como puerta Pauli-X, que equivale a una rotación en el eje X de la esfera de Bloch.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

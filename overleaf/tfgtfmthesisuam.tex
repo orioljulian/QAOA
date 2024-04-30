@@ -27,41 +27,42 @@
 \keywords{Algunas}
 \palabrasclave{Otras}
 
-\coverdata
-{
+\coverdata{
   Escuela Politécnica Superior \\
   Universidad Autónoma de Madrid \\
-  C\textbackslash Francisco Tomás y Valiente nº 11
+  C\textbackslash{}Francisco Tomás y Valiente nº 11
 }
 
 \begin{document}
 
-\chapter{Introducción\label{cap:introduccion}}{introduccion/introduccion}
+\chapter{Introducción\label{cap:introduccion}}{introduccion/introduccion.tex}
 
-\chapter{Estado del arte\label{CAP:ESTADODELARTE}}{estadodelarte/estadodelarte}
+\chapter{Estado del arte\label{CAP:ESTADODELARTE}}{estadodelarte/estadodelarte.tex}
 
-\chapter{Diseño\label{CAP:DISEÑO}}{disenyo/disenyo}
+\chapter{Diseño\label{CAP:DISEÑO}}{disenyo/disenyo.tex}
 
-\chapter{Desarrollo\label{CAP:DESARROLLO}}{desarrollo/desarrollo}
+\chapter{Desarrollo\label{CAP:DESARROLLO}}{desarrollo/desarrollo.tex}
 
-\chapter{Integración, pruebas y resultados\label{CAP:RESULTADOS}}{resultados/resultados}
+\chapter{Integración, pruebas y resultados\label{CAP:RESULTADOS}}{resultados/resultados.tex}
 
-\chapter{Conclusiones y trabajo futuro\label{CAP:CONCLUSIONES}}{conclusiones/conclusiones}
+\chapter{Conclusiones y trabajo futuro\label{CAP:CONCLUSIONES}}{conclusiones/conclusiones.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 %\chapter{Bibliografía\label{CAP:bibliografia}}{bibliografia}
 \newpage
-\phantomsection
+\phantomsection{}
 
 \addcontentsline{toc}{chapter}{Bibliografía}
 \bibliographystyle{IEEEtran}
-\bibliography{bibliografia}
+\bibliography{bibliografia.bib}
 
 \appendix
 
-\chapter{Desarrollo de operaciones}{apendice/operaciones}  % TODO: Cambiar nombre
+\chapter{Ejemplo de aplicación de operadores de QAOA\label{CAP:EJEMPLO_QAOA}}{apendice/ejemplo_qaoa.tex}
+\chapter{Desarrollo de operaciones}{apendice/operaciones.tex}
+\chapter{Paso de función clásica a hamiltoniano\label{CAP:F_CLASICA_A_HAMILTONIANO}}{apendice/f_clasica_a_hamiltoniano.tex}
 
 \end{document}
 

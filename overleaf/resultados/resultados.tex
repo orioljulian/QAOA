@@ -1,22 +1,35 @@
 En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados obtenidos entre métricas distintas, se han realizado los siguientes tipos de pruebas:
 
 \begin{itemize}
-\item \textbf{Estadística máxima:}
-  Con este método se busca obviar el ruido presente en cada ejecución. Para ello se realizan \textit{n} iteraciones distintas sobre el algoritmo y para cada una de ellas:
-  \begin{enumerate}
-  \item
-    Se ejecuta el optimizador clásico para hallar los parámetros óptimos (esto supone la ejecución del circuito cuántico el número de veces necesario para que el optimizador encuentre un mínimo local).
-  \item
-    Se ejecuta el circuito una vez más con los parámetros óptimos.
-  \item \label{it:5-definicion estadistica max}
-    Se obtiene el camino dado por el algoritmo para recorrer el grafo y se añade dicho camino a un diccionario para su posterior revisión. En el caso de la figura \ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}
-    el resultado sería \textit{10101}, es decir, el camino con mayor valor.
-  \end{enumerate}
+\item \textbf{A/TE}:
+  Con este método se busca despreciar el ruido presente en cada ejecución.
+  Para ello se realizan \textit{n} ejecuciones distintas del algoritmo para un número \textit{p} de capas y se calcula el porcentaje de ejecuciones en los que se ha obtenido como resultado el camino óptimo del problema.
+
+  \begin{align*}
+    \frac{\textnormal{Núm aciertos}}{\textnormal{Total de ejecuciones}}
+  \end{align*}
+
+  \paragraph{Ejemplo:}
+  Tomando como ejemplo de salida de QAOA la mostrada en la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} esto sumaría al cálculo de \textbf{RC/TE} $\frac{1}{n}$, ya que el camino óptimo es el de mayor número de ocurrencias en la ejecución del circuito.
   
-\item \textbf{Estadística global:}
-  A diferencia de la estrategia previamente explicada, al realizar el paso \ref{it:5-definicion estadistica max} se toman todos los caminos resultantes de la ejecución del circuito con los parámetros \(\beta_{opt}\) y \(\gamma_{opt}\).
-  De esta forma, una ejecución como la dada en la figura \ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}
-  se ve condicionada por todos los resultados, no únicamente por el camino con valor máximo.
+\item \textbf{NumOc/TE}:
+
+  Lo que se busca aquí es la media de veces que el camino óptimo aparece en la ejecución del circuito de QAOA\@.
+
+  Con el fin de reducir la aleatoriedad en las operaciones en ordenadores cuánticos, al enviar un circuito para ser ejecutado se realizan varias iteraciones del mismo (cantidad especificada en Qiskit con el \textit{número de ocurrencias}).
+  Esto hace que al ejecutar el circuito de QAOA en el último paso con $(\gamma_{opt}, \beta_{opt})$ el resultado mostrado tenga tantos valores como \textit{número de ocurrencias} tuviera la instrucción (por defecto $1024$).
+
+  Ese es el motivo por el que en gráficas como la de la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} aparecen varios resultados (aunque en ese caso lo que aparece en el eje vertical es el número de ocurrencias de cada resultado normalizada).
+
+  De esta forma la estadística \textbf{NumOc/TE} se calcula como
+
+  \begin{align*}
+    \frac{1}{\textnormal{Total de ejecuciones}} \sum_0^\textnormal{Total de ejecuciones} (\textnormal{Media de núm ocurrencias del óptimo})
+  \end{align*}
+
+  \paragraph{Ejemplo:}
+
+  En la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} la ``Media de núm ocurrencias del óptimo'' sería 0.59
   
 \item \textbf{Función gamma:}
   Se ha utilizado para comprobar la forma general que tiene la función \textit{execute\_circuit}, a minimizar por el optimizador clásico. Para ello se han realizado circuitos de una sola capa y se ha mantenido el parámetro \(\beta=1\). Se ha decidido así porque dicho parámetro se encarga del ángulo de rotación de los operadores \(\sigma_{x}\), de construcción trivial en comparación con los operadores dependientes de \(\gamma\).
@@ -26,9 +39,17 @@ En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados ob
 
 A continuación se mostrarán los resultados de ejecución utilizando ambos paradigmas, esto es, QAOA y Quantum Annealing, además de explorar el rendimiento de las ejecuciones en Qiskit variando los métodos para construir la función de coste.
 
-\section{Tutorial de Qiskit - Max Cut}{resultados/tutorial_qiskit}
-\section{Grafo simple}{resultados/primer_grafo}
-\section{Tercer grafo}{resultados/zhiqiang_grafo}  % TODO: Cambiar nombre
+\newpage
+
+\section{MAX-CUT en grafo de 4 aristas}{resultados/tutorial_qiskit.tex}
+
+\newpage
+
+\section{Camino más corto en grafo de 4 nodos\label{sec:5-primer_grafo}}{resultados/primer_grafo.tex}
+
+\newpage
+
+\section{Camino más corto para estudiar la variación con el número de capas}{resultados/zhiqiang_grafo.tex}
 
 %%% Local Variables:
 %%% mode: latex

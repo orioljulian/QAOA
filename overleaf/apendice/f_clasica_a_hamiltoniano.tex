@@ -1,0 +1,88 @@
+Esta sección está destinada a demostrar el paso de una función clásica $f(x)$ en su versión QUBO a su hamiltoniano correspondiente $C$.
+
+\begin{itemize}
+\item Definiciones:
+  \begin{itemize}
+  \item $f(x)$: Función clásica en formato QUBO (\textit{Quadratic Unconstrained Binary Optimization}), donde $x \in {\{0 , 1\}}^n$.
+
+  \item $C(z)$: Función clásica en formato Ising equivalente a $f(x)$, pero donde $z \in {\{-1 , 1\}}^n$.
+
+  \item $\sigma_z$: Operador Pauli-Z.
+
+    \begin{align*}
+      \sigma^z = \begin{bmatrix}
+        1 & 0 \\
+        0 & -1
+      \end{bmatrix}
+    \end{align*}
+  \end{itemize}
+\end{itemize}
+
+Concretamente se pretende demostrar que sustituyendo las variables $z_i$ en $C(z)$ por puertas $\sigma^z$ en el qubit \textit{i} se puede obtener el operador $C$ tal que se cumpla:
+
+\begin{align*}
+  f(x) = \bra{x} C \ket{x}, \forall{x \in {\{0, 1\}}^n}
+\end{align*}
+
+Esto es equivalente a decir que el operador $C$ es diagonal, con valores correspondientes a la función clásica $f(x)$:
+
+\begin{align*}
+  &C \ket{x} = \begin{bmatrix}
+    C(0 \ldots 00) & 0          & 0  & 0 \\
+    0          & C(0 \ldots 01) & 0  & 0 \\
+    \vdots         &            & \ddots &   \\
+    0          & 0          & 0  & C(1 \ldots 11)
+  \end{bmatrix} \cdot
+  \begin{bmatrix}
+    0  \\
+    \vdots \\
+    1  \\
+    \vdots \\
+    0
+  \end{bmatrix} = f(x) \ket{x} & \forall x \in {\{0, 1\}}^n
+\end{align*}
+
+Los autovalores de $\sigma^z$ son $-1, +1$, y sus respectivos autovectores la base computacional:
+
+\begin{align*}
+  \sigma^z\ket{0} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} = +1*\ket{0} \\
+  \sigma^z\ket{1} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} = -1*\ket{1}
+\end{align*}
+
+Esto puede ser generalizado como:
+
+\begin{align*}
+  \sigma^z\ket{x} = {(-1)}^x\ket{x}, x \in \{0, 1\}
+\end{align*}
+
+En las funciones de coste utilizadas existen dos términos distintos en los que pueden aparecer variables $z_i$:
+\begin{itemize}
+\item $c*z_i$ \\
+  Un operador $\sigma^z$ actuando en el qubit \textit{i} se desarrolla de esta forma:
+
+  \begin{align}\label{eq:8-demostracion-z_i}
+    &\sigma^z_i \ket{x_0 \ldots x_{n-1}} = I \otimes \ldots \otimes \sigma^z_i \otimes \ldots \otimes I \ket{x_0 \ldots x_{n-1}} = {(-1)}^{x_i} \ket{x_0 \ldots x_{n-1}}     & x_i \in \{0, 1\}, i \in 1, \ldots n
+  \end{align}
+  
+\item $c*z_j*z_k, j \ne k$ \\
+  De forma similar al caso anterior, dos operadores $\sigma^z$ actuando en dos qubits \textit{i}, \textit{j} se desarrollan de esta forma:
+
+  \begin{align}\label{eq:8-demostracion-z_i_j}
+    \sigma^z_i \sigma^z_j \ket{x_0 \ldots x_{n-1}} &= I \otimes \ldots \otimes \sigma^z_i \otimes \sigma^z_j \otimes \ldots \otimes I \ket{x_0 \ldots x_{n-1}} = \nonumber \\
+                                    &= {(-1)}^{x_i} {(-1)}^{x_j} \ket{x_0 \ldots x_{n-1}}     & x_i \in \{0, 1\}, i \in 1, \ldots n
+  \end{align}
+
+\item $c*z_i*z_i = c$ \\
+  Porque $z_i \in \{-1, 1\} \forall i \in 0, \ldots n - 1$
+
+\end{itemize}
+
+Esto permite que se realice un cambio de variable a la función $C(z)$ tal que $z_i \rightarrow {(-1)}^{x_i}$, donde se cumple que $x_i \in \{0, 1\}$ teniendo en cuenta que $z_i \in \{-1, 1\}$.
+
+Dado este cambio de variable, a su vez se podrán utilizar las ecuaciones \textit{\ref{eq:8-demostracion-z_i}} y \textit{\ref{eq:8-demostracion-z_i_j}} para sustituir esos términos ${(-1)}^{x_i}$ por $\sigma^z_i$
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

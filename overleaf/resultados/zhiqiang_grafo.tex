@@ -1,43 +1,42 @@
-Dadas las incoherencias encontradas en los resultados de la sección anterior, se aplica QAOA al problema descrito en el artículo \cite{solving_shortest_path_with_qaoa}, con el fin de seguir analizando el comportamiento del algoritmo al aumentar el número de capas.
+Dadas las incoherencias encontradas en los resultados de la sección anterior, se aplica QAOA al problema descrito en el \textit{artículo~\cite{solving_shortest_path_with_qaoa}}, con el fin de seguir analizando el comportamiento del algoritmo al aumentar el número de capas.
 
-Este problema consiste, de nuevo, en obtener el camino más corto para un grafo, en este caso el de la \textit{figura \ref{fig:zhiqiang grafo}}.
+Este problema consiste, de nuevo, en obtener el camino más corto para un grafo, en este caso el de la \textit{figura~\ref{fig:4-zhiqiang_grafo}}.
 
-\begin{figure}[htbp]{fig:zhiqiang grafo}{Basado en el \textit{artículo \cite{solving_shortest_path_with_qaoa}}}
-  \centering
-  \includegraphics[scale=0.75]{zhiqiang-grafo/zhiqiang-grafo}
-\end{figure}
-
-\subsection{Resultados de Qiskit}
+\subsection{Resultados con QAOA}
 \begin{table}[htbp]{tab:5-zhiqiang-aer_estadisticas}{Resultados de la ejecución de QAOA del tercer grafo. P=20. Modificadores del paper (omitir \(2*\gamma\))}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
     \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1 &  0.6\% &  5.9\% \\ \hline
-    p = 2 & 30.7\% & 16.9\% \\ \hline
-    p = 3 & 93.8\% & 26.0\% \\ \hline
-    p = 4 & 66.9\% & 39.4\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 33.1%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚM
-    p = 5 &  1.6\% & 15.0\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 98.4%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚM. El global resultado es 0101 con un 55.17%
-    p = 6 & 81.0\% & 32.9\% \\ \hline
-    p = 7 & 36.5\% & 26.4\% \\ \hline
-    p = 8 & 64.2\% & 32.8\% \\ \hline
+    p = 1             &  0.6\%                           &  5.9\% \\ \hline
+    p = 2             & 30.7\%                           & 16.9\% \\ \hline
+    p = 3             & 93.8\%                           & 26.0\% \\ \hline
+    p = 4             & 66.9\%                           & 39.4\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 33.1%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚN
+    p = 5             &  1.6\%                           & 15.0\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 98.4%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚN. El global resultado es 0101 con un 55.17%
+    p = 6             & 81.0\%                           & 32.9\% \\ \hline
+    p = 7             & 36.5\%                           & 26.4\% \\ \hline
+    p = 8             & 64.2\%                           & 32.8\% \\ \hline
   \end{tabular}
 \end{table}
 
-A diferencia de las ejecuciones del primer grafo (\textit{tabla \ref{tab:5-primer-paper-aer_estadisticas}}), aquí se ve una clara mejora con el aumento del número de capas.
+A diferencia de las ejecuciones del grafo correspondiente a la \textit{tabla~\ref{tab:5-primer-paper-aer_estadisticas}}, aquí se ve una clara mejora con el aumento del número de capas.
 
 Además, para el caso \(p = 3\) se aprecia una distancia mucho mayor a la habitual entre la estadística máxima y global. A efectos prácticos se toma como medida de fiabilidad la estadística máxima, ya que significa que se ha encontrado el camino óptimo el 93.8\% de las ejecuciones realizadas.
 
+\subsubsection{Función gamma}
+
 El resultado de la función gamma es el siguiente:
+
 \begin{figure}[htbp]{}{Función gamma del tercer grafo. P=20}
   \centering
   \includegraphics[scale=0.5]{zhiqiang-grafo/modificadores-paper/zhiqiang-p20-gammaFun}
 \end{figure}
-A diferencia de las funciones gamma del grafo para el problema de MAX-CUT y el primer grafo de QAOA, en esta gráfica se ve mucho más ruido.
+
+A diferencia de las funciones gamma de los problemas de MAX-CUT y el camino más corto en grafo de 5 aristas, en esta gráfica se ve mucho más ruido.
 
 Esto se compara también con la gráfica resultante de ejecutar este mismo problema utilizando, para los operadores lineales del circuito, los ángulos obtenidos teóricamente (en lugar de basarse en los obtenidos del artículo).
 
-\begin{table}[htbp]{}{Resultados de la ejecución de QAOA del tercer grafo. Ángulos teóricos}
+\begin{table}[htbp]{tab:5-zhiqiang_mod-orig_estadisticas}{Resultados de la ejecución de QAOA del tercer grafo. Ángulos teóricos}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
@@ -78,6 +77,24 @@ Esto se compara también con la gráfica resultante de ejecutar este mismo probl
 \end{table}
 
 Al igual que en anteriores ejecuciones utilizando Quantum Annealing, se mantiene la coherencia en los resultados. El resultado obtenido un mayor número de veces es el camino óptimo y el siguiente camino más producido es el otro único camino válido (sin romper ninguna restricción).
+
+\subsection{Resultados con librería de QAOA}
+
+Las estadísticas ejecutadas con la función \textit{QAOAAnsatz} de Qiskit, al igual que en las secciones anteriores, muestran un comportamiento igual al obtenido en la implementación propia de QAOA (\textit{tabla~\ref{tab:5-zhiqiang_mod-orig_estadisticas}}).
+
+\begin{table}[htbp]{}{Resultados utilizando \textit{QAOAAnsatz} con el problema de la \textit{figura~\ref{fig:4-zhiqiang_grafo}}}
+  \centering
+  \begin{tabular}{|c|r|r|}
+    \hline
+    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    p = 1 &  0.2\% &  9.86\% \\ \hline
+    p = 2 &  1.2\% & 20.01\% \\ \hline
+    p = 3 & 40.6\% & 19.62\% \\ \hline
+    p = 4 &  0.5\% & 27.51\% \\ \hline
+    p = 5 & 42.7\% & 24.88\% \\ \hline
+  \end{tabular}
+\end{table}
+
 
 %%% Local Variables:
 %%% mode: latex

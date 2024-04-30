@@ -3,30 +3,30 @@
 En esta sección se muestra el desarrollo necesario para operar sobre operador $e^{i*\theta*A}$, dados dos casos:
 
 \subsection{A*A = I}
-\label{eq:8-funcion A2I}
 
 \begin{itemize}
 \item \textbf{Definiciones:}
   \begin{align*}
-    I = \begin{pmatrix}
+    I = \begin{bmatrix}
       1 & 0 \\
       0 & 1
-    \end{pmatrix}
+    \end{bmatrix}
     , A^2 = I
+  \end{align*}
+
+\item \textbf{Desarrollo:}
+
+  \begin{align*}
+    \exp(i*\theta*A) &= \sum_{n = 0}^{\infty} \frac{{(i*\theta)}^n * A^n}{n!} = \\
+                &= (1*A^0 - \frac{\theta^2*A^2}{2!} + \frac{\theta^4*A^4}{4!} - \ldots) +
+                  i*(\theta*A^1 - \frac{\theta^3*A^3}{3!} + \frac{\theta^5*A^5}{5!} - \ldots) = \\
+                &= I*(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \ldots) +
+                  i*A*(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \ldots)
+                  = \cos(\theta)*I + i*\sin(\theta)*A
   \end{align*}
 \end{itemize}
 
-\begin{align*}
-  exp(i*\theta*A) &= \sum_{n = 0}^{\infty} \frac{(i*\theta)^n * A^n}{n!} = \\
-             &= (1*A^0 - \frac{\theta^2*A^2}{2!} + \frac{\theta^4*A^4}{4!} - ...) +
-               i*(\theta*A^1 - \frac{\theta^3*A^3}{3!} + \frac{\theta^5*A^5}{5!} - ...) = \\
-             &= I*(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - ...) +
-               i*A*(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - ...)
-               = cos(\theta)*I + i*sin(\theta)*A
-\end{align*}
-
-\subsection{A es diagonalizable}
-\label{eq:8-funcion A diagonalizable}
+\subsection{A es diagonalizable\label{eq:8-funcion A diagonalizable}}
 
 Un operador $A$ sobre un espacio $V$ es diagonalizable si es diagonal con respecto a alguna base ortonormal de $V$. La representación diagonal de $A$ tiene la siguiente forma:
 
@@ -44,7 +44,7 @@ Dada una función $f$ definida sobre los números complejos se puede definir una
 Concretamente, para $e^{i \theta A}$:
 
 \begin{align*}
-   exp( -i \theta A) = \sum_\lambda exp(\lambda) \ket{\lambda}\bra{\lambda}
+   \exp( -i \theta A) = \sum_\lambda \exp(\lambda) \ket{\lambda}\bra{\lambda}
 \end{align*}
 
 %%% Local Variables:
