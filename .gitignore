@@ -6,6 +6,7 @@
 !requirements_qiskit.txt
 !requirements_dwave.txt
 !readme.md
+!esquema.pptx
 
 !latex/
 latex/**/*.aux
@@ -16,6 +17,7 @@ latex/**/*.toc
 latex/**/auto/
 
 !overleaf/
+overleaf/*.bash
 overleaf/**/*.aux
 overleaf/**/*.log
 overleaf/**/*.bbl

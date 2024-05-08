@@ -1,23 +1,9 @@
-\section{Problemas de optimización combinatoria\label{sec:3-problemas de optimizacion combinatoria}}
+\section{Pasar de problemas de optimización combinatoria a QUBO\label{sec:3-problemas de optimizacion combinatoria}}
 
-Un problema de optimización combinatoria se define con la siguiente función de coste:
-
-\begin{align*}
-  f(x) = \sum_{\alpha = 1}^{m} f_\alpha(x) \\
-  \textnormal{ dde } x = x_1x_2 \ldots x_n \textnormal{ y } x_i\in{\{0, 1\}} \\
-   f_{\alpha}(x) = \begin{cases}
-     1 \textnormal{ si x satisface } f_\alpha \\
-     0 \textnormal{ en otro caso}
-   \end{cases}
-\end{align*}
-
-En este caso el objetivo será encontrar el \textbf{mínimo global} de esta función. Para esto mismo se debe encontrar una cadena de bits de tamaño \textit{n} que cumplan para la mayor cantidad de cláusulas $f_\alpha(x) = 0$.
-
-Para que sean aplicados a algoritmos cuánticos estos problemas no pueden tener restricciones añadidas, por lo que el espacio de resultados posibles será de $2^n$ combinaciones.
-
-\subsection{Añadir restricciones}
-
-Si el problema que se está intentando representar tiene restricciones de la forma $A(x) = B(x)$ la forma de añadirlas a la función de coste sería $f'(x) = f(x) + P*{(A(x)-B(x))}^2$, donde
+En la \textit{sección~\ref{sec:2-problemas de optimizacion combinatoria}} se explica que los problemas de optimización con restricciones deben ser transformados para su posterior procesamiento por los algoritmos tratados.
+Una restricción puede ser definida como una igualdad de la forma $A(x) = B(x)$ que debe cumplir toda entrada $x$ de la función de coste para considerarse válida.
+La forma de convertir un problema con restricciones a uno sin ellas es modificar la función de coste para que las incluya en su definición, por lo que en lugar de tener $f(x)$ como función de coste se tendrá:
+$f'(x) = f(x) + P*{(A(x)-B(x))}^2$, donde
 
 \begin{align*}
   P*{(A(x) - B(x))}^2 \begin{cases}
@@ -26,10 +12,10 @@ Si el problema que se está intentando representar tiene restricciones de la for
   \end{cases}
 \end{align*}
 
-El parámetro P se denomina \textit{modificador de Lagrange} y tiene un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > \max_x{f(x)}$.
+El parámetro P se denomina \textit{modificador de Lagrange} y deberá tener un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > \max_x{f(x)}$.
 
 \section{Circuito de QAOA\label{sec:3-circuito de qaoa}}
-El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de $f(x)$.
+El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de la función de coste $f(x)$.
 
 La base computacional se representa como $\{\ket{x} : x \in {\{0, 1\}}^n\}$.
 
@@ -90,17 +76,16 @@ Como se puede ver únicamente depende de la cantidad de qubits del sistema.
 \textit{C} debe ser un operador diagonal  % TODO: Citar del apéndice para explicar qué es un operador diagonal en |x>
 en la base computacional \(\ket{x}\) con los valores de la función objetivo. De esta forma, siendo \(\ket{x}\) un vector en la base computacional se cumple que \(\forall \ket{x} = [x_1x_2 \ldots x_n], \bra{x}C\ket{x} = f(x)\). Se define a partir de la función de coste clásica del problema a resolver y se construye utilizando puertas Pauli-Z ($\sigma^z$).
 
-Para obtener este operador se parte de una función de la forma \(f(x)\), donde \(x=x_1x_2 \ldots x_n\) y \(x_i\in{0, 1}\) (como la definida en la \textit{sección~\ref{sec:3-problemas de optimizacion combinatoria}}). Para construirlo la función utilizada debe tener como entrada variables con valor \(\{-1, 1\}\), en lugar de \(\{0, 1\}\), para lo que se debe realizar un cambio de variable:
+Para obtener este operador se parte de una función de coste de la forma \(f(x)\), donde \(x=x_1x_2 \ldots x_n\) y \(x_i\in{0, 1}\).
+Para construirlo la función utilizada debe estar en formato Ising, en lugar de la versión QUBO (caso de $f(x)$), lo cual se traduce en tener como entrada variables con valor \(\{-1, 1\}\), en lugar de \(\{0, 1\}\).
+Para ello se debe realizar un cambio de variable:
 
 \begin{align*}
   &f(x) \rightarrow C(z) \\
   &x_i \rightarrow \frac{1 - z_i}{2}
 \end{align*}
 
-De esta forma \(z_i = \begin{cases}
-  1 \text{ si } x_i = 0 \\
-  -1 \text{ si } x_i = 1
-\end{cases}\).
+De esta forma $z_i = 1$ si $x_i = 0$ y $z_i = -1$ si $x_i = 1$.
 La forma de pasar de la función $C(z)$ al operador $C$ es sustituyendo las variables \(z_i\) por puertas \(\sigma^z_i\). La justificación de esto se encuentra en la \textit{sección~\ref{CAP:F_CLASICA_A_HAMILTONIANO}} del apéndice.
 
 \section{Algoritmo de QAOA}

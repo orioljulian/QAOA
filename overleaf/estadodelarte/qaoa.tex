@@ -1,3 +1,6 @@
+% TODO: MAIL (AÑADIRLO AQUI; está en Diseño explicado): También describe la utilidad del formato ising, al reescribir la función con variables 1 y -1, también  el paso inmediato a circuito cuántico. 
+% El hamiltoniano describe la función objetivo a optimizar. H describe la energía del sistema  y el problema de optimización es buscar el estado del sistema de menor energía.
+
 Este algoritmo es utilizado para resolver problemas de optimización en formato Ising.  % TODO: Citar
 Para esto, se construye un hamiltoniano cuyo estado de mínima energía corresponda con el mínimo de la función de optimización.
 
@@ -7,16 +10,16 @@ Dada una función de coste $C(x)$, un hamiltoniano $H$ y un espacio de resultado
   \forall{x \in 2^{n}}, C(x) = \bra{x}H\ket{x}
 \end{align*}
 
-Como este operador H no es necesariamente unitario se debe utilizar el operador $e^{iH}$,  % TODO: Explicarlo de alguna forma
+Como este operador en un problema de optimización no es necesariamente unitario se debe utilizar el operador $e^{iH}$ para ser descrito en un circuito cuántico,  % TODO: Explicarlo de alguna forma
 en el que en lugar de encontrar el estado de menor energía se debe encontrar el estado de menor fase.  % TODO: No sé si está bien explicado
 
 Para esto, en el algoritmo QAOA se utilizan dos operadores unitarios.
 \begin{itemize}
-\item El primero es el \textbf{problem hamiltonian}, $U(C, \gamma) = e^{-i \gamma H}$, correspondiente al operador previamente mencionado.
+\item El primer operador es $U(C, \gamma) = e^{-i \gamma H}$, denominado hamiltoniano del problema (problem hamiltonian), correspondiente al operador previamente mencionado.
 
   Dado un estado con una serie de valores posibles (correspondientes a los estados de la base computacional) este operador separa las fases relativas de dichos valores, de tal forma que la fase de los valores con menor coste disminuye y la de los valores con mayor coste aumenta. Esto no modifica la probabilidad de medición, ya que modificar la fase relativa manteniendo el eje de medición no modifica la probabilidad de medición de estos valores.
 
-\item Para que estos cambios en las fases relativas se traduzcan en un aumento de la probabilidad de medición de los valores deseados se utiliza el operador \textbf{mixer hamiltonian}, $U(B, \beta) = e^{-i \beta B}$.
+\item Para que estos cambios en las fases relativas se traduzcan en un aumento de la probabilidad de medición de los valores deseados se utiliza el operador $U(B, \beta) = e^{-i \beta B}$, denominado hamiltoniano de mezcla o interferencia (mixer hamiltonian).
 
   Este operador realiza una rotación en el estado, de tal forma que los valores con menor fase son más probables de observar que los valores con mayor fase.
 
@@ -24,6 +27,7 @@ Para esto, en el algoritmo QAOA se utilizan dos operadores unitarios.
 
 En la \textit{sección~\ref{CAP:EJEMPLO_QAOA}} del apéndice se muestra un ejemplo para ilustrar los efectos de los dos operadores descritos.
 
+% TODO: Introducir aquí también las capas (los 2 operadores se aplican de manera sucesiva en capas, etc)
 % TODO: Hablar sobre la resolución de $e^{-i \alpha H}$ de la ecuación de Schrodinger
 
 

@@ -3,25 +3,26 @@ Dadas las incoherencias encontradas en los resultados de la sección anterior, s
 Este problema consiste, de nuevo, en obtener el camino más corto para un grafo, en este caso el de la \textit{figura~\ref{fig:4-zhiqiang_grafo}}.
 
 \subsection{Resultados con QAOA}
+
 \begin{table}[htbp]{tab:5-zhiqiang-aer_estadisticas}{Resultados de la ejecución de QAOA del tercer grafo. P=20. Modificadores del paper (omitir \(2*\gamma\))}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1             &  0.6\%                           &  5.9\% \\ \hline
-    p = 2             & 30.7\%                           & 16.9\% \\ \hline
-    p = 3             & 93.8\%                           & 26.0\% \\ \hline
-    p = 4             & 66.9\%                           & 39.4\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 33.1%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚN
-    p = 5             &  1.6\%                           & 15.0\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 98.4%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚN. El global resultado es 0101 con un 55.17%
-    p = 6             & 81.0\%                           & 32.9\% \\ \hline
-    p = 7             & 36.5\%                           & 26.4\% \\ \hline
-    p = 8             & 64.2\%                           & 32.8\% \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
+    p = 1 &  0.6\% &  5.9\% \\ \hline
+    p = 2 & 30.7\% & 16.9\% \\ \hline
+    p = 3 & 93.8\% & 26.0\% \\ \hline
+    p = 4 & 66.9\% & 39.4\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 33.1%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚN
+    p = 5 &  1.6\% & 15.0\% \\ \hline  % EL OTRO MAX RESULTADO OBTENIDO (0101 - 98.4%) ES EL SEGUNDO VALIDO, ESO ES POCO COMÚN. El global resultado es 0101 con un 55.17%
+    p = 6 & 81.0\% & 32.9\% \\ \hline
+    p = 7 & 36.5\% & 26.4\% \\ \hline
+    p = 8 & 64.2\% & 32.8\% \\ \hline
   \end{tabular}
 \end{table}
 
 A diferencia de las ejecuciones del grafo correspondiente a la \textit{tabla~\ref{tab:5-primer-paper-aer_estadisticas}}, aquí se ve una clara mejora con el aumento del número de capas.
 
-Además, para el caso \(p = 3\) se aprecia una distancia mucho mayor a la habitual entre la estadística máxima y global. A efectos prácticos se toma como medida de fiabilidad la estadística máxima, ya que significa que se ha encontrado el camino óptimo el 93.8\% de las ejecuciones realizadas.
+Además, para el caso \(p = 3\) se aprecia una distancia mucho mayor a la habitual entre las estadísticas \textbf{NA/TE} y \textbf{MM/TE}. A efectos prácticos se toma como medida de fiabilidad \textbf{NA/TE}, ya que significa que se ha encontrado el camino óptimo el 93.8\% de las ejecuciones realizadas.
 
 \subsubsection{Función gamma}
 
@@ -40,7 +41,7 @@ Esto se compara también con la gráfica resultante de ejecutar este mismo probl
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
     p = 1 &  0.1\% &  9.79\% \\ \hline
     p = 2 & 10.0\% & 20.20\% \\ \hline
     p = 3 & 38.1\% & 19.47\% \\ \hline
@@ -57,10 +58,10 @@ Esto se compara también con la gráfica resultante de ejecutar este mismo probl
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1 &    0\% &  7.43\% \\ \hline
-    p = 2 & 40.3\% & 14.69\% \\ \hline
-    p = 3 & 62.0\% &  21.9\% \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
+    p = 1             &    0\%                           &  7.43\%                          \\ \hline
+    p = 2             & 40.3\%                           & 14.69\%                          \\ \hline
+    p = 3             & 62.0\%                           &  21.9\%                          \\ \hline
   \end{tabular}
 \end{table}
 
@@ -69,10 +70,10 @@ Esto se compara también con la gráfica resultante de ejecutar este mismo probl
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{Camino} & \textbf{Energía} & \textbf{Número de ocurrencias} \\ \hline
-    1010 (\textbf{Óptimo}) &  7 & 776 \\ \hline
-    0101                   & 12 & 247 \\ \hline
-    0010                   & 46 &   1 \\ \hline
+    \textbf{Camino}        & \textbf{Energía} & \textbf{Muestras} \\ \hline
+    1010 (\textbf{Óptimo}) &  7               & 776               \\ \hline
+    0101                   & 12               & 247               \\ \hline
+    0010                   & 46               &   1               \\ \hline
   \end{tabular}
 \end{table}
 
@@ -86,7 +87,7 @@ Las estadísticas ejecutadas con la función \textit{QAOAAnsatz} de Qiskit, al i
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
     p = 1 &  0.2\% &  9.86\% \\ \hline
     p = 2 &  1.2\% & 20.01\% \\ \hline
     p = 3 & 40.6\% & 19.62\% \\ \hline

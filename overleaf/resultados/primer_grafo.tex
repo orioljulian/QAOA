@@ -24,21 +24,21 @@ De esta forma, se asume que los resultados del artículo deberían ser equivalen
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1             & 91.3\%                           & 39.34\%                          \\ \hline
-    p = 2             & 64.6\%                           & 24.16\%                          \\ \hline
-    p = 3             & 63.4\%                           & 18.82\%                          \\ \hline
-    p = 4             &  9.4\%                           &  5.38\%                          \\ \hline
-    p = 5             & 67.9\%                           & 19.45\%                          \\ \hline
-    p = 6             & 29.8\%                           & 12.59\%                          \\ \hline
-    p = 7             & 28.9\%                           &  9.12\%                          \\ \hline
-    p = 8             & 36.7\%                           & 12.49\%                          \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
+    p = 1 & 91.3\% & 39.34\% \\ \hline
+    p = 2 & 64.6\% & 24.16\% \\ \hline
+    p = 3 & 63.4\% & 18.82\% \\ \hline
+    p = 4 &  9.4\% &  5.38\% \\ \hline
+    p = 5 & 67.9\% & 19.45\% \\ \hline
+    p = 6 & 29.8\% & 12.59\% \\ \hline
+    p = 7 & 28.9\% &  9.12\% \\ \hline
+    p = 8 & 36.7\% & 12.49\% \\ \hline
   \end{tabular}
 \end{table}
 
 El primer resultado a resaltar en la \textit{tabla~\ref{tab:5-primer-paper-aer_estadisticas}} es un empeoramiento de los resultados a medida que se aumenta el número de capas, lo cual es contrario a lo esperado teóricamente.
 
-Además, la gran diferencia entre los resultados dados por la estadística máxima y la estadística global denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la \textit{figura~\ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}}.
+Además, la gran diferencia entre los resultados dados por las estadísticas \textbf{NA/TE} y \textbf{MM/TE} denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la \textit{figura~\ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}}.
 
 El resultado de la función gamma es el siguiente:
 \begin{figure}[htbp]{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}{Función gamma. Caso del artículo}
@@ -65,12 +65,12 @@ Se aprecia un comportamiento similar al visto en los resultados del grafo de la 
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1             &  0.5\%                           &  4.05\%                          \\ \hline
-    p = 2             &  9.2\%                           &  5.83\%                          \\ \hline
-    p = 3             & 54.8\%                           & 12.98\%                          \\ \hline
-    p = 4             & 11.1\%                           &  7.00\%                          \\ \hline
-    p = 5             &    6\%                           &  5.71\%                          \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
+    p = 1 &  0.5\% &  4.05\% \\ \hline
+    p = 2 &  9.2\% &  5.83\% \\ \hline
+    p = 3 & 54.8\% & 12.98\% \\ \hline
+    p = 4 & 11.1\% &  7.00\% \\ \hline
+    p = 5 &    6\% &  5.71\% \\ \hline
   \end{tabular}
 \end{table}
 
@@ -101,17 +101,17 @@ Añadir una restricción a la función de coste, que especifique que solo se pue
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1             & 93.8\%                           & 37.83\%                          \\ \hline
-    p = 2             & 64.6\%                           & 26.16\%                          \\ \hline
-    p = 3             & 84.8\%                           & 27.82\%                          \\ \hline
-    p = 4             & 56.0\%                           & 23.47\%                          \\ \hline
-    p = 5             & 88.1\%                           & 46.40\%                          \\ \hline
-    p = 6             & 88.1\%                           & 21.83\%                          \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
+    p = 1 & 93.8\% & 37.83\% \\ \hline
+    p = 2 & 64.6\% & 26.16\% \\ \hline
+    p = 3 & 84.8\% & 27.82\% \\ \hline
+    p = 4 & 56.0\% & 23.47\% \\ \hline
+    p = 5 & 88.1\% & 46.40\% \\ \hline
+    p = 6 & 88.1\% & 21.83\% \\ \hline
   \end{tabular}
 \end{table}
 
-Los resultados (\textit{tabla~\ref{tab:5-primer-restriccion_extra-aer_estadisticas}}) presentan una ligera mejora con respecto a los presentes en la \textit{tabla~\ref{tab:5-primer-paper-aer_estadisticas}}, tanto para las estadísticas máximas como globales.
+Los resultados (\textit{tabla~\ref{tab:5-primer-restriccion_extra-aer_estadisticas}}) presentan una ligera mejora con respecto a los presentes en la \textit{tabla~\ref{tab:5-primer-paper-aer_estadisticas}}, tanto para la estadística \textbf{NA/TE} como para \textbf{MM/TE}.
 
 La función gamma resultante (\textit{figura~\ref{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}}) toma, en comparación con la original (\textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}}), unos valores elevados.
 Se distingue un incremento en la diferencia entre los mínimos globales y los mínimos locales (no globales).
@@ -161,7 +161,7 @@ Estos mismos parámetros resultados de la ejecución en \textit{ibm\_nairobi} ha
 \end{figure}
 
 Comparando las \textit{figuras~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} y\textit{~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos}}
-se aprecia la diferencia de ejecutar unos mismos parámetros en un simulador y un ordenador cuántico real. Aunque los resultados sean similares el número de ocurrencias de la cadena de bits correspondiente con el camino óptimo disminuye notablemente en la ejecución real, debido al ruido presente en toda ejecución de un circuito cuántico.
+se aprecia la diferencia de ejecutar unos mismos parámetros en un simulador y un ordenador cuántico real. Aunque los resultados sean similares, el número de muestras en las que se obtuvo la cadena de bits correspondiente con el camino óptimo disminuye notablemente en la ejecución real, debido al ruido presente en toda ejecución de un circuito cuántico.
 
 
 \subsection{Resultados de D-Wave}
@@ -172,23 +172,30 @@ Con respecto a los resultados de aplicar Quantum Annealing utilizando los sistem
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{Camino}         & \textbf{Energía} & \textbf{Número de ocurrencias} \\ \hline
-    10101 (\textbf{Óptimo}) & 11               & 348                            \\ \hline
-    10010                   & 12               & 373                            \\ \hline
-    01001                   & 12               & 294                            \\ \hline
-    00000                   & 54               &   4                            \\ \hline
-    10000                   & 58               &   1                            \\ \hline
-    00001                   & 59               &   1                            \\ \hline
-    10100                   & 60               &   1                            \\ \hline
-    00101                   & 61               &   1                            \\ \hline
-    01010                   & 69               &   1                            \\ \hline
+    \textbf{Camino}         & \textbf{Energía} & \textbf{Muestras} \\ \hline
+    10101 (\textbf{Óptimo}) & 11               & 348               \\ \hline
+    10010                   & 12               & 373               \\ \hline
+    01001                   & 12               & 294               \\ \hline
+    00000                   & 54               &   4               \\ \hline
+    10000                   & 58               &   1               \\ \hline
+    00001                   & 59               &   1               \\ \hline
+    10100                   & 60               &   1               \\ \hline
+    00101                   & 61               &   1               \\ \hline
+    01010                   & 69               &   1               \\ \hline
   \end{tabular}
 \end{table}
 
-La energía se refiere al coste de dicho camino de acuerdo con la función de coste utilizada. Se puede ver cómo, aunque se encuentre el camino óptimo un menor número de veces que en QAOA, existe una mayor coherencia en los resultados. Esto es así porque los caminos con mayores ocurrencias son los que tienen menor energía, mientras en las ejecuciones de Qiskit se pueden ver ejemplos, como es el camino 00111 en la \textit{figura~\ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}} con un gran número de ocurrencias pero también una energía elevada.
-\footnote{Con la formulación del problema dada, la energía del camino ``00111'' es 150. Esto se debe a que se rompen varias restricciones presentes en la función de coste. Este valor puede variar dependiendo del multiplicador de Lagrange empleado
+La energía se refiere al coste de dicho camino de acuerdo con la función de coste utilizada.
+Se puede ver cómo, aunque se encuentre el camino óptimo un menor número de veces que en QAOA, existe una mayor coherencia en los resultados.
+Esto es así porque los caminos que han salido en una mayor cantidad de muestras son los que tienen menor energía, mientras en las ejecuciones de Qiskit se pueden ver ejemplos, como es el camino 00111 en la
+\textit{figura~\ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}}, que han aparecido en una gran cantidad de muestras pero también tiene una energía elevada.
+\footnote{
+  Con la formulación del problema dada, la energía del camino ``00111'' es 150.
+  Esto se debe a que se rompen varias restricciones presentes en la función de coste.
+  Este valor puede variar dependiendo del multiplicador de Lagrange empleado
   % TODO: Citar multiplicador de lagrange del anexo
-  y las restricciones utilizadas.}
+  y las restricciones utilizadas.
+}
 
 
 \subsection{Resultados con librería de QAOA}
@@ -201,12 +208,12 @@ La función mencionada, \textit{QAOAAnsatz}, construye un circuito a partir de u
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
-    \textbf{nº Capas} & \textbf{Estadística máxima (\%)} & \textbf{Estadística global (\%)} \\ \hline
-    p = 1             &  1.0\%                           &  5.54\%                          \\ \hline
-    p = 2             &  5.0\%                           &  4.58\%                          \\ \hline
-    p = 3             & 47.0\%                           & 12.36\%                          \\ \hline
-    p = 4             &  1.0\%                           &  6.91\%                          \\ \hline
-    p = 5             &  5.0\%                           &  6.34\%                          \\ \hline
+    \textbf{nº Capas} & \textbf{NA/TE} [\ref{it:5-na}] & \textbf{MM/TE} [\ref{it:5-mm}] \\ \hline
+    p = 1 &  1.0\% &  5.54\% \\ \hline
+    p = 2 &  5.0\% &  4.58\% \\ \hline
+    p = 3 & 47.0\% & 12.36\% \\ \hline
+    p = 4 &  1.0\% &  6.91\% \\ \hline
+    p = 5 &  5.0\% &  6.34\% \\ \hline
   \end{tabular}
 \end{table}
 
