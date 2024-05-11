@@ -1,69 +1,25 @@
-El punto de partida es el trabajo desarrollado por Urgelles et al.~\cite{multi-objective_routing_optimization},
-% TODO: Donde se hace taltaltal (explicar lo que hace).
-El algoritmo utilizado es QAOA Y TALTALTAL
+El punto de partida es el trabajo desarrollado por Urgelles et al.~\cite{multi-objective_routing_optimization}.
+En este se exploran algoritmos cuánticos para la optimización del enrutamiento de paquetes en redes de comunicaciones, con el pretexto de aplicarlo a tecnologías 6G.
+Concretamente, se explora el rendimiento de QAOA al resolver el problema del camino más corto en grafos dirigidos pesados.
+\\
+Para esto se resuelve una versión de este problema en un grafo simple, mostrando los resultados obtenidos por QAOA, y después se aplica el algoritmo a un grafo multi-objetivo.
+En este segundo caso se parte de un grafo donde las aristas tienen dos o más pesos distintos, relacionados con distintas propiedades que quieren verse minimizadas.
+Por esto, no siempre es posible obtener un mismo camino que constituya el mínimo global para todas estas propiedades, por lo que en su defecto se busca el camino que constituya un óptimo de Pareto y, por lo tanto, sea suficientemente bajo para el coste de cada una.
+\\
+Como el objetivo de este trabajo es la comprensión y análisis de resultados de QAOA, la aplicación del mismo a grafos multi-objetivo no será explorada.
+Esto es porque se basa en realizar sucesivas ejecuciones de QAOA, variando la entrada de ejecuciones posteriores basándose en las anteriores, sin modificar el funcionamiento del algoritmo en sí.
 
-con la intención de replicar la instancia de QAOA.
-Este aplica el algoritmo para resolver el problema de hallar el camino más corto en un grafo, con el pretexto de aplicarlo al enrutamiento de paquetes en redes de comunicaciones, y aplica también QAOA para una versión multi-objetivo del mismo problema, versión que no va a ser tratada en este trabajo.  % TODO: Explicar mejor la parte de multi-objetivo
+Como los algoritmos a tratar pertenecen a un paradigma distinto a la computación clásica, es necesario definir las clases de complejidad necesarias dentro de la computación cuántica, así como su relación con las clases tradicionales.
 
-% TODO: Los algoritmos de optimizacion son de complejidad variable en fncion de lo que se quiera resolver, por eso entra la complejidad
-% TODO: Basicamente introducir aquí las dos primeras subsecciones (Los problemas de tipo QUBO se usan para resolver QAOA y QA)
+Además, los problemas de optimización a resolver con QAOA y QA son de tipo QUBO, por lo que es necesario defininir qué cualidades posee un problema de este tipo.
 
-\section{Complejidad}
+\section{Complejidad}{estadodelarte/complejidad.tex}
 
-Al categorizar algoritmos para resolver problemas computacionales se pueden distinguir dos grupos:
-El primero son algoritmos deterministas, en los que se garantiza obtener el resultado correcto siempre.
-En segundo caso se encuentran algoritmos basados en heurísticas, los cuales tienen una posibilidad no nula de no obtener el resultado correcto.
-La idea de utilizar algoritmos falibles radica en que existen situaciones en las que es preferible aceptar un porcentaje de error acotado si eso se traduce en una disminución considerable en la complejidad temporal o espacial.
-
-Esto se aplica también a la computación cuántica, donde hay algoritmos deterministas, y no deterministas.  % TODO: Citar caso del algoritmo de Grover para EQP?? https://arxiv.org/abs/quant-ph/0106071
-El último es el caso de los algoritmos tratados en este trabajo, tanto QAOA como QA, los cuales dan un resultado óptimo con una probabilidad de error de no ser correcto.  % TODO: Esto del final ponerlo bien
-
-Por supuesto, se contempla la utilización del paradigma de la computación cuántica en problemas en los que la complejidad de un algoritmo cuántico escale más lento que la de los métodos clásicos correspondientes.
-
-
-% TODOO: Hablar de EQP (Exact Quantum Polynomial time) vs BQP (Bounded-error Quantum Polynomial time)??
-% TODOO: Problema: QAOA es BQP se supone
-En computación los problemas pueden ser divididos en dos grandes grupos:
-
-\begin{itemize}
-\item \textit{P}: Aquellos problemas que pueden ser resueltos en tiempo polinomial.
-\item \textit{NP}: Problemas cuyas soluciones son verificables en tiempo polinomial o, de manera equivalente, que pueden ser resueltos en tiempo polinomial por una máquina de Turing no determinista.
-\end{itemize}
-
-De forma similar, al introducir computadoras cuánticas se introducen dos nuevos conjuntos, también de interés para resolver problemas:
-
-\begin{itemize}
-\item \textit{EQP} (Exact Quantum Polynomial time): Conjunto de problemas que pueden ser resueltos por una computadora cuántica utilizando un algoritmo determinista en tiempo polinómico. Esto sería análogo a los problemas tipo \textit{P}.
-\item \textit{BQP} (Bounded-error Quantum Polynomial time): Conjunto de problemas resolubles por una computadora cuántica en tiempo polinómico con una probabilidad de error mayor que 0.
-\end{itemize}
-
-\section{Problemas de optimización combinatoria\label{sec:2-problemas de optimizacion combinatoria}}
-
-Un problema de optimización combinatoria con variables binarias se define una función de coste de la forma:
-
-\begin{align*}
-  f(x) = \sum_{\alpha = 1}^{m} f_\alpha(x) \\
-  \textnormal{ dde } x = x_1x_2 \ldots x_n \textnormal{ y } x_i\in{\{0, 1\}} \\
-   f_{\alpha}(x) = \begin{cases}
-     1 \textnormal{ si x satisface } f_\alpha \\
-     0 \textnormal{ en otro caso}
-   \end{cases}
-\end{align*}
-
-% TODO: Añadirlo aquí. video de Ket.G para dar la idea de problemas de optimizaciin, QUBO y la ventaja de usar QC ( escala en n qubit lo que en clásica es 2 elevado a n bit.
-% TODO: https://www.youtube.com/watch?v=OXthrvvLhDw
-
-El objetivo del problema es encontrar el mínimo global de esta función. De la misma forma, el objetivo puede ser definido como hallar el máximo de $-1*f(x)$.
-
-Además el espacio de estados puede estar restringido, esto es, que la cantidad de $x$ válidos sea $< 2^n$ o, de manera equivalente, que existan cadenas de $n$ bits que no sean válidas en el contexto del problema (en el caso del problema del camino más corto sería, por ejemplo, un camino vacío o discontinuo).
-
-Los problemas aplicados tanto a \textit{QAOA} como a \textit{QA} son problemas tipo \textit{QUBO} (Quadratic Unconstrained Binary Optimization).
-Estos son problemas en los que el espacio de estados posibles no está restringido, por lo que para resolver un problema utilizando alguno de estos dos algoritmos se debe realizar una conversión entre problemas de optimización genéricos a problemas tipo \textit{QUBO}. Esta conversión se explica en la \textit{sección~\ref{sec:2-problemas de optimizacion combinatoria}}.
-
+\section{Problemas de optimización combinatoria\label{sec:2-problemas de optimizacion combinatoria}}{estadodelarte/problemas_optimizacion.tex}
 
 \section{QAOA}{estadodelarte/qaoa.tex}
 
-\section{Computación adiabática cuántica}{estadodelarte/aqc.tex}
+\section{Quantum Annealing}{estadodelarte/qa.tex}
 
 %%% Local Variables:
 %%% mode: latex

@@ -1,0 +1,35 @@
+Al categorizar algoritmos para resolver problemas computacionales se pueden distinguir dos grupos:
+El primero son algoritmos deterministas, en los que se garantiza obtener el resultado correcto siempre.
+El segundo son algoritmos basados en heurísticas, los cuales tienen una posibilidad no nula de no obtener el resultado correcto.
+La idea de utilizar algoritmos falibles radica en que existen situaciones en las que es preferible aceptar un porcentaje de error acotado si eso se traduce en una disminución considerable en la complejidad temporal o espacial.
+
+Esto se aplica también a la computación cuántica, donde hay algoritmos deterministas, y no deterministas.
+El último es el caso de los algoritmos tratados en este trabajo, tanto QAOA como QA, los cuales tienen probabilidad no nula de no dar el resultado correcto.
+
+Por supuesto, solo se contempla la utilización del paradigma de la computación cuántica en problemas en los que la complejidad de un algoritmo cuántico escale más lento que la de los métodos clásicos correspondientes.
+
+% TODOO: Problema: QAOA es BQP se supone
+En computación los problemas pueden ser divididos en dos grandes grupos:
+
+\begin{itemize}
+\item \textit{P}: Aquellos problemas que pueden ser resueltos en tiempo polinomial.
+\item \textit{NP}: Problemas cuyas soluciones son verificables en tiempo polinomial o, de manera equivalente, que pueden ser resueltos en tiempo polinomial por una máquina de Turing no determinista.
+\end{itemize}
+
+De forma similar, al introducir computadoras cuánticas se introducen dos nuevos conjuntos, también de interés para resolver problemas:
+
+\begin{itemize}
+\item \textit{EQP} (Exact Quantum Polynomial time):
+  Conjunto de problemas que pueden ser resueltos por una computadora cuántica utilizando un algoritmo determinista en tiempo polinómico.
+  Esto sería análogo a los problemas tipo \textit{P}.
+
+\item \textit{BQP} (Bounded-error Quantum Polynomial time):
+  Conjunto de problemas resolubles por una computadora cuántica en tiempo polinómico con una probabilidad de error mayor que 0.
+  Tanto QAOA como QA caen en este segundo conjunto de problemas, \textit{BQP}.
+\end{itemize}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:
