@@ -1,0 +1,37 @@
+Se ha habilitado un repositorio de Github\cite{codigo_tfg} con todo el contenido de este TFG, incluidos los cuadernos de Jupyter utilizados para realizar las ejecuciones de los algoritmos de este trabajo.
+
+Para ambos Qiskit y D-Wave existen más cuadernos con problemas resueltos y modificaciones de los problemas presentados que los mostrados en el trabajo de fin de grado.
+
+\paragraph{Ejecuciones en D-Wave}
+
+Se ha proporcionado un fichero \path{requirements_dwave.txt} con los paquetes necesarios para realizar las ejecuciones de \textit{quantum annealing}.
+\\
+Para realizar estas ejecuciones además es necesario crear una cuenta en \url{https://www.dwavesys.com}, para tener un token asociado con el que poder conectarse a los sistemas de D-Wave
+
+El código ejecutado se encuentra en el subdirectorio \path{codigo/dwave}, separado en cuadernos según el problema a resolver (\path{shortest-path-dwave.ipynb} y \path{max-cut.ipynb}).
+
+\paragraph{Ejecuciones en Qiskit}
+
+Se ha proporcionado un fichero \path{requirements_qiskit.txt} con los paquetes necesarios para realizar ejecuciones de QAOA\@.
+También es importante realizar las ejecuciones en un entorno con Python $\le$ 3.8 (solo ha sido probado para Python 3.8), ya que para versiones superiores existen errores en las librerías de Qiskit.
+\\
+Para realizar ejecuciones en ordenadores reales se debe generar un token de Qiskit en \url{https://quantum.ibm.com}, pero para cualquier otra ejecución en simulador no es necesario, ya que pueden ser ejecutadas en la máquina local.
+
+Para las ejecuciones en Qiskit se han utilizado los siguientes cuadernos, todos presentes en el subdirectorio \path{codigo/}:
+
+\begin{itemize}
+\item \path{print_circuits.ipynb}: Utilizado para obtener las imágenes de los circuitos presentadas en este trabajo.
+  Se ha separado de otras secciones porque por defecto un circuito cuántico no muestra los parámetros $\gamma$ y $\beta$, sino coeficientes ya resueltos (es decir, para $\gamma = 1.5$ en un operador $Rz(\gamma*2)$ mostraría $Rz(3)$).
+
+\item \path{grafo-generico/shortest_path_qaoa.ipynb} y \path{max-cut-qiskit/max_cut_qaoa.ipynb}: Estos dos cuadernos contienen la implementación de QAOA, generación de estadísticas y ejecuciones en ordenadores reales.
+  
+  Ha sido separado en dos ficheros distintos, según el tipo de problema, para diferenciar las modificaciones en las pruebas y los dibujos de grafos, pero las ejecuciones en circuitos cuánticos y generación de estadísticas son idénticas.
+  
+\item \path{grafo-generico/QAOAAnsatz.ipynb} y \path{max-cut-qiskit/qiskit-QAOAAnsatz.ipynb}: De manera análoga a los ficheros anteriores, contienen las ejecuciones utilizando la implementación de Qiskit de QAOA, separado según el tipo de problema a resolver.
+\end{itemize}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

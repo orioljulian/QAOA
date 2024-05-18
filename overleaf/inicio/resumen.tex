@@ -1,10 +1,26 @@
-***** Rehacer el resumen ****************
+En el contexto actual, donde el aumento de tecnologías basadas en \textit{Big Data} es cada vez mayor, es muy común que problemas que antes se consideraban triviales sean ahora irresolubles en la práctica por su magnitud.
+\\
+Es crucial encontrar los métodos más eficientes para resolver estos problemas, ya que no solo hacen que un problema pueda ser resuelto con un coste menor, sino que problemas irresolubles sean resueltos.
+\\\\
+El paradigma de la computación cuántica, que aplica principios de la mecánica cuántica a la computación, promete ser una herramienta para tratar estos problemas con un coste temporal menor al actual.
+\\
+Concretamente en el contexto de los problemas de optimización, en los que se busca el extremo de una función de coste, existen numerosos algoritmos que utilizan tecnologías cuánticas para tratar de mejorar las soluciones clásicas.
+\\
+Es por esto que en este trabajo se realiza un estudio en profundidad sobre el funcionamiento y rendimiento de uno de estos algoritmos, QAOA (\textit{Quantum Approximate Optimization Algorithm})\@.
+\\
+Para ello se ha realizado una implementación completa del algoritmo y se ha comprobado utilizando problemas de optimización obtenidos de diferentes fuentes.
+\\
+Además, se ha utilizado el algoritmo de QA (\textit{Quantum Annealing}) para comparar con los resultados dados por QAOA a estos problemas.
+\\\\
+De esta forma se ha obtenido un trabajo con dos fines distintos.
+\begin{itemize}
+\item Un fin didáctico, por el cual se ha realizado una explicación completa de cómo y por qué funciona QAOA\@, dando también una construcción sistematizada del algoritmo.
 
-En un mundo cada vez más conectado, con el crecimiento exponencial del volumen de datos en la red, los ataques en internet, como los ataques de denegación del servicio, son cada vez más frecuentes.
-\\\\Actualmente es de interés el desarrollo de herramientas de seguridad modulares que, por una parte, permitan añadir fácilmente aportaciones de la comunidad de desarrolladores y, por otra, sean sencillas de utilizar por parte del usuario.
-\\\\La aportación de este trabajo de fin de grado cosiste en el diseño y desarrollo de un cortafuegos, que permitirá, por un lado, que los programadores añadan sus propias soluciones de forma muy sencilla y, por otro lado,  a los usuarios gestionar el cortafuegos fácilmente.
-\\\\En primer lugar, se analizarán las soluciones y sistemas de cortafuegos existentes en el mercado con el fin de detectar sus fortalezas y debilidades. El propósito es diseñar una aplicación que supla estas carencias y sea verdaderamente útil para el usuario.
-\\\\Una vez realizado el estudio, se procederá a diseñar la aplicación utilizando el mejor sistema para filtrar paquetes. Entre las distintas posibilidades disponibles actualmente, XDP es una alternativa muy interesante puesto que permite que se ejecute código en el controlador de tarjeta de red. La ventaja de este sistema es poder eliminar paquetes a alta velocidad y con menos recursos, algo muy importante cuando se trata de detener un ataque. La principal desventaja es la complejidad del desarrollo y comunicación debido a la necesidad de utilizar lenguajes de bajo nivel en el funcionamiento interno y de alto nivel en la interfaz.
-\\\\Por último, se realizarán pruebas de rendimiento y de validación con el fin de comprobar que todos los requisitos se satisfacen y el cortafuegos es viable. Esto es muy importante, ya que es una aplicación corriendo en una zona crítica del sistema.
+\item Un fin estadístico, por el que se ha explorado cómo se comporta el algoritmo en distintas situaciones.
+\end{itemize}
 
-\palabrasclave{Cortafuegos, metodologías ágiles, filtrado de paquetes, XDP, eBPF,  Flask Python, ataques de internet, API REST, desarrollo web}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

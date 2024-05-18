@@ -1,23 +1,23 @@
 El punto de partida es el trabajo desarrollado por Urgelles et al.~\cite{multi-objective_routing_optimization}.
-En este se exploran algoritmos cuánticos para la optimización del enrutamiento de paquetes en redes de comunicaciones, con el pretexto de aplicarlo a tecnologías 6G.
+En este se exploran algoritmos cuánticos para la optimización del enrutamiento de paquetes en redes de comunicaciones, con el objetivo de aplicarlo a tecnologías 6G.
 Concretamente, se explora el rendimiento de QAOA al resolver el problema del camino más corto en grafos dirigidos pesados.
 \\
 Para esto se resuelve una versión de este problema en un grafo simple, mostrando los resultados obtenidos por QAOA, y después se aplica el algoritmo a un grafo multi-objetivo.
 En este segundo caso se parte de un grafo donde las aristas tienen dos o más pesos distintos, relacionados con distintas propiedades que quieren verse minimizadas.
-Por esto, no siempre es posible obtener un mismo camino que constituya el mínimo global para todas estas propiedades, por lo que en su defecto se busca el camino que constituya un óptimo de Pareto y, por lo tanto, sea suficientemente bajo para el coste de cada una.
+Por esto, no siempre es posible obtener un mismo camino que constituya el mínimo global para todas estas propiedades, por lo que en su defecto se busca el camino que constituya un óptimo de Pareto y, por lo tanto, su coste para cada propiedad sea suficientemente bajo.
 \\
 Como el objetivo de este trabajo es la comprensión y análisis de resultados de QAOA, la aplicación del mismo a grafos multi-objetivo no será explorada.
 Esto es porque se basa en realizar sucesivas ejecuciones de QAOA, variando la entrada de ejecuciones posteriores basándose en las anteriores, sin modificar el funcionamiento del algoritmo en sí.
 
-Como los algoritmos a tratar pertenecen a un paradigma distinto a la computación clásica, es necesario definir las clases de complejidad necesarias dentro de la computación cuántica, así como su relación con las clases tradicionales.
+Como los algoritmos a tratar pertenecen a un paradigma distinto a la computación clásica, es conveniente describir las clases de complejidad necesarias dentro de la computación cuántica, así como su relación con las clases tradicionales.
 
-Además, los problemas de optimización a resolver con QAOA y QA son de tipo QUBO, por lo que es necesario defininir qué cualidades posee un problema de este tipo.
+Además, los problemas de optimización a resolver con QAOA y QA son de tipo QUBO, por lo que es necesario definir qué cualidades posee un problema de este tipo.
 
 \section{Complejidad}{estadodelarte/complejidad.tex}
 
 \section{Problemas de optimización combinatoria\label{sec:2-problemas de optimizacion combinatoria}}{estadodelarte/problemas_optimizacion.tex}
 
-\section{QAOA}{estadodelarte/qaoa.tex}
+\section{QAOA\label{sec:2-qaoa}}{estadodelarte/qaoa.tex}
 
 \section{Quantum Annealing}{estadodelarte/qa.tex}
 

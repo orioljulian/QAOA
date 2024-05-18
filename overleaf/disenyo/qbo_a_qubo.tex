@@ -1,0 +1,22 @@
+Como ya se ha comentado anteriormente, los problemas de optimización con restricciones deben ser transformados para su posterior procesamiento por los algoritmos tratados.
+Una restricción puede ser definida como una igualdad de la forma $A(x) = B(x)$ que debe cumplir toda entrada $x$ de la función de coste para considerarse válida.
+La forma de convertir un problema con restricciones a uno sin ellas es modificar la función de coste para que las incluya en su definición, por lo que en lugar de tener $f(x)$ como función de coste se tendrá:
+$f'(x) = f(x) + P*{(A(x) - B(x))}^2$, donde
+
+\begin{align}
+  P*{(A(x) - B(x))}^2 \begin{cases}
+    = 0 \textnormal{ si se cumple la restricción } \\
+    > \max_x{f(x)} \textnormal{ en otro caso }
+  \end{cases}
+\end{align}
+
+El parámetro P se denomina \textit{modificador de Lagrange} y deberá tener un valor lo suficientemente grande como para que el castigo en caso de romper una restricción haga que el valor de la función de coste sea mayor que cualquier otro resultado en el que no se rompan restricciones.
+De esta forma toda entrada válida en $f(x)$ tendrá el mismo coste en $f'(x)$, mientras que toda entrada no válida en $f(x)$ tendrá en $f'(x)$ un coste mayor que cualquier entrada de $f(x)$.
+\\
+Si todas las restricciones cumplen que ${(A(x) - B(x))}^2 >= 1$, entonces el modificador de Lagrange queda sujeto a $P > \max_x{f(x)}$.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

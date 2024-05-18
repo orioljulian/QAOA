@@ -1,0 +1,57 @@
+En definitiva, el circuito de QAOA está basado en un estado inicial $\ket{\psi_0}$ y un circuito parametrizado (también llamado circuito ansatz)
+$U(B, \beta_{p-1})U(C, \gamma_{p-1}) \ldots U(B, \beta_0)U(C, \gamma_0)$, cuyo estado resultante se denomina $\lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle$.
+
+Como ya ha sido mencionado en la introducción, QAOA es un algoritmo híbrido, por lo que tiene una parte ejecutada en un computador cuántico y otra en un computador clásico. La medición de $\lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle$ corresponde a la primera, mientras que la variación de $\vec{\beta}$ y $\vec{\gamma}$ es realizada por un optimizador clásico.
+
+Así, la estructura general de QAOA es la siguiente~\cite{qaoa_paper_original}:
+
+\begin{enumerate}
+\item Inicializar $\vec{\beta}$ y $\vec{\gamma}$ a valores arbitrarios según el número de capas $p$.
+\item\label{it:3-algoritmo_repetir}
+  Repetir hasta que se cumpla cierto criterio de convergencia, obteniendo $\vec{\beta_{opt}}, \vec{\gamma_{opt}}$
+  \begin{enumerate}
+  \item\label{it:3-algoritmo_construir_circuito} Construir el circuito correspondiente al estado $\lvert \psi(\vec{\beta}, \vec{\gamma})\rangle$
+
+  \item\label{it:3-algoritmo_ejecutar_circuito}
+    Evaluar el estado en la base computacional.
+    Esto, por el funcionamiento del modelo orientado a circuitos, devuelve una estimación de la probabilidad de cada uno de los estados de la base $\ket{x}$.
+
+  \item\label{it:3-algoritmo_valor_esperado}
+    Computar el valor esperado de $C$: $\langle \psi(\vec{\beta}, \vec{\gamma}) \rvert C \lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle$.
+    De forma equivalente, se puede obtener este valor de manera clásica calculando la media ponderada del coste en $f(x)$ de los estados obtenidos según su probabilidad.
+
+    \begin{align}
+      \sum_{\ket{x}} f(x)*P(\ket{x})
+    \end{align}
+
+    Donde $f(x)$ es el coste de la función para un valor $x$ obtenido en la ejecución del paso anterior y $P(\ket{x})$ es la probabilidad estimada de obtener x en dicha ejecución.
+
+    El valor esperado obtenido representa una métrica de cómo de bueno es el resultado de la ejecución del circuito.
+    A menor sea este valor, más cercano está $\lvert \psi(\vec{\beta}, \vec{\gamma})\rangle$ al estado fundamental.
+
+  \item Hallar nuevos $\vec{\beta_{new}}, \vec{\gamma_{new}}$ usando un algoritmo clásico de optimización y volver al \textit{paso~\ref{it:3-algoritmo_repetir}}.
+  \end{enumerate}
+
+\item Evaluar $\lvert \psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \rangle$ para obtener el estado $x$ con mayor probabilidad.
+  Este valor aproximará $\min_{x}f(x)$.
+
+\end{enumerate}
+
+Para el estado construido se cumple que para un número de capas $p \rightarrow \infty$:
+
+\begin{align}
+  \min_{\vec{\beta}, \vec{\gamma}} \langle \psi(\vec{\beta}, \vec{\gamma}) \rvert C \lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle = \min_{x} f(x)
+\end{align}
+
+Esto es equivalente a decir que el estado fundamental\ref{CAP:AGHJI} del sistema corresponde al valor mínimo de la función de coste.
+
+De esta forma, el optimizador clásico llamará en repetidas iteraciones a una función \textit{execute\_circuit()} con una entrada $(\vec{\beta}, \vec{\gamma})$ que devolverá como salida un valor mayor o igual al mínimo de la función de coste.
+Este resultado es el que el optimizador debe minimizar.
+
+En este caso el optimizador clásico que se utilizará es COBYLA (\textit{Constrained Optimization BY Linear Approximation}), de la librería de \textit{Python} \textit{scipy.minimize}.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

@@ -7,47 +7,77 @@ Un caso paradigmático serían los algoritmos basados en heurísticas, los cuale
 
 \section{Motivación}
 
-Es en este contexto en el que se desarrolla la computación cuántica, que promete ser una tecnología que permite la creación de algoritmos que resuelvan algunos de estos problemas de forma más eficiente.
+Es en este contexto en el que se desarrolla la computación cuántica, que promete ser una tecnología que permite resolver algunos de estos problemas de forma más eficiente.
 \\
 Al respecto se suele mencionar la revolución en el campo de la encriptación que supondría el algoritmo de Shor~\cite{Shor_algorithm}.
-Este invalidaría las tecnologías de ofuscación basadas en algoritmos que utilicen el principio de que la factorización de un entero en números primos es un problema que escala de forma muy ineficiente con respecto al tamaño de la entrada.
+Este invalidaría las tecnologías de ofuscación basadas en la factorización de un entero en números primos al ser un problema que escala de forma muy ineficiente con respecto al tamaño de la entrada.
 \\
 Este no es el único caso en el que la computación cuántica podría significar una diferencia con respecto a la computación clásica,
 ya que también se proponen varios algoritmos de optimización alternativos que permitirían una mejora en la escalabilidad.
-Esta superioridad cuántica todavía no ha podido verse realizada, ya que en la era NISQ (Noisy Intermediate-Scale Quantum era~\cite{Quantum_computing_in_the_NISQ_era_and_beyond}) no es posible el uso de procesadores cuánticos con muchos qubits y poco ruido  % TODOO: Decir qué es el ruido
-en sus ejecuciones.
+Esta superioridad cuántica todavía no ha podido verse realizada, ya que en la era NISQ (Noisy Intermediate-Scale Quantum era~\cite{Quantum_computing_in_the_NISQ_era_and_beyond}) no es posible el uso de procesadores cuánticos con muchos qubits y poco ruido en sus ejecuciones.
 Esto hace que tomen importancia los algoritmos híbridos, como QAOA~\cite{qaoa_paper_original} o VQE, que combinan la ejecución de circuitos cuánticos pequeños con el pre y post-procesamiento en un ordenador clásico.
 
-Para la resolución de problemas de optimización con variables binarias en cuántica, es común que el hamiltoniano del sistema contenga los valores de la función de coste.
+Para la resolución de problemas de optimización con variables binarias en cuántica se busca que el hamiltoniano que describe el sistema cuántico represente la función de coste del problema que se quiere optimizar, para que el mínimo de energía del sistema cuántico coincida con el mínimo de la función de coste.
+
 Para esto es necesario que el formato del problema de optimización sea QUBO (Quadratic Unconstrained Binary Optimization), en los que se busca el mínimo global de una función de coste.
 Además, el problema no puede tener restricciones, por lo que el tamaño del espacio de estados disponibles en el problema es $2^n$.
 La función de coste tiene la forma $f: {\{0, 1\}}^n \rightarrow \mathbb{R}$ para $n \in \mathbb{N}$.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Dentro de la computación cuántica existen distintos modelos, que describen sistemas para aplicar los principios dados.
-Dos de esos son el modelo de \textbf{circuitos cuánticos}, el cual es de uso generalista; y el modelo de \textbf{Quantum Annealing} (QA), que solo puede ser utilizado para resolver problemas de optimización con el algoritmo que tiene su mismo nombre.
-El primer modelo constituye el proyecto más ambicioso hasta la fecha, ya que serviría para resolver cualquier problema computable (aunque no necesariamente de manera más eficiente) al ser sistemas Turing-completos.
-Por esto se esperaría que un problema resuelto con el modelo de circuitos dé peores resultados que utilizando QA\@.
+Dos efectos de la mecánica cuántica, la superposición y el entrelazamiento, permiten a las tecnologías basadas en computación cuántica resolver problemas que están más allá del alcance de las computadoras clásicas.
+\\
+Los computadores cuánticos realizan ciertos tipos de cálculos exponencialmente más rápido que las computadoras clásicas, lo que podría conducir a mejoras significativas en la precisión y eficiencia de los algoritmos de optimización.
+Esto es debido a que es posible realizar cálculos en paralelo y explorar una mayor cantidad de escenarios posibles.
 
-\section{Objetivos}
-
-Se introducen así los dos algoritmos a tratar en este trabajo.
+Hoy en día existen dos categorías principales de tecnologías basadas en computación cuántica:
 \begin{itemize}
-\item El primero, \textbf{Quantum Approximate Optimization Algorithm} (QAOA)~\cite{qaoa_paper_original}, es un algoritmo híbrido (con pre y post-procesamiento en un ordenador clásico) que es aplicado en computadoras que siguen el modelo de circuitos cuánticos.
-  La forma de implementarlo será a nivel de puertas cuánticas, que es el equivalente a puertas lógicas en álgebra booleana, utilizando las librerías de Qiskit para su ejecución.
+\item Computadoras cuánticas basadas en puertas universales.
+
+\item Optimizadores cuánticos basados en \textit{Quantum Annealing} (recocido cuántico).
+\end{itemize}
+
+IBM-Q y Google ofrecen computadores cuánticos basados en puertas universales.
+Estos sistemas tienen la propiedad de ser Turing-completos, en los que se interconectan un conjunto de puertas universales.
+\\
+En una aplicación práctica se codifican los datos de entrada a través de los estados iniciales de los qubits; se llevan a un estado de superposición; se aplica un algoritmo en todos los estados, mediante un circuito cuántico implementado a través de una serie de puertas que se aplican a los qubits; y finalmente se mide uno o varios qubits, colapsando el estado cuántico.
+Esta medición tiene un resultado probabilístico y la finalidad es que el estado solución quede reflejado con el de mayor probabilidad y sea interpretable como la solución del problema.
+
+Por el contrario, los sistemas D-Wave se fabrican según la teoría del recocido cuántico (\textit{quantum annealing}).
+Este sistema es un dispositivo cuya función es resolver problemas de tipo QUBO\@.
+La formulación QUBO se ha convertido en un formato de entrada estándar para los \textit{quantum annealers}, al que se convierten los problemas de aplicaciones prácticas de interés.
+\\
+El cálculo se realiza mediante un algoritmo heurístico de optimización cuántica.
+Las ideas de la computación cuántica adiabática (E.Farhi et al., 2000~\cite{aqc}) son similares al algoritmo de recocido simulado clásico (simulated annealing), donde las fluctuaciones térmicas permiten que el sistema salte entre diferentes mínimos locales en la función de coste.
+\\
+En el \textit{quantum annealing}, las transiciones del sistema son impulsadas por el efecto túnel cuántico.
+Una propiedad que todas las QPU (\textit{Quantum Processing Units}) tienen es que la disposición física de los qubits es fija.
+La arquitectura de hardware de los \textit{quantum annealers}, como el de D-Wave, emplea una red de qubits y acopladores dispuestos para mapear de manera eficiente los problemas de optimización al hardware cuántico.
+Este diseño permite la traducción efectiva de problemas de optimización a operadores hamiltonianos (definidos en la \textit{sección~\ref{CAP:ADFJKLS}}) y la posterior búsqueda del mínimo energético de estos mediante la aplicación de un proceso de recocido.
+
+Las computadoras cuánticas basadas en puertas universales también se pueden usar para el recocido, aunque de manera menos eficiente.
+Los \textit{quantum annealers}, como el de D-Wave, tienen un diseño específico orientado a resolver problemas de optimización.
+Esta es también la razón por la que D-Wave tiene máquinas de más de miles de qubits (King et al., 2022~\cite{2000_dwave-King_2022}) a día de hoy, mientras que la computadora cuántica universal de última generación tiene solo unos cientos de qubits\cite{ibm_roadmap}.
+
+En este trabajo se tratarán sendos algoritmos de las dos tecnologías de computación cuántica mencionadas:
+
+\begin{itemize}
+\item El primero, \textbf{Quantum Approximate Optimization Algorithm} (QAOA)~\cite{qaoa_paper_original}, es un algoritmo híbrido (con pre y post-procesamiento en un ordenador clásico) que es aplicado en computadoras que siguen el modelo basado en puertas.
+  La forma de implementarlo será al más bajo nivel, es decir, a nivel de puertas cuánticas, que es el equivalente a puertas lógicas en álgebra booleana, utilizando las librerías de Qiskit (IBM-Q) para su ejecución.
   En este trabajo será el algoritmo de mayor importancia, ya que el segundo se utilizará como comparación con este.\footnote{
     Existe un segundo significado de QAOA, Quantum Alternating Operator Ansatz~\cite{quantum_alternating_operator_ansatz}, que es una generalización del primero, con los operadores que se utilizan y la utilización de qudits (qubits de n-dimensiones) en lugar de qubits.
     En este trabajo siempre que se mencione QAOA se referirá al primero, definido en el artículo de Farhi et al.~\cite{qaoa_paper_original}.
   }
 
-\item El segundo algoritmo será el de \textbf{Quantum Annealing} (QA), que como ya se ha mencionado supone un modelo de computación completamente distinto al previo.
-  Esto se hará mediante los sistemas de la empresa D-Wave, la cual se especializa en proporcionar ordenadores con el modelo de QA\@.
-  El uso del algoritmo será únicamente de caja negra, es decir, no se va a realizar una implementación del mismo, sino que se utilizará a través de la interfaz de D-Wave.
+\item El segundo algoritmo, ya introducido, será el de \textbf{Quantum Annealing} (QA).
+  Esto se hará mediante los sistemas de la empresa D-Wave y se le dará un uso de caja negra, es decir, no se va a realizar una implementación del mismo, sino que se utilizará a través de la interfaz proporcionada por estos sistemas.
 \end{itemize}
 
-De esta forma, el objetivo de este trabajo es estudiar la implementación en detalle de QAOA, utilizando los resultados obtenidos con el algoritmo de QA como comparación.
+\section{Objetivos}
+
+El objetivo de este trabajo es estudiar la implementación en detalle de QAOA, utilizando los resultados obtenidos con el algoritmo de QA como comparación.
 El motivo por el que se han escogido estos algoritmos es porque, a pesar de las diferencias entre ellos, el tipo de problemas a resolver es el mismo, a saber, problemas tipo QUBO\@.
-Además, tanto en QAOA como en QA, para alcanzar el mínimo de la función de coste clásica $f$ se debe hacer que el estado fundamental  % TODO: \ref{sec:6-apendice-estado_fundamental}
+Además, tanto en QAOA como en QA, para alcanzar el mínimo de la función de coste clásica $f$ se debe hacer que el estado fundamental\ref{CAP:UJASDGH}  % TODO: \ref{sec:6-apendice-estado_fundamental}
 del hamiltoniano que describe el sistema cuántico contenga ese mínimo de $f$.
 
 % Tal vez comparar Quantum Annealing con simulated annealing https://softwareengineering.stackexchange.com/questions/194552/what-is-the-difference-between-quantum-annealing-and-simulated-annealing

@@ -1,14 +1,9 @@
-% TODO: MAIL (Explicar esto): DWave y el Quantum Annealing 
-% https://www.youtube.com/watch?v=DPxytTrUhdU
-% No se tiene acceso al estado cuántico, pero se puede evolucionar el sistema para llegar al estado solución. Se trata de transformar grafos, el del algoritmo al de la arquitectura del sistema. 
-% Quantum anealing en lugar de utilizar el calentamiento de Temperatura clásico utiliza el efecto tunel cuántico
-
-El nombre de quantum annealing viene de su relación con el algoritmo de simulated annealing.
+El nombre de \textit{quantum annealing} viene de su relación con el algoritmo de \textit{simulated annealing}.
 En ambos se busca el mínimo de una función de coste asociada a un problema de optimización combinatoria.
 \\
-En el algoritmo de simulated annealing se busca el mínimo partiendo de un estado inicial y moviéndose sucesivamente a estados vecinos en el espacio de estados.
+En el algoritmo de \textit{simulated annealing} se busca el mínimo partiendo de un estado inicial y moviéndose sucesivamente a estados vecinos en el espacio de estados.
 Se parte de una temperatura alta al principio, lo que hace que el radio de aceptación de estados vecinos sea mayor, y disminuyéndola gradualmente hasta encontrar el mínimo.
-Este algoritmo tiene la posibilidad de finalizar en un estado que constituye un mínimo local de la función de coste, si la energía inicial no es lo suficientemente fuerte.
+Este algoritmo tiene la posibilidad de finalizar en un estado que constituya un mínimo local no global de la función de coste, si la energía inicial no es lo suficientemente fuerte.
 \\
 De forma similar, QA también parte de un estado inicial y lo evoluciona hasta encontrar el estado de mínima energía.
 
@@ -16,20 +11,20 @@ La idea general de QA es la siguiente:
 \\
 Sea un sistema cuántico dado por un hamiltoniano dependiente del tiempo $H(t)$:
 
-\begin{align*}
+\begin{align}
   H(t) = (1-\frac{t}{T})H_s + \frac{t}{T}H_c
-\end{align*}
+\end{align}
 
 $T$ representa el tiempo total y $H_s$ es un hamiltoniano con un estado fundamental $\ket{\psi_s}$ conocido.
 $H_c$ es un hamiltoniano equivalente al operador $C$ de QAOA cuyo estado fundamental $\ket{\psi_c}$ se quiere conocer ya que, al igual que $C$, es equivalente al estado de menor valor en la función de coste clásica.
 \\
-De acuerdo con el teorema adiabático si el estado $\ket{\psi(t=0)}$ del sistema es el estado fundamental de $H_s$ y se avanza el tiempo lentamente el sistema se mantendrá en el estado fundamental de $H(t)$, de tal forma que $\ket{\psi(t=T)}$ será el estado fundamental de $H_c$ y, por lo tanto, el resultado de la función de coste.
+De acuerdo con el teorema adiabático\cite{adiabatic_theorem} si el estado $\ket{\psi(t=0)}$ del sistema es el estado fundamental de $H_s$ y se avanza el tiempo lentamente el sistema se mantendrá en el estado fundamental de $H(t)$, de tal forma que $\ket{\psi(t=T)}$ será el estado fundamental de $H_c$ y, por lo tanto, el resultado de la función de coste.
 
-Como ya se ha visto en la sección anterior, la evolución de un estado viene dada por la ecuación de Schrödinger~\ref{eq:2-ecuacion schrodinger}, de tal forma que para QA el hamiltoniano $H(t)$ del sistema afecta de la siguiente forma:
+Como ya se ha visto en la sección anterior, la evolución de un estado viene dada por la ecuación de Schrödinger(\textit{ecuación~\ref{eq:2-ecuacion schrodinger}}), de tal forma que para QA el hamiltoniano $H(t)$ del sistema afecta de la siguiente forma:
 
-\begin{align*}
+\begin{align}
   \ket{\psi_c} = e^{-i H(t) t}\ket{\psi_s}
-\end{align*}
+\end{align}
 
 Una similitud esencial entre QAOA y QA es que ambos siguen esta noción de evolucionar de un estado inicial al estado de mínima energía del sistema, que en ambos casos corresponde con el mínimo de la función de coste, solo que donde en QA varía el tiempo ($t$) en QAOA varían los ángulos $\beta$ y $\gamma$.
 \\

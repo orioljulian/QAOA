@@ -1,0 +1,109 @@
+El sistema cuántico en QAOA se implementa en un espacio de Hilbert\ref{CAP:HJIADG} de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de la función de coste $f(x)$.
+\\
+La base computacional se representa como $\{\ket{x} : x \in {\{0, 1\}}^n\}$.
+
+La idea general de QAOA se basa en preparar un estado parametrizado \(\lvert \psi(\vec{\beta}, \vec{\gamma})\rangle\) tal que, con los valores adecuados \( (\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \), el estado \(\lvert\psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}})\rangle\) encuentre la solución al problema. Los parámetros de dicho estado son los vectores:
+
+\begin{align}
+  \vec{\beta} = [\beta_0, \beta_1, \ldots , \beta_{p-1}], \vec{\gamma} = [\gamma_0, \gamma_1, \ldots , \gamma_{p-1}]
+\end{align}
+
+Donde \textit{p} es el número de capas del circuito y $\beta_i, \gamma_i \in{[0, 2\pi]}$.
+
+En este estado se diferencian un estado inicial ($\ket{\psi_0}$) y dos operadores, mencionados en la \textit{sección~\ref{sec:2-qaoa}}, el hamiltoniano del problema y el hamiltoniano de mezcla.
+Estos se combinan de la siguiente forma:
+
+\begin{align}
+  \lvert \psi(\vec{\beta}, \vec{\gamma})\rangle = U(B, \beta_{p-1})U(C, \gamma_{p-1})U(B, \beta_{p-2})U(C, \gamma_{p-2}) \ldots U(B, \beta_0)U(C, \gamma_0) \ket{\psi_0}
+\end{align}
+
+El aumento del número de capas ($p$) mejora el resultado del algoritmo, pero también aumenta la profundidad del circuito, por lo que lo hace más susceptible de sufrir por el ruido de la ejecución.
+
+\subsection{Estado inicial}
+El estado inicial del sistema es la superposición equiprobable, definida como
+
+\begin{align}
+  \ket{\psi_0} = \frac{1}{\sqrt{2^n}} \sum_x\ket{x}
+  = {(\frac{1}{\sqrt{2}} (\ket{0} + \ket{1}))}^{\otimes n}
+  = H^{\otimes n} \ket{0}^{\otimes n}
+\end{align}
+
+Este estado inicial se construye añadiendo operadores de Hadamard a \textit{n} qubits inicializados a $\ket{0}$, lo que genera un estado equiprobable, es decir, donde la probabilidad de obtener una cadena cualquiera en ${\{0, 1\}}^n$ al medir el estado sería en cualquier caso $\frac{1}{2^n}$.
+
+\subsection{Hamiltoniano de mezcla y del problema\label{sec:3-problem_y_mixer_hamiltonian}}
+
+Estos dos hamiltonianos son operadores unitarios definidos como:
+
+\begin{align}
+  U(B, \beta) = e^{-i \beta B} \\
+  U(C, \gamma) = e^{-i \gamma C}
+\end{align}
+
+Como ha sido explicado en la \textit{sección~\ref{sec:2-qaoa}}, el operador $U(C, \gamma)$ modifica la fase de los estados, haciendo que los de menor energía aumenten en fase y los de mayor energía disminuyan.
+\\
+También se ha explicado cómo el operador $U(B, \beta)$ realiza rotaciones de tal forma que aumente la amplitud, y por ende la probabilidad, de los estados con mayor fase.
+
+\subsubsection{Operador \textit{B}}
+\textit{B} se construye a partir de puertas Pauli-X ($\sigma^x$) y únicamente depende de la cantidad de qubits del sistema.
+Se define de la siguiente forma:
+
+\begin{align}
+  &B = \sum_{i=0}^{n-1}\sigma^x_{i} \\
+  &U(B, \beta) = e^{-i \beta B} = \prod_{j=0}^{n-1}e^{-i \beta \sigma^x_j} = \prod_{j=0}^{n-1}Rx_i(2*\beta)
+\end{align}
+
+Donde $Rx(\alpha)$ es un operador que realiza una rotación de $\alpha$ radianes sobre el eje x de la esfera de Bloch.
+\\
+También, cuando un operador lineal tiene un subíndice se refiere a que es aplicado a ese qubit, por lo que la expresión $Rx_i(\alpha)$ es una puerta $Rx(\alpha)$ aplicada al qubit i-ésimo.
+Es equivalente a $I \otimes I \otimes \ldots \otimes R_x(\alpha) \otimes \ldots I \otimes I$.
+
+De esta forma, la variable $\beta$ del hamiltoniano de mezcla representa un ángulo, y por lo tanto es periódico.
+Esto es importante porque el aumento indefinido de $\beta$ puede llevar a disminuir la amplitud de los estados con más fase.
+
+
+\subsubsection{Operador \textit{C}\label{sec:3-operador_c}}
+
+\textit{C} debe ser un operador diagonal\ref{CAP:UJASDGHJASDGH} en la base computacional $\ket{x}$, con los valores de la función objetivo.
+Esto es equivalente a tener los valores $f(0 \ldots 0), f(0 \ldots 1), \ldots, f(1 \ldots 1)$ en la diagonal de $C$ y el resto de elementos con valor 0.
+Para un vector $\ket{x}$ de la base computacional se cumple:
+
+\begin{align}
+  \bra{x}C\ket{x} = f(x)
+\end{align}
+
+Para obtener este operador $C$ se parte de una función de coste en su formato QUBO, con la forma $f(x)$, donde $x=x_0x_1 \ldots x_{n-1}, x_i \in \{0, 1\}$.
+\\
+Un primer paso es convertir la función en formato QUBO a su formato Ising~\cite{ising_formulations_of_np_problems}.
+Una función Ising es equivalente a una tipo QUBO, solo que en lugar de aceptar cadenas del conjunto ${\{0, 1\}}^n$ acepta cadenas de ${\{-1, 1\}}^n$ para su entrada.
+Esto es necesario porque, como se verá más adelante, para convertir una función de coste a un hamiltoniano $C$ se deben usar operadores cuyos autovalores\ref{CAP:AGHISD} correspondan a los valores que pueden tomar las variables del sistema, en este caso $-1$ y $1$.
+Para realizar este paso se puede realizar un cambio de variable como el siguiente:
+
+\begin{align}
+  &f(x) \rightarrow C(z) \\
+  &x_i \rightarrow \frac{1 - z_i}{2} \nonumber
+\end{align}
+
+De esta forma $z_i = 1$ si $x_i = 0$ y $z_i = -1$ si $x_i = 1$.
+
+La forma de pasar de la función $C(z)$ al operador $C$ es sustituyendo las variables $z_i$ por puertas Pauli-Z en el qubit $i$ ($\sigma^z_i$).
+\\
+El motivo por el que para muchos algoritmos cuánticos se utiliza el formato Ising es porque los autovalores de la puerta Pauli-Z son $-1$ y $1$, lo que permite este paso entre variables $z$ y operadores $\sigma^z$.
+\\
+La justificación detallada se encuentra en la \textit{sección~\ref{CAP:F_CLASICA_A_HAMILTONIANO}} del apéndice.
+
+Como se verá en aplicaciones concretas de QAOA, al igual que el hamiltoniano $U(B, \beta)$ se expresa mediante operadores $Rx(\alpha)$, la forma de expresar el hamiltoniano $U(C, \gamma)$ es mediante puertas $Rz(\alpha)$, cuya definición es:
+
+\begin{align}
+  Rz_i(\alpha) = e^{-i \alpha \sigma^z_i}
+\end{align}
+
+De manera análoga a $Rx(\alpha)$, $Rz(\alpha)$ representa una rotación de $\alpha$ radianes sobre el eje Z de la esfera de Bloch.
+\\
+De esto se concluye que, al igual que en el caso del hamiltoniano de mezcla, el hamiltoniano del problema también tiene una entrada que representa un ángulo.
+Por lo tanto si se aumenta lo suficiente, disminuirá la fase de los estados con menor energía, produciendo un resultado contrario al deseado.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

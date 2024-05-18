@@ -1,29 +1,26 @@
-Un problema de optimización combinatoria con variables binarias se define una función de coste de la forma:
+Un problema de optimización combinatoria con variables binarias se define con una función de coste de la forma:
 
-\begin{align*}
+\begin{align}
   f(x) = \sum_{\alpha = 1}^{m} f_\alpha(x) \\
-  \textnormal{ dde } x = x_1x_2 \ldots x_n \textnormal{ y } x_i\in{\{0, 1\}} \\
-   f_{\alpha}(x) = \begin{cases}
-     1 \textnormal{ si x satisface } f_\alpha \\
-     0 \textnormal{ en otro caso}
+  \textnormal{ donde } x = x_1x_2 \ldots x_n \textnormal{ y } x_i\in{\{0, 1\}} \nonumber \\
+   f_{\alpha}(x) \begin{cases} \nonumber
+     > 0 \textnormal{ si x satisface } f_\alpha \\
+     = 0 \textnormal{ en otro caso}
    \end{cases}
-\end{align*}
-
-% TODO: Añadirlo aquí. video de Ket.G para dar la idea de problemas de optimizaciin, QUBO y la ventaja de usar QC ( escala en n qubit lo que en clásica es 2 elevado a n bit.
-% TODO: https://www.youtube.com/watch?v=OXthrvvLhDw
+\end{align}
 
 El objetivo del problema es encontrar el mínimo global de esta función. De la misma forma, el objetivo puede ser definido como hallar el máximo de $-1*f(x)$.
 
 Además el espacio de estados puede estar restringido, esto es, que la cantidad de $x$ válidos sea $< 2^n$ o, de manera equivalente, que existan cadenas de $n$ bits que no sean válidas en el contexto del problema (en el caso del problema del camino más corto sería, por ejemplo, un camino vacío o discontinuo).
 
-Los problemas aplicados tanto a \textit{QAOA} como a \textit{QA} son problemas tipo \textit{QUBO} (Quadratic Unconstrained Binary Optimization).
-Estos son problemas en los que el espacio de estados posibles no está restringido, por lo que para resolver un problema utilizando alguno de estos dos algoritmos se debe realizar una conversión entre problemas de optimización genéricos a problemas tipo \textit{QUBO}. Esta conversión se explica en la \textit{sección~\ref{sec:2-problemas de optimizacion combinatoria}}.
+Los problemas aplicados tanto a QAOA como a QA son problemas tipo QUBO (\textit{Quadratic Unconstrained Binary Optimization}).
+Estos son problemas en los que el espacio de estados posibles no está restringido, por lo que para resolver un problema utilizando alguno de estos dos algoritmos se debe realizar una conversión entre problemas de optimización genéricos a problemas tipo \textit{QUBO}. Esta conversión se explica en la \textit{sección~\ref{sec:3-problemas de optimizacion combinatoria}}.
 
 Una estrategia infalible para resolver un problema de este tipo es aplicar la fuerza bruta, evaluando todas las cadenas de bits posibles para encontrar la de menor coste.
 Este es un método muy costoso, ya que la complejidad crece de forma exponencial con $n$.
 De la misma forma, si se precomputaran todos los valores posibles de la función de coste la memoria aumentaría de forma exponencial, ya que para cadenas de $n$ bits se necesitarían almacenar $2^n$ valores distintos.
 \\
-Por naturaleza, todo circuito cuántico de $n$ qubits tiene una matriz asociada de tamaño $2^n \times 2^n$ denominada el hamiltoniano, que describe la energía del sistema.
+Por naturaleza, todo circuito cuántico de $n$ qubits tiene una matriz asociada de tamaño $2^n \times 2^n$ denominada el hamiltoniano, que describe la energía del sistema\ref{CAP:ASHUIDGHIASDG}.
 De esta forma si se construye un circuito cuyo hamiltoniano tenga en su diagonal los valores de una función de coste clásica se pueden lograr almacenar los $2^n$ valores distintos con tan solo $n$ qubits.
 De esta forma es posible definir de forma implícita la función de coste del problema y revertir ese incremento exponencial de precomputar los valores.
 \\

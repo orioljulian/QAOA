@@ -1,21 +1,17 @@
-% TODO: MAIL (AÑADIRLO AQUI; está en Diseño explicado): También describe la utilidad del formato ising, al reescribir la función con variables 1 y -1, también  el paso inmediato a circuito cuántico. 
-% El hamiltoniano describe la función objetivo a optimizar. H describe la energía del sistema  y el problema de optimización es buscar el estado del sistema de menor energía.
+La idea fundamental de QAOA es partir de un hamiltoniano $C$ con los valores de una función de coste $f(x)$ en su diagonal\ref{CAP:HAGUSIASDGJ} es decir:
 
-La idea fundamental de QAOA es partir de un hamiltoniano $C$ con los valores de una función de coste $C(x)$ en su diagonal es decir:
+\begin{align}
+  \forall{x \in {\{0, 1\}}^{n}}, f(x) = \bra{x}C\ket{x}
+\end{align}
 
-\begin{align*}
-  \forall{x \in {\{0, 1\}}^{n}}, C(x) = \bra{x}C\ket{x}
-\end{align*}
-
-De esta forma al medir el estado fundamental del sistema, es decir, el estado de mínima energía,   % TODO: Citar estado fundamental
-se obtendrá el valor $x$ para el que $C(x)$ es mínimo.
+De esta forma al medir el estado fundamental\ref{CAP:HAGUSIASDGJ} del sistema, es decir, el estado de mínima energía, se obtendrá el valor $x$ para el que $f(x)$ es mínimo.
 \\
-No obstante el operador $C$ no es necesariamente unitario, la cual es una propiedad fundamental de un operador en un sistema cuántico\footnote{
-  Esto es necesario para que el sistema sea coherente y cumpla que $\sum_{\ket{x}} {P(\ket{x})} = 1$,
-  donde $\ket{x}$ itera sobre los vectores de la base computacional del sistema y \(P(\ket{x})\) se refiere a la probabilidad de medir i sobre dicha base.}.
+No obstante el operador $C$ no es necesariamente unitario, la cual es una propiedad necesaria de un operador para ser implementado en un sistema cuántico\footnote{
+  Todo operador lineal en un sistema cuántico debe ser unitario para que el sistema sea coherente y cumpla que $\sum_{\ket{x}} {P(\ket{x})} = 1$,
+  donde $\ket{x}$ itera sobre los vectores de la base computacional del sistema y \(P(\ket{x})\) se refiere a la probabilidad de medir x sobre dicha base.}.
 Para ello se debe utilizar el operador $e^{iC}$, que es unitario para todo operador hermítico $C$.
 
-Esta expresión surge de la resolución de la ecuación de Schrödinger~\ref{eq:2-ecuacion schrodinger}, la cual es una ecuación diferencial que describe la evolución de un estado cuántico a partir de su hamiltoniano.
+Esta expresión surge de la resolución de la ecuación de Schrödinger (\textit{ecuación~\ref{eq:2-ecuacion schrodinger}}), la cual es una ecuación diferencial que describe la evolución de un estado cuántico a partir de su hamiltoniano.
 
 \begin{align}\label{eq:2-ecuacion schrodinger}
   i \frac{d\ket{\psi(t)}}{dt} = H \ket{\psi(t)} \rightarrow \ket{\psi(t)} = e^{-i H t}\ket{\psi(0)}
@@ -25,13 +21,13 @@ Esta expresión será utilizada en la construcción de los operadores de QAOA, y
 
 Siguiendo con la notación del artículo original~\cite{qaoa_paper_original}, en el algoritmo QAOA se utilizan dos operadores unitarios:
 \begin{itemize}
-\item El primer operador es $U(C, \gamma) = e^{-i \gamma C}$, denominado hamiltoniano del problema (\textbf{problem hamiltonian}).
+\item El primer operador es $U(C, \gamma) = e^{-i \gamma C}$, denominado hamiltoniano del problema (\textit{problem hamiltonian}).
 
-  Dado un estado con una serie de valores posibles (correspondientes a los estados de la base computacional) este operador separa las fases relativas de dichos valores.
-  De esta forma al aumentar $\gamma$ la fase de los valores con menor coste disminuye y la de los valores con mayor coste aumenta.
-  Esto no modifica la probabilidad de medición, ya que modificar la fase relativa manteniendo el eje de medición no modifica la probabilidad de medición de estos valores.
+  Dado un estado con una serie de valores posibles (correspondientes a los estados de la base computacional) este operador separa las fases relativas\ref{CAP:hbasgagbjk} de dichos valores.
+  De esta forma al aumentar $\gamma$ la fase de los valores con menor coste aumenta y la de los valores con mayor coste disminuye.
+  Esto no tiene ningún efecto en los resultados, ya que modificar la fase relativa manteniendo el eje de medición no modifica la probabilidad de medición de estos valores.
 
-\item Para que estos cambios en las fases relativas se traduzcan en un aumento de la probabilidad de medición de los valores deseados se utiliza el operador $U(B, \beta) = e^{-i \beta B}$, denominado hamiltoniano de mezcla o interferencia (\textbf{mixer hamiltonian}).
+\item Para que estos cambios en las fases relativas se traduzcan en un aumento de la probabilidad de medición de los valores deseados se utiliza el operador $U(B, \beta) = e^{-i \beta B}$, denominado hamiltoniano de mezcla o interferencia (\textit{mixer hamiltonian}).
 
   Este operador realiza una rotación en el estado, de tal forma que al variar $\beta$ los valores con menor fase son más probables de observar que los valores con mayor fase.
 
@@ -39,11 +35,12 @@ Siguiendo con la notación del artículo original~\cite{qaoa_paper_original}, en
 
 En la \textit{sección~\ref{CAP:EJEMPLO_QAOA}} del apéndice se muestra un ejemplo para ilustrar los efectos de los dos operadores descritos.
 
-Como se verá en la \textit{sección~\ref{sec:3-problem_y_mixing_hamiltonian}}, tanto $\gamma$ como $\beta$ representan ángulos que describen rotaciones en torno a los ejes del sistema.
-Es por ello que tienen un carácter periódico y si se aumentan lo suficiente pueden llevar a regresar al punto de inicio.
+Como se indicará con más detalle en la \textit{sección~\ref{sec:3-problem_y_mixer_hamiltonian}}, tanto $\gamma$ como $\beta$ representan ángulos que describen rotaciones en torno a los ejes del sistema.
+Es por ello que tienen un carácter periódico y si se aumentan lo suficiente pueden provocar un efecto de desbordamiento.
 
 La función de los operadores hamiltonianos es fundamental para el funcionamiento de QAOA, pero una sola aplicación de estos sobre un estado puede no dar un buen resultado.
 Por este motivo se repiten sucesivamente los dos operadores variando $\beta$ y $\gamma$ para lograr mejores resultados, donde un par $U(B, \beta_i)U(C, \gamma_i)$ constituirá la capa i-ésima del algoritmo.
+QAOA será definido con un número de capas $p$.
 
 
 %%% Local Variables:

@@ -1,120 +1,49 @@
-\section{Pasar de problemas de optimización combinatoria a QUBO\label{sec:3-problemas de optimizacion combinatoria}}
+Antes de explicar el diseño concreto de cada problema y cómo se implementa en cada tecnología cuántica, en la \textit{fig.~\ref{fig:3-esquema_disenyo}} se indica el flujo de trabajo realizado en este TFG, marcado en color verde se muestran las aportaciones de este trabajo, mientras que en azul se muestran recursos obtenidos de otras fuentes.
 
-En la \textit{sección~\ref{sec:2-problemas de optimizacion combinatoria}} se explica que los problemas de optimización con restricciones deben ser transformados para su posterior procesamiento por los algoritmos tratados.
-Una restricción puede ser definida como una igualdad de la forma $A(x) = B(x)$ que debe cumplir toda entrada $x$ de la función de coste para considerarse válida.
-La forma de convertir un problema con restricciones a uno sin ellas es modificar la función de coste para que las incluya en su definición, por lo que en lugar de tener $f(x)$ como función de coste se tendrá:
-$f'(x) = f(x) + P*{(A(x)-B(x))}^2$, donde
+\begin{figure}[Flujo de trabajo]{fig:3-esquema_disenyo}{Flujo de trabajo}
+  \centering
+  \includegraphics[scale=0.45]{esquema.png}
+\end{figure}
 
-\begin{align*}
-  P*{(A(x) - B(x))}^2 \begin{cases}
-    = 0 \textnormal{ si se cumple la restricción } \\
-    \ge P \textnormal{ en otro caso }
-  \end{cases}
-\end{align*}
+Los dos algoritmos del trabajo, QAOA y QA, han sido ejecutados en tres problemas distintos:
 
-El parámetro P se denomina \textit{modificador de Lagrange} y deberá tener un valor lo suficientemente grande como para que el castigo en caso de romper una restricción aumente lo suficiente el valor de la función de coste como para que sea mayor que cualquier otro resultado en el que no se rompa. Esto sería: $P > \max_x{f(x)}$.
+\begin{itemize}
+\item Max-cut en grafo de 4 aristas:
 
-\section{Circuito de QAOA\label{sec:3-circuito de qaoa}}
-El sistema cuántico en el algoritmo se desarrolla sobre un espacio de Hilbert de $2^n$ dimensiones, donde \textit{n} es el número de bits de entrada en la función de coste clásica. Esto quiere decir que se tendrán tantos qubits como bits tenga la entrada de la función de coste $f(x)$.
+  Este problema, obtenido en la página web tutorial de Qiskit\cite{qiskit_tutorial_antiguo}, ha sido elegido como el primero a resolver para asegurar una correcta implementación de QAOA, debido a su simplicidad.
+  Además, en la fuente se aporta el código utilizado, por lo que se puede comparar completamente con el código propio.
+  Los problemas max-cut son un estándar en la resolución de QAOA.
 
-La base computacional se representa como $\{\ket{x} : x \in {\{0, 1\}}^n\}$.
+\item Camino más corto en grafo de 4 nodos:
 
-La idea general de QAOA se basa en preparar un estado \(\lvert \psi(\vec{\beta}, \vec{\gamma})\rangle\) tal que, con los valores adecuados \( (\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \), el estado \(\lvert\psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}})\rangle\) encuentre la solución al problema. Los parámetros de dicho estado son:
-\begin{align*}
-  \vec{\beta} = [\beta_0, \beta_1, \ldots , \beta_{p-1}] \\
-  \vec{\gamma} = [\gamma_0, \gamma_1, \ldots , \gamma_{p-1}] \\
-\end{align*}
-Donde \textit{p} es el número de capas del circuito y $\beta_i, \gamma_i \in{[0, 2\pi]}$.
+  Tras lograr unos resultados satisfactorios en el problema anterior, se resuelve el problema del artículo de Urgelles et al.\cite{multi-objective_routing_optimization}.
+  En este caso se aumenta la complejidad con respecto a la resolución del problema de max-cut.
+  Para comparar con los resultados obtenidos, en el artículo se incluyen un circuito de prueba y estadísticas de QAOA ejecutadas para una y varias capas.
 
-Este estado consta de tres componentes: el \textbf{estado inicial} ($\ket{\psi_0}$); y dos operadores denominados \textbf{problem hamiltonian} ($U(C, \gamma)$) y \textbf{mixing hamiltonian} ($U(B, \beta)$).
-Estos se combinan de la siguiente forma:
+\item Camino más corto para estudiar la variación con el número de capas:
 
-\[
-  \lvert\psi(\vec{\beta}, \vec{\gamma})\rangle = U(B, \beta_{p-1})U(C, \gamma_{p-1})U(B, \beta_{p-2})U(C, \gamma_{p-2}) \ldots U(B, \beta_0)U(C, \gamma_0) \ket{\psi_0}
-\]
+  Tras obtener unos resultados incongruentes en el problema anterior al aumentar el número de capas del algoritmo se decide evaluar otra instancia del problema del camino más corto, del artículo de Shan et al.\cite{solving_shortest_path_with_qaoa}, para analizar el comportamiento del algoritmo para $p > 1$.
+\end{itemize}
 
-\subsection{Estado inicial}
-El estado inicial del qubit se define como
+Para estos tres casos se ha seguido el mismo proceso de análisis.
+\\
+Se ha definido una función de coste clásica apta para el problema.
+Después se ha utilizado esta función para calcular el circuito parametrizado ansatz.
+Este se ha aplicado en una implementación realizada en Python del algoritmo haciendo uso de la librería de Qiskit, que permite la construcción y posterior ejecución de circuitos cuánticos a nivel de puertas.
+\\
+Por otra parte la función de coste también ha sido utilizada para la ejecución de QA en ordenadores de D-Wave y para la ejecución de la función \textit{Qiskit.QAOAAnsatz()}, la cual es una implementación de caja negra de QAOA empleada para su comparación con el código escrito.
+\\
+El análisis de los resultados ha sido realizado utilizando como datos los proporcionados por las respectivas fuentes de los problemas, además de los resultados de las ejecuciones de QA, QAOA y \textit{Qiskit.QAOAAnsatz()}, así como los circuitos generados por las dos últimas.
+Las métricas empleadas para esta comparación han sido definidas en el capítulo~\ref{CAP:RESULTADOS}.
 
-\begin{align*}
-  \ket{\psi_0} = \frac{1}{\sqrt{2^n}} \sum_x\ket{x}
-  = {(\frac{1}{\sqrt{2}} (\ket{0} + \ket{1}))}^{\otimes n}
-  = H^{\otimes n} \ket{0}^{\otimes n}
-\end{align*}
+Para llevar este proceso a cabo es necesario comprender antes cómo funciona QAOA y cómo se puede formular un problema de optimización con restricciones para que sea resuelto por este algoritmo.
 
-Este estado inicial se construye añadiendo operadores de Hadamard a \textit{n} qubits inicializados a $\ket{0}$, lo que genera un estado equiprobable, es decir, donde la probabilidad de obtener una cadena dada de \textit{n} bits al medir el estado sería en cualquier caso $\frac{1}{2^n}$.
+\section{Traducción de problemas de optimización combinatoria a QUBO\label{sec:3-problemas de optimizacion combinatoria}}{disenyo/qbo_a_qubo.tex}
 
-\subsection{Problem hamiltonian y mixing hamiltonian\label{sec:3-problem_y_mixing_hamiltonian}}
+\section{Circuito de QAOA\label{sec:3-circuito de qaoa}}{disenyo/circuito_qaoa.tex}
 
-Los operadores se definen como:
+\section{Algoritmo de QAOA}{disenyo/algoritmo_qaoa.tex}
 
-\begin{align*}
-  U(B, \beta) = e^{-i \beta B} \\
-  U(C, \gamma) = e^{-i \gamma C} \\
-\end{align*}
-
-La operación \(U(X) = e^{-i X}\) sirve para garantizar la unitariedad del operador ya que, como se verá en su definición, \textit{B} y \textit{C} no son necesariamente unitarios
-\footnote{En computación cuántica los operadores lineales deben ser unitarios. Tiene relación con la idea
-  $\sum_{\ket{x}} {P(\ket{x})} = 1$,
-  donde $\ket{x}$ itera sobre los vectores de la base computacional del sistema y
-  \(P(\ket{x})\) se refiere a la probabilidad de medir i sobre dicha base.}.
-
-Tanto la noción de hamiltoniano como la construcción de un operador unitario proceden de la ecuación de Schrödinger de la mecánica cuántica.
-% TODO: Hablar en el apéndice sobre el segundo postulado del libro y su resolución. Añadir el QC-textbook como bibliografía.
-
-\subsubsection{Operador \textit{B}}
-\textit{B} se construye a partir de puertas Pauli-X ($\sigma^x$) y se define de la siguiente forma:
-
-\begin{align*}
-  &B = \sum_{i=0}^{n-1}\sigma^x_{i} \\
-  &U(B, \beta) = e^{-i \beta B} = \prod_{j=0}^{n-1}e^{-i \beta \sigma^x_j} = \prod_{j=0}^{n-1}Rx_i(2*\beta)  % TODO: Citar aquí y definir Rx en el apéndice o a pie de página
-\end{align*}
-
-Como se puede ver únicamente depende de la cantidad de qubits del sistema.
-
-\subsubsection{Operador \textit{C}\label{sec:3-operador c}}
-\textit{C} debe ser un operador diagonal  % TODO: Citar del apéndice para explicar qué es un operador diagonal en |x>
-en la base computacional \(\ket{x}\) con los valores de la función objetivo. De esta forma, siendo \(\ket{x}\) un vector en la base computacional se cumple que \(\forall \ket{x} = [x_1x_2 \ldots x_n], \bra{x}C\ket{x} = f(x)\). Se define a partir de la función de coste clásica del problema a resolver y se construye utilizando puertas Pauli-Z ($\sigma^z$).
-
-Para obtener este operador se parte de una función de coste de la forma \(f(x)\), donde \(x=x_1x_2 \ldots x_n\) y \(x_i\in{0, 1}\).
-Para construirlo la función utilizada debe estar en formato Ising, en lugar de la versión QUBO (caso de $f(x)$), lo cual se traduce en tener como entrada variables con valor \(\{-1, 1\}\), en lugar de \(\{0, 1\}\).
-Para ello se debe realizar un cambio de variable:
-
-\begin{align*}
-  &f(x) \rightarrow C(z) \\
-  &x_i \rightarrow \frac{1 - z_i}{2}
-\end{align*}
-
-De esta forma $z_i = 1$ si $x_i = 0$ y $z_i = -1$ si $x_i = 1$.
-La forma de pasar de la función $C(z)$ al operador $C$ es sustituyendo las variables \(z_i\) por puertas \(\sigma^z_i\). La justificación de esto se encuentra en la \textit{sección~\ref{CAP:F_CLASICA_A_HAMILTONIANO}} del apéndice.
-
-\section{Algoritmo de QAOA}
-La estructura general del algoritmo es la siguiente:
-\begin{enumerate}
-\item Inicializar $\vec{\beta}$ y $\vec{\gamma}$ a valores arbitrarios.
-\item\label{it:3-algoritmo_repetir}
-  Repetir hasta que se cumpla cierto criterio de convergencia, obteniendo $\vec{\beta_{opt}}, \vec{\gamma_{opt}}$
-  \begin{enumerate}
-  \item Construir el circuito correspondiente al estado $\lvert\psi(\vec{\beta}, \vec{\gamma})\rangle$
-  \item Medir el estado en la base computacional, lo que devuelve una cadena de bits ${\{0, 1\}}^n$
-  \item Computar el valor esperado de $C$:\@$\langle \psi(\vec{\beta}, \vec{\gamma}) \rvert C \lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle$.
-    Esto puede ser calculado de manera equivalente evaluando la cadena de bits, obtenida de medir el estado, con la función de coste clásica $f(x)$.
-  \item Hallar nuevos \(\vec{\beta_{new}}, \vec{\gamma_{new}}\) usando un algoritmo clásico de optimización y volver al \textit{paso~\ref{it:3-algoritmo_repetir}}.
-  \end{enumerate}
-\item Calcular el valor esperado: \( \langle \psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \rvert C \lvert \psi(\vec{\beta_{opt}}, \vec{\gamma_{opt}}) \rangle \). Este valor aproximará \(\min_{x}f(x)\)
-\end{enumerate}
-
-Para el estado construido se cumple que para un número de capas \(p \rightarrow \infty\):
-
-\begin{align*}
-  \min_{\beta, \gamma} \langle \psi(\vec{\beta}, \vec{\gamma}) \rvert C \lvert \psi(\vec{\beta}, \vec{\gamma}) \rangle = \min_{x} f(x)
-\end{align*}
-
-Esto es equivalente a decir que el estado fundamental del sistema corresponde al valor mínimo de la función de coste.  % TODO: \ref{sec:6-apendice-estado_fundamental}
-
-De esta forma, el optimizador clásico llamará en repetidas iteraciones a una función \textit{execute\_circuit} con una entrada \((\vec{\beta}, \vec{\gamma})\) que devolverá como salida un valor mayor o igual al mínimo de la función de coste. Este resultado es el que el optimizador debe minimizar.
-
-En este caso el optimizador clásico que se utilizará es COBYLA (Constrained Optimization BY Linear Approximation), de la librería de \textit{Python} \textit{scipy.minimize}.  % TODOO: Citar de alguna fuente
 
 %%% Local Variables:
 %%% mode: latex

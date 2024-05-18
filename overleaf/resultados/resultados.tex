@@ -1,60 +1,65 @@
-En las ejecuciones de QAOA, con el fin de medir la eficacia de los resultados obtenidos entre métricas distintas, se han realizado los siguientes tipos de pruebas:
+Debido a la naturaleza probabilística de la computación cuántica, toda ejecución de un circuito se debe realizar varias veces, para obtener una aproximación de la probabilidad de los valores que describen el estado del sistema.
+Así, cuando se habla del resultado de la ejecución de un circuito cuántico, como el mostrado en la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}},
+se refiere a probabilidades asociadas a cada estado de la base computacional, que han sido calculadas mediante sucesivas ejecuciones del programa.
+La cantidad de veces que se ejecuta cada circuito, viene dado por el número de \textit{muestras} (\textit{shots}).
 
-Debido a la naturaleza probabilística de la computación cuántica, toda ejecución de un circuito se debe realizar varias veces, para obtener una aproximación de la probabilidad de los valores del estado.
-Así, cuando se habla del resultado de la ejecución de un circuito cuántico, como el mostrado en la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}},
-se refiere a probabilidades asociadas a cada valor, que han sido calculadas mediante sucesivas ejecuciones del programa.
-La cantidad de veces que se ejecuta cada programa, viene dado por las \textit{muestras} (\textit{shots}).
+Todas las ejecuciones de Qiskit, salvo en casos señalados, han sido ejecutadas en un simulador en local utilizando los métodos de \textit{Qiskit Runtime}.
+
+Para los resultados de QAOA, con el fin de medir la eficacia de distintas ejecuciones, se han utilizado las siguientes métricas:
 
 \begin{enumerate}
-\item\label{it:5-na} \textbf{NA/TE}:
-  Con este método se busca despreciar el ruido presente en cada ejecución.
+\item \textbf{NA/TE}:
+  Con esta métrica se busca despreciar el ruido presente en cada ejecución.
   Para ello se realizan \textit{n} ejecuciones distintas del algoritmo para un número \textit{p} de capas y se calcula el porcentaje de ejecuciones en los que se ha obtenido como resultado el camino óptimo del problema.
 
-  \begin{align*}
+  \begin{align}
     \textnormal{NA/TE} = \frac{\textit{NA}}{\textit{TE}}
-  \end{align*}
+  \end{align}
 
-  Donde \textit{NA} (número de aciertos) es la cantidad de ejecuciones en las que se ha encontrado el camino óptimo y \textit{TE} es el total de ejecuciones realizadas.
+  Donde \textit{NA} (número de aciertos) es la cantidad de ejecuciones en las que se ha encontrado el camino óptimo y $\textit{TE} = n$ es el total de ejecuciones realizadas.
 
   \paragraph{Ejemplo:}
-  Tomando como ejemplo de salida de QAOA la mostrada en la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} esto sumaría al cálculo de \textbf{NA/TE} $\frac{1}{n}$, ya que el camino óptimo es el obtenido en la mayor cantidad de muestras en la ejecución del circuito.
+  Tomando como ejemplo de salida de QAOA la mostrada en la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} esto sumaría al cálculo de \textbf{NA/TE} $\frac{1}{n}$, ya que el camino óptimo es el obtenido en la mayor cantidad de muestras en la ejecución del circuito.
   
-\item\label{it:5-mm} \textbf{MM/TE}:
+\item \textbf{MM/TE}:
 
   Lo que se busca con esta métrica es la media de veces que el camino óptimo aparece en la ejecución del circuito de QAOA\@.
 
   Como ya ha sido explicado, al ejecutar el circuito de QAOA en el último paso con $(\gamma_{opt}, \beta_{opt})$ el resultado obtenido tendrá tantos valores como \textit{muestras} tenga la instrucción (por defecto 1024)
 
-  Es el caso de gráficas como la de la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}}
+  Es el caso de gráficas como la de la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}}
   en la que el eje vertical muestra la probabilidad aproximada de cada valor.
 
   De esta forma la estadística \textbf{MM/TE} se calcula como:
 
-  \begin{align*}
+  \begin{align}
     \frac{1}{\textit{TE}} \sum_{i = 1}^\textit{TE} (\textit{MM}_i)
-  \end{align*}
+  \end{align}
 
   Donde \textit{TE} es el total de ejecuciones y $\textit{MM}_i$ es la media de las muestras en las que se han encontrado el resultado óptimo en la ejecución $i$.
 
   \paragraph{Ejemplo:}
-  En la \textit{figura~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} la media de muestras del óptimo sería 0.59.
+  En la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} la media de muestras del óptimo sería $\textit{MM}_i = 0.59$.
   
 \item \textbf{Función gamma:}
-  Se ha utilizado para comprobar la forma general que tiene la función \textit{execute\_circuit}, a minimizar por el optimizador clásico.
-  Para ello se han realizado circuitos de una sola capa y se ha mantenido el parámetro \(\beta=1\).
-  Se ha decidido así porque dicho parámetro se encarga del ángulo de rotación de los operadores \(\sigma_{x}\), de construcción trivial en comparación con los operadores dependientes de \(\gamma\).
-  % TODO: Referenciar punto del apéndice donde se hable sobre la construcción de las puertas Rx y Rz
-  Al variar \(\gamma\) y graficar la función resultante se puede intuir la probabilidad de encontrar mínimos locales en lugar del mínimo global.
+  Se ha utilizado para comprobar la forma general que tiene la función \textit{execute\_circuit()}, a minimizar por el optimizador clásico.
+  Esta función pretende representar cómo varía el valor esperado del algoritmo con la variación del parámetro $\gamma_0$ para una versión del circuito correspondiente con $p = 1$.
+  Para esto se ha utilizado la función \textit{execute\_circuit()}, tomando un $\beta = 1$ constante y calculando el resultado para distintos valores de $\gamma$.
+  Se ha elegido mantener $\beta$ constante porque, como ha sido explicado en la definición del hamiltoniano de mezcla (\textit{sección~\ref{sec:3-problem_y_mixer_hamiltonian}}), este sirve solo para convertir los cambios de fase generados por el hamiltoniano del problema en cambios en la amplitud, pero se ve afectado por la definición del problema específico a resolver.
+
+  Al variar \(\gamma\) y graficar la función resultante se puede intuir cómo de posible es encontrar mínimos locales de energía en lugar del mínimo global.
   Esto se traduce como la posibilidad de encontrar un resultado subóptimo para el problema, es decir, que el algoritmo falle.
 \end{enumerate}
 
-A continuación se mostrarán los resultados de ejecución utilizando ambos paradigmas, esto es, QAOA y Quantum Annealing, además de explorar el rendimiento de las ejecuciones en Qiskit variando los métodos para construir la función de coste.
+Estos tres métodos han sido implementados en Python, en los mismos cuadernos de Jupyter donde se encuentran las implementaciones del algoritmo QAOA\cite{codigo_tfg}.
 
-Para las ejecuciones de QAOA se utilizarán dos métodos distintos:
-una implementación basada en los cálculos desarrollados en la \textit{sección~\ref{CAP:DESARROLLO}} y un enfoque de caja negra, en el que se empleará la función \textit{QAOAAnsatz} de \textit{Qiskit} para generar un circuito cuántico de manera automática.
-Este último método se utilizará para comparar con el primero, para así verificar el funcionamiento de la implementación realizada.
+A continuación se mostrarán los resultados de ejecución utilizando ambos algoritmos, esto es, QAOA y Quantum Annealing, además de explorar el rendimiento de las ejecuciones en Qiskit variando los métodos para construir la función de coste.
 
-\section{MAX-CUT en grafo de 4 aristas}{resultados/tutorial_qiskit.tex}
+% Para las ejecuciones de QAOA se utilizarán dos métodos distintos:
+% una implementación basada en los cálculos desarrollados en la \textit{sección~\ref{CAP:DESARROLLO}} y un enfoque de caja negra, en el que se empleará la función \textit{QAOAAnsatz} de \textit{Qiskit} para generar un circuito cuántico de manera automática.
+% Este último método se utilizará para comparar con el primero, para así verificar el funcionamiento de la implementación realizada.
+
+\section{Max-cut en grafo de 4 aristas}{resultados/tutorial_qiskit.tex}
 
 \section{Camino más corto en grafo de 4 nodos\label{sec:5-primer_grafo}}{resultados/primer_grafo.tex}
 

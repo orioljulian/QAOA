@@ -1,11 +1,14 @@
-\documentclass[epsbased,copyright,final,printable,covers,extendedindex,firstnumbered,tfg,gnuplot]{tfgtfmthesisuam}
+\documentclass[epsbased,copyright,final,printable,covers,extendedindex,firstnumbered,tfg,lof,lot]{tfgtfmthesisuam}
 \usepackage{needspace}
 \usepackage{mdwlist}
 \usepackage{amsmath}  % matrix/pmatrix y align
 \usepackage{physics}
+\usepackage{url}  % Urls y paths
 \usepackage{enumitem}
 \usepackage{graphicx}  % includegraphics
 \usepackage{amssymb}  % R (Real numbers)
+\usepackage{listings}  % Codigo
+
 \setlist[enumerate]{label*=\arabic*.}
 
 \advisor{Francisco Gómez Arribas}
@@ -25,8 +28,8 @@
 \resumenfile{inicio/resumen}
 \abstractfile{inicio/abstract}
 
-\keywords{Algunas}
-\palabrasclave{Otras}
+\palabrasclave{Computación cuántica, Problemas QUBO, Ising, QAOA, Quantum annealing, optimización cuadrática, Camino más corto, Max cut}
+\keywords{Quantum computing, QUBO problems, Ising, QAOA, Quantum annealing, quadratic optimization, Shortest path, Max cut}
 
 \coverdata{
   Escuela Politécnica Superior \\
@@ -61,9 +64,12 @@
 
 \appendix
 
-\chapter{Ejemplo de aplicación de operadores de QAOA\label{CAP:EJEMPLO_QAOA}}{apendice/ejemplo_qaoa.tex}
-\chapter{Desarrollo de operaciones}{apendice/operaciones.tex}
+\chapter{Ejemplo de aplicación de operadores de qaoa\label{CAP:EJEMPLO_QAOA}}{apendice/ejemplo_qaoa.tex}
 \chapter{Paso de función clásica a hamiltoniano\label{CAP:F_CLASICA_A_HAMILTONIANO}}{apendice/f_clasica_a_hamiltoniano.tex}
+\chapter{Desarrollo de operaciones}{apendice/operaciones.tex}
+\chapter{Grafo de camino más corto {--} de función clásica a hamiltoniano del problema\label{CAP:DESARROLLO_ZHIQIANG_ISING}}{apendice/desarrollo_zhiqiang_ising.tex}
+\chapter{Modificaciones de qaoa para el camino más corto\label{CAP:OTRAS_SOLUCIONES}}{apendice/resultados_modificaciones_shortest_path.tex}
+\chapter{Repositorio de código\label{CAP:github}}{apendice/github.tex}
 
 \end{document}
 

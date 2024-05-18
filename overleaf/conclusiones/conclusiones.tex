@@ -1,10 +1,55 @@
-En este capítulo de la memoria se darán unas conclusiones sobre el aprendizaje que ha supuesto este proyecto y un planteamiento de trabajo futuro para mejorar la aplicación creada.
+En este capítulo de la memoria se darán unas conclusiones sobre el aprendizaje que ha supuesto este proyecto y un planteamiento de trabajos futuros en los que aplicar estos algoritmos.
 
 \paragraph{Conclusiones}
-La principal idea de este proyecto ha sido crear un cortafuegos muy sencillo de utilizar para el usuario y con la capacidad de que un desarrollador pueda incorporar sus propias huellas y configuraciones fácilmente. Esto puede ser complejo ya que hay que tener especial cuidado con el código que se inserta en el núcleo, una parte crítica del sistema, y se le añade la dificultad de comunicar la aplicación del núcleo con la del espacio usuario y con la interfaz escrita en un lenguaje de alto nivel.
-\\La elaboración de este proyecto me ha permitido apreciar las diferentes fases de un proyecto de programación, como la investigación, el diseño y la metodología de desarrollo para construir una aplicación funcional en el menor tiempo posible. También he comprendido la importancia del uso de una metodología ágil con el fin de mejorar la calidad y productividad dividiendo el proyecto en pequeñas partes.
-\\Esta aplicación combina el bajo nivel con el alto nivel y usa tecnologías novedosas, como XDP, que hace que los errores no sean tan fáciles de resolver debido al pequeño tamaño de la comunidad de desarrolladores y las constantes actualizaciones al tratarse de una tecnología nueva.
-\\Por último, se ha construido una aplicación cortafuegos para Linux completamente funcional y que cumple con todos los requisitos funcionales y no funcionales. Esta aplicación es capaz de utilizar una tecnología novedosa a bajo nivel, en el núcleo de Linux y, utilizando el alto nivel proporciona una interfaz sencilla para el usuario y facilita el desarrollo de soluciones de otros programadores mediante el uso de una API REST. El diseño de la interfaz se adapta al tamaño de la pantalla.
+Se ha hecho una comparativa entre algoritmos de optimización en dos tecnologías de computación cuántica.
+De los resultados obtenidos se concluye que la tecnología de \textit{quantum annealing} actualmente presenta una mayor facilidad para la implementación inmediata de los problemas abordados, además de una mayor tasa de obtención del óptimo.
+\\
+En D-Wave la implementación de problemas de optimización es más directa.
+Se puede realizar una ejecución del algoritmo introduciendo la función de coste y restricciones del problema en el formato adecuado, ya que la aplicación del algoritmo es un sistema de caja negra.
+\\
+Los resultados en D-Wave no muestran incongruencias, ya que todos los resultados inválidos quedan claramente diferenciados en la baja cantidad de muestras en las que se obtienen.
+Dentro de los caminos válidos, aunque todos resultan con una cantidad de muestras altas, el camino óptimo se diferencia por su menor energía, la cual es equivalente al coste de la función.
+
+Las principales aportaciones de este trabajo han sido:
+
+\begin{itemize}
+\item Realizar una explicación completa sobre el funcionamiento e implementación necesarios para resolver un problema de optimización combinatoria cualquiera utilizando QAOA\@.
+  
+\item Desarrollar un código en el que se sistematiza la implementación del algoritmo partiendo de una función de coste cualquiera en formato Ising.
+
+\item Comparar ejecuciones en ordenadores reales tanto de D-Wave como de IBM-Q.
+\end{itemize}
+
+De estas aportaciones también se concluye que la comparación entre la implementación de QAOA de este TFG, realizada desde cero, ofrece unos resultados similares a la implementación de QAOA de las librerías de Qiskit, denominada QAOAAnsatz(), por lo que tanto la explicación teórica del algoritmo como el código realizados en este trabajo son correctos.
+\\
+Tanto por la similitud entre estas dos instancias de QAOA, como por las formas presentadas por las respectivas funciones $\gamma$, se concluye que las diferencias encontradas en los problemas del camino más corto se deben a la naturaleza del problema.
+
+Al realizar el estudio detallado, reproduciendo resultados de artículos publicados, se han encontrado diferencias que han sido discutidas con los autores:
+
+\begin{itemize}
+\item Para el problema de la \textit{sección~\ref{sec:4-tutorial_de_qiskit}} se concluye que hay una diferencia en los circuitos ansatz de QAOA entre el desarrollo sistemático implementado en este TFG y el resultado mostrado en la página web tutorial de Qiskit\cite{qiskit_tutorial_antiguo}.
+  Se ha justificado el motivo por el que el rendimiento del algoritmo no se ve afectado, ya que ambos circuitos parametrizados generan los mismos resultados.
+  El motivo de este cambio llevado a cabo en Qiskit es, muy probablemente, mostrar un circuito simétrico donde todos los operadores tengan una misma rotación, aunque eso se traduzca en una inexactitud matemática porque la energía del sistema no coincida con el valor correspondiente en la función de coste.
+
+\item En el grafo resuelto en la \textit{sección~\ref{sec:4-primer_grafo}} se han encontrado discrepancias entre la implementación realizada en este trabajo y el circuito mostrado en el artículo\cite{multi-objective_routing_optimization} del que se ha obtenido el problema.
+  En el circuito mostrado en la fuente del problema, existen operadores que no dependen de ningún parámetro cuando según el desarrollo mostrado en este trabajo y el circuito generado por la función de Qiskit, \textit{QAOAAnsatz()}, sí existe dicha dependencia.
+  Por ello, en el artículo se incurre en una imprecisión, que ha sido debidamente notificada a los autores, y que han confirmado vía correo electrónico.
+\end{itemize}
+
 
 \paragraph{Trabajo futuro}
-En cuanto al trabajo futuro se pretende traducir la aplicación a otros idiomas, como el inglés, con el fin de que pueda ser utilizada por más personas. Por otro lado, se quiere añadir al repositorio GitHub las huellas y soluciones aportadas por otros desarrolladores para que puedan ser utilizadas por toda la comunidad. También es posible mejorar la aplicación creando nuevas soluciones de detección de huellas, actualizándola y mejorando su compatibilidad con todos los sistemas operativos.
+Este TFG puede suponer un punto de partida para explorar la aplicación de QAOA a otros tipos de problemas cuya resolución eficiente pueda resultar de utilidad.
+\\
+También se puede estudiar el rendimiento de problemas de optimización no orientados a grafos, para realizar una comparación entre estos y los problemas resueltos en este trabajo.
+\\
+Como caso representativo de estas dos propuestas, es interesante resolver la versión de optimización del problema de satisfacibilidad booleana, denominado problema de satisfacibilidad máxima, ya que es un caso de problema NP-completo en el que canónicamente se representan otros problemas pertenecientes a ese conjunto.
+
+Para mejorar los resultados obtenidos en QAOA se pueden desarrollar procedimientos post-ejecución, en los que se minimicen los resultados no deseados en la salida del algoritmo, de tal forma que aumenten las muestras asociadas a resultados de baja energía y disminuyan para resultados de alta energía.
+\\
+Otras modificaciones de QAOA que pueden otorgar mejores resultados son utilizar un hamiltoniano de mezcla diferente al dado por el artículo original del algoritmo o aplicar estrategias diferentes para determinar los parámetros de entrada $(\gamma, \beta)$ óptimos en lugar del optimizador clásico \textit{COBYLA}.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

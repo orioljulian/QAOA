@@ -1,0 +1,43 @@
+En esta sección se muestra cómo se puede realizar la conversión de la función de coste en formato QUBO, definida en la \textit{sección~\ref{sec:4-zhiqiang}}, al hamiltoniano del problema correspondiente.
+
+Para el paso de la función de la versión QUBO a versión Ising se debe realizar un cambio de variable $X_{ij} \rightarrow \frac{1 - z_k}{2}$.
+Con este paso se hará que, como las variables $X_{ij}$ toman valores $\{0, 1\}$, las variables $z_k$ tomen valores $\{-1, 1\}$.
+Además cada variable $z_k$ corresponderá al qubit \textit{k}-ésimo.
+La correspondencia entre variables $X_{ij}$ y $z_k$ es la siguiente:
+$X_{01}$ corresponde con $z_0$,
+$X_{02}$ corresponde con $z_1$,
+$X_{13}$ corresponde con $z_2$ y
+$X_{23}$ corresponde con $z_4$.
+
+La versión Ising de la función de coste queda de esta forma:\footnote{Dado $z_i \in \{-1, 1\}$, se cumple $z_i^2 = 1$}
+
+\begin{align}
+  g(z) &= 3\frac{1 - z_0}{2} + 6\frac{1 - z_1}{2} + 9\frac{1 - z_2}{2} + 1\frac{1 - z_3}{2} + \nonumber \\
+       &+ P{(\frac{1 - z_0}{2} + \frac{1 - z_1}{2} - 1)}^2 + P{(\frac{1 - z_2}{2} + \frac{1 - z_3}{2} - 1)}^2 + \nonumber \\
+       &+ P{(\frac{1 - z_0}{2} - \frac{1 - z_2}{2})}^2 + P{(\frac{1 - z_1}{2} - \frac{1 - z_3}{2})}^2 = \nonumber \\
+  = &  -1.5z_0 - 3z_1 - 4.5z_2 - 0.5z_3 + \nonumber \\
+       &+ 10*(z_0z_1 - z_0z_2 - z_1z_3 + z_2z_3) + 49.5
+\end{align}
+
+Al igual que para los problemas anteriores (explicado en la \textit{sección~\ref{sec:3-operador_c}} y demostrado en la \textit{sección~\ref{CAP:F_CLASICA_A_HAMILTONIANO}} del apéndice), en el operador $C$ del hamiltoniano del problema cada variable $z_i$ corresponderá a un operador Pauli-Z en el qubit $i$.
+\\
+El operador $C$ toma por lo tanto el siguiente valor:
+
+\begin{align}
+  C &= -1.5\sigma^z_0 - 3\sigma^z_1 - 4.5\sigma^z_2 - 0.5\sigma^z_3 + \nonumber \\
+    &+ 10*(\sigma^z_0\sigma^z_1 - \sigma^z_0\sigma^z_2 - \sigma^z_1\sigma^z_3 + \sigma^z_2\sigma^z_3) + 49.5
+\end{align}
+
+De forma inmediata se puede construir el hamiltoniano del problema:
+
+\begin{align}
+  &U(C, \gamma) = \exp(-i \gamma C) = \nonumber \\
+  &= Rz_0(-1.5 * 2\gamma) \cdot Rz_1(-3 * 2\gamma) \cdot Rz_2(-4.5 * 2\gamma) \cdot Rz_3(-0.5 * 2\gamma) \cdot \nonumber \\
+  &\cdot Rz_0z_1(10 * 2\gamma) \cdot Rz_0z_2(-10 * 2\gamma) \cdot Rz_1z_3(-10 * 2\gamma) \cdot Rz_2z_3(10 * 2\gamma)
+\end{align}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:
