@@ -1,0 +1,160 @@
+En esta sección se muestra una breve documentación sobre la ejecución de programas tanto en Qiskit como en D-Wave.
+
+\section{Qiskit}
+
+Las librerías de Qiskit parecen encontrarse todavía en fases tempranas de su desarrollo, por lo que siguen sufriendo cambios en los métodos para ejecutar circuitos.
+Por esto es necesario utilizar las mismas versiones de Qiskit, ya que en otro caso podría haber discrepancia en las funciones.
+
+\begin{table}{}{Versiones de Python para Qiskit}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Paquete}    & \textbf{Versión} \\ \hline
+    qiskit              & 0.45.1           \\
+    qiskit-ibm-runtime  & 0.17.0           \\
+    qiskit-ibm-provider & 0.8.0            \\
+    qiskit-aer          & 0.13.2           \\
+    qiskit-terra        & 0.45.1           \\
+    \hline
+  \end{tabular}
+\end{table}
+
+Concretamente se emplea el entorno de \textit{Qiskit Runtime}, que es el más nuevo hasta la fecha.
+
+\paragraph{Ejemplo de ejecución en simulador}
+
+\begin{lstlisting}[language=Python,label=cod:8-ejecucion_qiskit_simulador,caption={Ejemplo de ejecución en simulador de Qiskit},style=numbered]
+from qiskit import QuantumCircuit
+from qiskit.primitives import Sampler
+from qiskit.visualization import plot_histogram
+
+shots = 1024
+sampler = Sampler(options={"shots": shots})
+
+# Construccion de circuito con 2 qubits
+qc = QuantumCircuit(2)
+qc.h(0)           # Aplicar puerta Hadamard al qubit 0
+qc.cnot(0, 1)     # Aplicar puerta X con 0 como qubit de control y 1 como objetivo
+qc.measure_all()  # Instrucción para medir
+
+result = sampler.run(qc).result()  # Ejecutar circuito
+
+probabilities = result.quasi_dists[0]  # Resultados obtenidos en la ejecución
+# {0: 0.51, 3: 0.49}S
+
+quasi_probabilities = probabilities.binary_probabilities()
+# {00: 0.51, 11: 0.49}
+
+plot_histogram(quasi_probabilities)
+\end{lstlisting}
+
+Como primer paso un circuito debe ser construido.
+Una vez especificada la cantidad de qubits (línea 9 del \textit{código~\ref{cod:8-ejecucion_qiskit_simulador}}) a incluir se aplican puertas cuánticas explícitamente (líneas 10{-}12 del \textit{código~\ref{cod:8-ejecucion_qiskit_simulador}}).
+
+Para ejecutar en un simulador existen las llamadas primitivas \textit{qiskit.primitives.Sampler} y \textit{qiskit.primitives.Estimator}, que no requieren de la conexión a un computador cuántico real para ser ejecutados:
+\begin{itemize}
+\item \textit{Sampler}: Utilizado para ejecutar el circuito cuántico un número (\textit{shots}) de veces y mostrar los resultados.
+  Esto es equivalente a decir que se calcula $C\ket{0 \ldots 0}$, donde $C$ es equivalente a \textit{qc} en el código.
+  
+\item \textit{Estimator}: Calcula el valor esperado de un circuito parametrizado (ansatz) y un hamiltoniano (denominado observable).
+  Como ya ha sido explicado en la definición de QAOA, el valor esperado se calcula como:
+
+  \begin{align}
+    \langle \psi(\theta) \rvert C \lvert \psi(\theta) \rangle
+  \end{align}
+
+  Donde $\ket{\psi(\theta)}$ es el estado final del circuito parametrizado y $C$ es el hamiltoniano.
+
+  En el trabajo este objeto no ha sido utilizado, ya que el valor esperado necesario en QAOA (\textit{paso~\ref{it:3-algoritmo_valor_esperado}} del algoritmo) se puede calcular de manera clásica, a partir de la función de coste.
+\end{itemize}
+
+El circuito se ejecuta inicializando un objeto \textit{Sampler} con los parámetros necesarios, como el número de muestras (\textit{shots}).
+La ejecución se realiza en la línea 16 y el resto de instrucciones son para obtener los datos en un diccionario ``\{bits: probabilidades\}'' para obtener su histograma con \textit{qiskit.visualization.plot\_histogram}.
+
+
+\paragraph{Ejemplo de ejecución en ordenador real}
+
+\begin{lstlisting}[language=Python,label=cod:8-ejecucion_qiskit_real,caption={Ejemplo de ejecución en computador real de Qiskit},style=numbered]
+from qiskit_ibm_runtime import QiskitRuntimeService
+from qiskit_ibm_runtime import QiskitRuntimeService, Sampler, Session, Options
+
+# Guardar token asociado a la cuenta de Qiskit
+# Solo se tiene que realizar una vez en cada máquina
+QiskitRuntimeService.save_account(channel="ibm_quantum", token="token_ejemplo",
+                                    overwrite=True)
+
+QiskitRuntimeService.active_account(QiskitRuntimeService(channel="ibm_quantum"))
+service = QiskitRuntimeService(channel="ibm_quantum")
+
+quantum_computer = "ibmq_qasm_simulator"     # Nombre del ordenador al que conectarse
+backend = service.backend(quantum_computer)  # Conexión a dicho ordenador
+
+options = Options()  # Objeto opciones para Sampler y Estimator
+options.execution.init_qubits = True  # Inicializar qubits a 0
+options.execution.shots = 512  # Número de muestras
+
+qc = QuantumCircuit(2)
+qc.h(0)
+qc.cnot(0, 1)
+qc.measure_all()
+
+with Session(backend=backend, service=service) as session:
+    sampler = Sampler(session=session, options=options)
+    quasi_probabilities = sampler.run(qc).result().quasi_dists[0].binary_probabilities()
+    quasi_probabilities  # Resultado
+\end{lstlisting}
+
+Para poder realizar una conexión con un ordenador cuántico se debe introducir el token de \textit{Qiskit} generado al crear una cuenta.
+Esto se hace con la función \textit{qiskit\_ibm\_runtime.QiskitRuntimeService.save\_account()}, que en Linux genera un fichero \path{~/.qiskit/qiskit-ibm.json}.
+\\
+Tanto para la ejecución en un simulador como en un ordenador real se pueden usar unos objetos \textit{Sampler} y \textit{Estimator} equivalentes, solo que para el caso del simulador se obtienen de la librería \textit{qiskit.primitives} y en el caso de conectarse a un computador se obtienen de \textit{qiskit\_ibm\_runtime}.
+\\
+Tras conectarse a un ordenador concreto con \textit{qiskit\_ibm\_runtime.QiskitRuntimeService.backend()} se debe crear un entorno \textit{qiskit\_ibm\_runtime.Session()}, dentro del cual las ejecuciones se realizan de la forma habitual.
+
+
+\section{D-Wave}
+
+Los paquetes utilizados son los siguientes:
+
+\begin{table}{}{Versiones de Python para D-Wave}
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Paquete} & \textbf{Versión} \\ \hline
+    dwave-ocean-sdk  & 6.9.0            \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{lstlisting}[language=Python,label=cod:8-ejecucion_qiskit,caption={Ejemplo de ejecución en simulador de Qiskit},style=numbered]
+from dimod import BinaryQuadraticModel
+# Inicializar modelo
+bqm = BinaryQuadraticModel("BINARY")
+
+# Función de coste f(x, y) = 2x + 3y
+peso = {"x": 2, "y": 3}
+for variable in ["x", "y"]:
+    bqm.add_variable(variable, peso[variable])
+
+# Añadir restriccion: 3x + 2y - 9 = 0
+bqm.add_linear_equality_constraint([("x", 3), ("y", 2)], constant=-9, lagrange_multiplier=P)
+
+# Execute program
+sampler = EmbeddingComposite(DWaveSampler())
+sampleset = sampler.sample(bqm, num_reads=1024)
+print(sampleset)
+\end{lstlisting}
+
+En D-Wave el objeto \textit{dimod.BinaryQuadraticModel} (línea 3 del \textit{código~\ref{cod:8-ejecucion_qiskit}}) describe un modelo que sirve para resolver funciones de coste en versión QBO o Ising con restricciones.
+En este caso la inicialización a ``BINARY'' quiere decir que es tipo QBO, en el otro caso sería ``SPIN''.
+
+Tanto la introducción de la función de coste como la introducción de restricciones se realizan de formas similares a las líneas 8 y 11 del \textit{código~\ref{cod:8-ejecucion_qiskit}}.
+El argumento \textit{lagrange\_multiplier} corresponde con el modificador de Lagrange, utilizado para pasar de modelo QBO a QUBO\@.
+
+Las sentencias posteriores (líneas 14, 15 del \textit{código~\ref{cod:8-ejecucion_qiskit}}) ejecutan el modelo creado en un ordenador de D-Wave, con una cantidad de muestras \textit{num\_reads}.
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../tfgtfmthesisuam"
+%%% End:

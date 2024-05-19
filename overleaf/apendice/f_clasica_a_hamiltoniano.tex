@@ -9,24 +9,24 @@ Esta sección está destinada a demostrar el paso de una función clásica $f(x)
 
   \item $\sigma_z$: Operador Pauli-Z.
 
-    \begin{align*}
+    \begin{align}
       \sigma^z = \begin{bmatrix}
         1 & 0 \\
         0 & -1
       \end{bmatrix}
-    \end{align*}
+    \end{align}
   \end{itemize}
 \end{itemize}
 
 Concretamente se pretende demostrar que sustituyendo las variables $z_i$ en $C(z)$ por puertas $\sigma^z$ en el qubit \textit{i} se puede obtener el operador $C$ tal que se cumpla:
 
-\begin{align*}
+\begin{align}
   f(x) = \bra{x} C \ket{x}, \forall{x \in {\{0, 1\}}^n}
-\end{align*}
+\end{align}
 
 Esto es equivalente a decir que el operador $C$ es diagonal, con valores correspondientes a la función clásica $f(x)$:
 
-\begin{align*}
+\begin{align}
   &C \ket{x} = \begin{bmatrix}
     C(0 \ldots 00) & 0          & 0  & 0 \\
     0          & C(0 \ldots 01) & 0  & 0 \\
@@ -40,20 +40,20 @@ Esto es equivalente a decir que el operador $C$ es diagonal, con valores corresp
     \vdots \\
     0
   \end{bmatrix} = f(x) \ket{x} & \forall x \in {\{0, 1\}}^n
-\end{align*}
+\end{align}
 
 Los autovalores de $\sigma^z$ son $-1, +1$, y sus respectivos autovectores la base computacional:
 
-\begin{align*}
-  \sigma^z\ket{0} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} = +1*\ket{0} \\
+\begin{align}
+  \sigma^z\ket{0} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 0 \end{bmatrix} = +1*\ket{0} \nonumber \\
   \sigma^z\ket{1} = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix} \cdot \begin{bmatrix} 0 \\ 1 \end{bmatrix} = -1*\ket{1}
-\end{align*}
+\end{align}
 
 Esto puede ser generalizado como:
 
-\begin{align*}
+\begin{align}
   \sigma^z\ket{x} = {(-1)}^x\ket{x}, x \in \{0, 1\}
-\end{align*}
+\end{align}
 
 En las funciones de coste utilizadas existen dos términos distintos en los que pueden aparecer variables $z_i$:
 \begin{itemize}

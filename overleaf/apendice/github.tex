@@ -13,9 +13,9 @@ El código ejecutado se encuentra en el subdirectorio \path{codigo/dwave}, separ
 \paragraph{Ejecuciones en Qiskit}
 
 Se ha proporcionado un fichero \path{requirements_qiskit.txt} con los paquetes necesarios para realizar ejecuciones de QAOA\@.
-También es importante realizar las ejecuciones en un entorno con Python $\le$ 3.8 (solo ha sido probado para Python 3.8), ya que para versiones superiores existen errores en las librerías de Qiskit.
+También es recomendable realizar las ejecuciones en un entorno con Python3 $\le$ 3.8 (solo ha sido probado para Python 3.8), ya que para versiones superiores surgieron errores en las ejecuciones de las librerías de Qiskit.
 \\
-Para realizar ejecuciones en ordenadores reales se debe generar un token de Qiskit en \url{https://quantum.ibm.com}, pero para cualquier otra ejecución en simulador no es necesario, ya que pueden ser ejecutadas en la máquina local.
+Para realizar ejecuciones en computadores reales se debe generar un token de Qiskit en \url{https://quantum.ibm.com}, pero para cualquier otra ejecución en simulador no es necesario, ya que pueden ser ejecutadas en la máquina local.
 
 Para las ejecuciones en Qiskit se han utilizado los siguientes cuadernos, todos presentes en el subdirectorio \path{codigo/}:
 
@@ -23,7 +23,7 @@ Para las ejecuciones en Qiskit se han utilizado los siguientes cuadernos, todos 
 \item \path{print_circuits.ipynb}: Utilizado para obtener las imágenes de los circuitos presentadas en este trabajo.
   Se ha separado de otras secciones porque por defecto un circuito cuántico no muestra los parámetros $\gamma$ y $\beta$, sino coeficientes ya resueltos (es decir, para $\gamma = 1.5$ en un operador $Rz(\gamma*2)$ mostraría $Rz(3)$).
 
-\item \path{grafo-generico/shortest_path_qaoa.ipynb} y \path{max-cut-qiskit/max_cut_qaoa.ipynb}: Estos dos cuadernos contienen la implementación de QAOA, generación de estadísticas y ejecuciones en ordenadores reales.
+\item \path{grafo-generico/shortest_path_qaoa.ipynb} y \path{max-cut-qiskit/max_cut_qaoa.ipynb}: Estos dos cuadernos contienen la implementación de QAOA, generación de estadísticas y ejecuciones en computadores reales.
   
   Ha sido separado en dos ficheros distintos, según el tipo de problema, para diferenciar las modificaciones en las pruebas y los dibujos de grafos, pero las ejecuciones en circuitos cuánticos y generación de estadísticas son idénticas.
   

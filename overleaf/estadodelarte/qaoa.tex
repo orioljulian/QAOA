@@ -1,10 +1,10 @@
-La idea fundamental de QAOA es partir de un hamiltoniano $C$ con los valores de una función de coste $f(x)$ en su diagonal\ref{CAP:HAGUSIASDGJ} es decir:
+La idea fundamental de QAOA es partir de un hamiltoniano $C$ con los valores de una función de coste $f(x)$ en su diagonal (sección~\ref{sec:8-concepto-diagonal}) es decir:
 
 \begin{align}
   \forall{x \in {\{0, 1\}}^{n}}, f(x) = \bra{x}C\ket{x}
 \end{align}
 
-De esta forma al medir el estado fundamental\ref{CAP:HAGUSIASDGJ} del sistema, es decir, el estado de mínima energía, se obtendrá el valor $x$ para el que $f(x)$ es mínimo.
+De esta forma al medir el estado fundamental (sección~\ref{sec:8-concepto-estado_fundamental}) del sistema, es decir, el estado de mínima energía, se obtendrá el valor $x$ para el que $f(x)$ es mínimo.
 \\
 No obstante el operador $C$ no es necesariamente unitario, la cual es una propiedad necesaria de un operador para ser implementado en un sistema cuántico\footnote{
   Todo operador lineal en un sistema cuántico debe ser unitario para que el sistema sea coherente y cumpla que $\sum_{\ket{x}} {P(\ket{x})} = 1$,
@@ -23,7 +23,7 @@ Siguiendo con la notación del artículo original~\cite{qaoa_paper_original}, en
 \begin{itemize}
 \item El primer operador es $U(C, \gamma) = e^{-i \gamma C}$, denominado hamiltoniano del problema (\textit{problem hamiltonian}).
 
-  Dado un estado con una serie de valores posibles (correspondientes a los estados de la base computacional) este operador separa las fases relativas\ref{CAP:hbasgagbjk} de dichos valores.
+  Dado un estado con una serie de valores posibles (correspondientes a los estados de la base computacional) este operador separa las fases relativas (\textit{sección~\ref{sec:8-concepto-fase_relativa}}) de dichos valores.
   De esta forma al aumentar $\gamma$ la fase de los valores con menor coste aumenta y la de los valores con mayor coste disminuye.
   Esto no tiene ningún efecto en los resultados, ya que modificar la fase relativa manteniendo el eje de medición no modifica la probabilidad de medición de estos valores.
 

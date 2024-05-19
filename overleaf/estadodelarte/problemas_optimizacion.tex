@@ -20,7 +20,7 @@ Una estrategia infalible para resolver un problema de este tipo es aplicar la fu
 Este es un método muy costoso, ya que la complejidad crece de forma exponencial con $n$.
 De la misma forma, si se precomputaran todos los valores posibles de la función de coste la memoria aumentaría de forma exponencial, ya que para cadenas de $n$ bits se necesitarían almacenar $2^n$ valores distintos.
 \\
-Por naturaleza, todo circuito cuántico de $n$ qubits tiene una matriz asociada de tamaño $2^n \times 2^n$ denominada el hamiltoniano, que describe la energía del sistema\ref{CAP:ASHUIDGHIASDG}.
+Por naturaleza, todo circuito cuántico de $n$ qubits tiene una matriz asociada de tamaño $2^n \times 2^n$ denominada el hamiltoniano, que describe la energía del sistema (\textit{sección~\ref{sec:8-concepto-energia}}).
 De esta forma si se construye un circuito cuyo hamiltoniano tenga en su diagonal los valores de una función de coste clásica se pueden lograr almacenar los $2^n$ valores distintos con tan solo $n$ qubits.
 De esta forma es posible definir de forma implícita la función de coste del problema y revertir ese incremento exponencial de precomputar los valores.
 \\

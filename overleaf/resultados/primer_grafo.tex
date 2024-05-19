@@ -10,7 +10,7 @@ Para ello se ha tomado el circuito parametrizable incorrecto, mostrado en la \te
 La prueba de la igualdad entre la implementación propia y la del artículo se encuentra en que, empleando los parámetros $\beta = 0.28517317$ y $\gamma = -5.05969577$ dados como óptimos, se obtiene un gráfico muy similar al del artículo (\textit{fig~\ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}}).
 El nivel de precisión dado en los parámetros es superior al requerido, ya que con una precisión de 3 o 4 decimales se obtienen los mismos resultados.
 
-\begin{figure}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} comparación entre resultados]{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}{Comparación entre resultado de QAOA obtenido y resultado del artículo\cite{multi-objective_routing_optimization}}
+\begin{figure}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} comparación entre resultados]{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}{Comparación entre resultado de QAOA obtenido y resultado del artículo\cite{multi-objective_routing_optimization}}
   \subfigure{Resultado del artículo\cite{multi-objective_routing_optimization}}{
     \centering
     \includegraphics[width=0.42\textwidth]{primer-grafo/sin_restriccion_extra/primer_paper_orig_resultado.png}
@@ -23,7 +23,7 @@ El nivel de precisión dado en los parámetros es superior al requerido, ya que 
 
 De esta forma, se asume que los resultados del artículo deberían ser equivalentes a los obtenidos en esta instancia del algoritmo.
 
-\begin{table}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} solución del artículo]{tab:5-primer-paper-aer_estadisticas}{Resultados de la ejecución de la versión de QAOA del artículo\cite{multi-objective_routing_optimization}}
+\begin{table}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} solución del artículo]{tab:5-primer-paper-aer_estadisticas}{Resultados de la ejecución de la versión de QAOA del artículo\cite{multi-objective_routing_optimization}}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
@@ -45,7 +45,7 @@ Esto contrasta con los resultados con valores de capas más altos para los que, 
 Además, la gran diferencia entre los resultados dados por las estadísticas \textbf{NA/TE} y \textbf{MM/TE} denotan una gran cantidad de ruido al ejecutar el algoritmo, lo cual se corrobora viendo los resultados de ejecuciones concretas, como los dados en la \textit{fig.~\ref{fig:5-primer-grafo/sin restriccion extra/primer paper aer resultado}}.
 
 El resultado de la función gamma es el siguiente:
-\begin{figure}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} función gamma de la solución del artículo]{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}{Función gamma. Solución del artículo\cite{multi-objective_routing_optimization}}
+\begin{figure}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} función gamma de la solución del artículo]{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}{Función gamma de \textit{execute\_circuit()} (con $\beta = 1.0$ y variando $\gamma$). Solución del artículo\cite{multi-objective_routing_optimization}}
   \centering
   \includegraphics[scale=0.5]{primer-grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun.png}
 \end{figure}
@@ -64,7 +64,7 @@ Las estadísticas obtenidas en la \textit{tabla~\ref{tab:5-primer-mod_originales
 Se aprecia un comportamiento cíclico, similar al que se verá en los resultados del grafo de la \textit{tabla~\ref{tab:5-zhiqiang_mod-orig_estadisticas}}.
 La tendencia observada es que se mejoran las estadísticas hasta las 3 capas y luego disminuyen.
 
-\begin{table}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} implementación de QAOA]{tab:5-primer-mod_originales-aer_estadisticas}{Resultados de la ejecución de QAOA con la solución según el desarrollo del trabajo}
+\begin{table}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} implementación de QAOA]{tab:5-primer-mod_originales-aer_estadisticas}{Resultados de la ejecución de QAOA con la solución según el desarrollo del trabajo}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
@@ -81,17 +81,17 @@ La función gamma resultante se muestra en la \textit{fig.~\ref{fig:5-primer-mod
 Tiene un mínimo global menos claro con respecto a la función gamma de la versión del circuito del artículo, en la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}}.
 Además a diferencia de dicha gráfica, en esta no se aprecia periodicidad alguna.
 
-\begin{figure}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} función gamma de la implementación de QAOA]{fig:5-primer-mod_originales-gamma_fun}{Función gamma. Solución según el desarrollo del trabajo.}
+\begin{figure}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} función gamma de la implementación de QAOA]{fig:5-primer-mod_originales-gamma_fun}{Función gamma de \textit{execute\_circuit()} (con $\beta = 1.0$ y variando $\gamma$). Solución según el desarrollo del trabajo.}
   \centering
   \includegraphics[scale=0.5]{primer-grafo/sin_restriccion_extra/primer-paper-mod_originales-gamma_fun.png}
 \end{figure}
 
 Se han realizado modificaciones al algoritmo, mostradas y discutidas en la \textit{sección~\ref{sec:8-primer}} del apéndice.
 
-\subsection{Resultados con QAOA en ordenador cuántico real}
-Utilizando la herramienta \textit{Runtime} de Qiskit se han realizado ejecuciones del código para comprobar sus resultados en ordenadores reales.
+\subsection{Resultados con QAOA en computador cuántico real}
+Utilizando la herramienta \textit{Runtime} de Qiskit se han realizado ejecuciones del código para comprobar sus resultados en computadores reales.
 
-El funcionamiento ha consistido en obtener los parámetros $\gamma$ y $\beta$ en dichos ordenadores y después ejecutar una vez más en un simulador para obtener el resultado al problema.
+El funcionamiento ha consistido en obtener los parámetros $\gamma$ y $\beta$ en dichos computadores y después ejecutar una vez más en un simulador para obtener el resultado al problema.
 
 \subsubsection{\(p = 1\)}
 El código ha sido ejecutado con la imprecisión encontrada en el artículo\cite{multi-objective_routing_optimization} (\textit{sección~\ref{sec:4-primer_grafo_diferencias_con_el_articulo}}), tratando así de asemejarse a los resultados que ahí se exponen.
@@ -114,22 +114,22 @@ El otro valor a remarcar, \textit{nfev=$30$}, se refiere al número de llamadas 
 
 Los parámetros obtenidos, ejecutados en un simulador, dan el resultado de la fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}.
 
-\begin{figure}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} ejecución en simulador]{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}{Ejecución de $\gamma, \beta$ en simulador}
+\begin{figure}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} ejecución en simulador]{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}{Ejecución de $\gamma, \beta$ en simulador}
   \centering
   \includegraphics[scale=0.4]{primer-grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer.png}
 \end{figure}
 
 Esto indica que el motivo de obtener un resultado inesperadamente alto de la función se debe a la presencia de un camino, \textit{10001}, de coste elevado obtenido un gran número de veces. Este camino es costoso, con valor de 63, debido a que rompe varias restricciones de la función de coste.
 
-Estos mismos parámetros resultados de la ejecución en \textit{ibm\_nairobi} han sido ejecutados en el ordenador de \textit{ibm\_lagos}, dando los resultados de la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos}}.
+Estos mismos parámetros resultados de la ejecución en \textit{ibm\_nairobi} han sido ejecutados en el computador de \textit{ibm\_lagos}, dando los resultados de la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos}}.
 
-\begin{figure}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} ejecución en ordenador real]{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos}{Ejecución de $\gamma, \beta$ en \textit{ibm\_lagos}}
+\begin{figure}[Resultados QAOA {--} artículo de Urgelles \textit{et al.} (2022) {--} ejecución en computador real]{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos}{Ejecución de $\gamma, \beta$ en \textit{ibm\_lagos}}
   \centering
   \includegraphics[scale=0.4]{primer-grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos.png}
 \end{figure}
 
 Comparando las \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} y \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_lagos}}
-se aprecia la diferencia de ejecutar unos mismos parámetros en un simulador y un ordenador cuántico real.
+se aprecia la diferencia de ejecutar unos mismos parámetros en un simulador y un computador cuántico real.
 Aunque los resultados sean similares, el número de muestras en las que se obtuvo la cadena de bits correspondiente con el camino óptimo disminuye notablemente en la ejecución real, debido al ruido presente en toda ejecución de un circuito cuántico.
 
 
@@ -137,7 +137,7 @@ Aunque los resultados sean similares, el número de muestras en las que se obtuv
 
 Con respecto a los resultados de aplicar \textit{quantum annealing} utilizando los sistemas de D-Wave se ha obtenido el resultado de la \textit{tabla~\ref{tab:5-primer-dwave_estadisticas}}
 
-\begin{table}[Resultados D-Wave {--} artículo de Urgelles et al. (2022)]{tab:5-primer-dwave_estadisticas}{Resultados de la ejecución del camino más corto en grafo de 4 nodos en D-Wave}
+\begin{table}[Resultados D-Wave {--} artículo de Urgelles \textit{et al.} (2022)]{tab:5-primer-dwave_estadisticas}{Resultados de la ejecución del camino más corto en grafo de 4 nodos en D-Wave}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
@@ -169,7 +169,7 @@ En la siguiente sección se muestran unas estadísticas calculadas en la impleme
 Se utilizará para comparar con la implementación propia de QAOA, para así poder asegurarse de que el funcionamiento es el esperado.
 La función mencionada, \textit{QAOAAnsatz}, construye un circuito a partir de un hamiltoniano, que en este caso será equivalente al operador \textit{C} correspondiente al hamiltoniano del problema.
 
-\begin{table}[Resultados QAOAAnsatz {--} artículo de Urgelles et al. (2022)]{}{Resultados utilizando \textit{QAOAAnsatz} con el problema de la \textit{fig.~\ref{fig:4-primer_grafo}}}
+\begin{table}[Resultados QAOAAnsatz {--} artículo de Urgelles \textit{et al.} (2022)]{}{Resultados utilizando \textit{QAOAAnsatz} con el problema de la \textit{fig.~\ref{fig:4-primer_grafo}}}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline

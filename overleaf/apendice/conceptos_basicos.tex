@@ -1,10 +1,131 @@
-En esta sección se explican ciertos conceptos básicos sobre la computación cuántica para la comprensión de los algoritmos presentes en este trabajo.
+En esta sección se explican ciertos conceptos fundamentales empleados en la computación cuántica, para la comprensión de los algoritmos presentes en este trabajo.
 \\
 La función de estas explicaciones es dar una guía breve para entender lo explicado a gran escala, pero no se pretende tratar con todas las definiciones formales necesarias para desarrollar QAOA o QA\@.
 \\
 Para un aprendizaje en profundidad se recomienda acudir al libro de Nielsen \& Chuang (2010)\cite{Nielsen_Chuang_2010}, en el que se exponen las bases de la computación cuántica.
 
+\section{Postulados\label{sec:8-concepto-postulados}}
 
+En el libro de Nielsen \& Chuang (2010)\cite{Nielsen_Chuang_2010} se definen cuatro postulados de la computación cuántica, que consisten, de forma muy simplificada, en:
+
+\begin{enumerate}
+\item \textbf{Espacio de estados y estado de un sistema simple}:
+  \\
+  Este espacio de estados es un espacio de Hilbert complejo de 2 dimensiones.
+  El estado de un sistema, en este caso el qubit/s, viene dado por un vector unitario en el espacio de estados.
+  
+  Por ejemplo los qubits $\ket{0} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ y $\ket{1} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ se denominan la base computacional y en función de ella se describe cualquier qubit.
+  Por supuesto se podrían usar cualquier otra base con dos vectores ortonormales, pero se acepta la base computacional como estándar.
+  
+\item \textbf{Evolución de un sistema}:
+  \\
+  La evolución del sistema viene dada por la ecuación de Schrödinger, que describe cómo evoluciona un qubit/s $\ket{\psi}$ en función de un operador $H$, denominado el hamiltoniano del sistema.
+
+  \begin{align}
+    i \hbar * \frac{d \ket{\psi}}{d t} = H \ket{\psi}
+  \end{align}
+  
+\item \textbf{Medición}:
+  \\
+  El acto de medir un estado cuántico modifica su propio valor.
+  \\
+  Es posible medir en cualquier base, pero típicamente se mide en la base computacional, tal que el resultado de medir un estado cuántico será $\ket{0}$ o $\ket{1}$ con una probabilidad que será mayor a más cercano esté el estado de dicho vector de la base.
+
+\item \textbf{Sistemas compuestos}
+
+  Al unir dos o más qubits entre sí se crea un sistema compuesto, tal que el espacio de Hilbert asociado aumenta (para $n$ qubits tiene $2^n$ dimensiones).
+  La operación utilizada para esto se denomina producto tensorial, y se escribe como ``$\otimes$''.
+
+\end{enumerate}
+
+
+\section{Amplitud}
+
+Las amplitudes de un estado definido en una base ortonormal concreta definen cómo se construye dicho estado.
+\\
+De esta forma, para una base $\{\ket{i}\}$ donde cada vector $\ket{i}$ tiene una amplitud $i \in \mathbb{C}$ asociada para $\ket{\psi}$, se puede definir:
+
+\begin{align}
+  \ket{\psi} = \sum_{\ket{i}} i \ket{i}
+\end{align}
+
+Cuando las amplitudes $i$ se definen en función de la base computacional (${\{\ket{0}, \ket{1}\}}^{\otimes n}$) se cumple que la probabilidad de medir uno de esos estados $\ket{i}$ de la base computacional es:
+
+\begin{align}
+  P_{\ket{\psi}}(\ket{i}) = |i|^2
+\end{align}
+
+Ejemplo: En el estado $\ket{\psi} = a\ket{0} + b\ket{1}$ se tiene que al medir en la base computacional $P_{\ket{\psi}}(\ket{0}) = |a|^2$.
+
+\section{Energía\label{sec:8-concepto-energia}}
+
+El hamiltoniano describe el panorama energético de un sistema cuántico.
+Para un estado $\ket{\psi}$ se puede saber su energía $E$ a partir del hamiltoniano $H$:
+
+\begin{align}
+  E(\ket{\psi}) = \expval{H}{\psi}
+\end{align}
+
+Ejemplo: Dado un hamiltoniano $H = \begin{bmatrix} 1 & 0 \\ 0 & 2 \end{bmatrix}$ la energía del estado $\ket{+} = \frac{1}{\sqrt{2}} (\ket{0} + \ket{1})$ sería:
+
+\begin{align}
+  \bra{+}H\ket{+} = \begin{bmatrix} \sqrt{2}^{-1} & \sqrt{2}^{-1}\end{bmatrix} \cdot
+  \begin{bmatrix}
+    1 & 0 \\
+    0 & 2
+  \end{bmatrix} \cdot \begin{bmatrix} \sqrt{2}^{-1} \\ \sqrt{2}^{-1}\end{bmatrix} = 1.5
+\end{align}
+
+
+\section{Estado fundamental\label{sec:8-concepto-estado_fundamental}}
+
+El estado fundamental se refiere al estado $\ket{\psi^*}$ de menor energía del sistema.
+
+\begin{align}
+  \ket{\psi^*} = \min_{\ket{\psi} \in V} E(\ket{\psi})
+\end{align}
+
+En QAOA se define un operador $C$ que es diagonal en la base computacional con los valores de la función de coste.
+Un ejemplo de este operador es el de la \textit{ecuación~\ref{eq:apendice_ejemplo_operador_C}}.
+\\
+El operador $C$ tiene como energía el coste de la función clásica asociada.
+\\
+De esta forma, cuando en QAOA se habla del estado fundamental del operador $C$ se puede hablar de forma equivalente del mínimo de la función de coste.
+
+
+\section{Operador diagonal\label{sec:8-concepto-diagonal}}
+
+Un operador $M$ es diagonalizable si tiene una representación diagonal con respecto a alguna base ortonormal del espacio de Hilbert $V$.
+La representación diagonal de $M$ es:
+
+\begin{align}
+  M = \sum_\lambda \lambda \ket{\lambda} \bra{\lambda}
+\end{align}
+
+Donde $\lambda \in \mathbb{C}$ son los autovalores de $M$ y $\ket{\lambda} \in V$ sus respectivos autovectores (es decir, $M \ket{\lambda} = \lambda \ket{\lambda}$).
+
+Si la base de esa representación diagonal es la base computacional, la forma de $M$ será una matriz con 0s y los respectivos autovalores en la diagonal.
+
+Ejemplo: $M = \begin{bmatrix}
+  4 & 0 \\
+  0 & 9
+\end{bmatrix} = 4\ket{0} \bra{0} + 9\ket{1} \bra{1}$
+
+
+\section{Fase global\label{sec:8-concepto-fase_global}}
+
+La fase global de un estado $e^{i \theta}\ket{\psi}$ es el factor $e^{i \theta}$ y no modifica nunca la probabilidad de medición de los estados de la base computacional.
+Esto es debido a que, por cómo se define el postulado de la medición, la fase global se cancela.
+\\
+Es por esto que a efectos prácticos cuando se opera sobre $e^{i \theta}\ket{\psi}$ se puede operar de forma equivalente sobre $\ket{\psi}$.
+
+
+\section{Fase relativa\label{sec:8-concepto-fase_relativa}}
+Para dos amplitudes $i, j \in \mathbb{C}$ se dice que difieren por una fase relativa si existe $\theta \in \mathbb{R}$ tal que $i = \exp(i \theta)*j$.
+
+Siempre que se mida en la misma base, las variaciones en la fase relativa no modifican la probabilidad de medición.
+
+% Ejemplo: $- \frac{1}{2}\ket{0}$ y $\frac{1}{2}\ket{1}$ difieren por una fase relativa de $e^{i0} = 1$
 
 
 %%% Local Variables:

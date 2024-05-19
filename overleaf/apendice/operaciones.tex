@@ -6,46 +6,39 @@ En esta sección se muestra el desarrollo necesario para operar sobre operador $
 
 \begin{itemize}
 \item \textbf{Definiciones:}
-  \begin{align*}
+  \begin{align}
     I = \begin{bmatrix}
       1 & 0 \\
       0 & 1
     \end{bmatrix}
     , A^2 = I
-  \end{align*}
+  \end{align}
 
 \item \textbf{Desarrollo:}
 
-  \begin{align*}
+  \begin{align}
     \exp(i*\theta*A) &= \sum_{n = 0}^{\infty} \frac{{(i*\theta)}^n * A^n}{n!} = \\
                 &= (1*A^0 - \frac{\theta^2*A^2}{2!} + \frac{\theta^4*A^4}{4!} - \ldots) +
-                  i*(\theta*A^1 - \frac{\theta^3*A^3}{3!} + \frac{\theta^5*A^5}{5!} - \ldots) = \\
+                  i*(\theta*A^1 - \frac{\theta^3*A^3}{3!} + \frac{\theta^5*A^5}{5!} - \ldots) = \nonumber \\
                 &= I*(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \ldots) +
                   i*A*(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \ldots)
-                  = \cos(\theta)*I + i*\sin(\theta)*A
-  \end{align*}
+                  = \cos(\theta)*I + i*\sin(\theta)*A  \nonumber
+  \end{align}
 \end{itemize}
 
 \subsection{A es diagonalizable\label{sec:8-funcion A diagonalizable}}
 
-Un operador $A$ sobre un espacio $V$ es diagonalizable si es diagonal con respecto a alguna base ortonormal de $V$. La representación diagonal de $A$ tiene la siguiente forma:
+Dada una función $f$ definida sobre los números complejos se puede definir una función correspondiente sobre $A$ utilizando su representación diagonal(\textit{sección~\ref{sec:8-concepto-diagonal}}):
 
-\begin{align*}
-  A = \sum_\lambda \lambda \ket{\lambda}\bra{\lambda}
-\end{align*}
-Donde $\lambda$ son los autovalores de $A$ y $\ket{\lambda}$ sus respectivos autovectores.
-
-Dada una función $f$ definida sobre los números complejos se puede definir una función correspondiente sobre $A$ utilizando su representación diagonal:
-
-\begin{align*}
+\begin{align}
   f(A) = \sum_\lambda f(\lambda) \ket{\lambda}\bra{\lambda}
-\end{align*}
+\end{align}
 
 Concretamente, para $e^{i \theta A}$:
 
-\begin{align*}
+\begin{align}
    \exp( -i \theta A) = \sum_\lambda \exp(\lambda) \ket{\lambda}\bra{\lambda}
-\end{align*}
+\end{align}
 
 %%% Local Variables:
 %%% mode: latex
