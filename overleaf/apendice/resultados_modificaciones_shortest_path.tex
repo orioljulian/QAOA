@@ -13,7 +13,7 @@ Esta modificación ha consistido en añadir una restricción a la función de co
 La intención con este caso es que, al haber una restricción más, los caminos que rompan dicha restricción tengan un coste aún más elevado.
 Así los resultados deberían ser mejores, al filtrar de manera más agresiva ciertos caminos incongruentes.
 
-\begin{table}[Resultados QAOA {--} artículo de Urgelles et al. {--} restricción extra]{tab:5-primer-restriccion_extra-aer_estadisticas}{Resultados de la ejecución de QAOA añadiendo la restricción de la \textit{fórmula~\ref{eq:5-primer-restriccion_extra}}}
+\begin{table}[Resultados QAOA {--} artículo de Urgelles et al. (2022) {--} restricción extra]{tab:5-primer-restriccion_extra-aer_estadisticas}{Resultados de la ejecución de QAOA añadiendo la restricción de la \textit{fórmula~\ref{eq:5-primer-restriccion_extra}}}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
@@ -32,7 +32,7 @@ Los resultados (\textit{tabla~\ref{tab:5-primer-restriccion_extra-aer_estadistic
 La función gamma resultante (\textit{fig.~\ref{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}}) toma, en comparación con la original (\textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer_paper_p_27_gamma_fun}}), unos valores elevados.
 Se distingue un incremento en la diferencia entre los mínimos globales y los mínimos locales (no globales).
 
-\begin{figure}[Resultados QAOA {--} artículo de Shan et al. {--} función gamma con restricción extra]{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}{Función gamma. Con restricción extra}
+\begin{figure}[Resultados QAOA {--} artículo de Fan et al. (2023) {--} función gamma con restricción extra]{fig:5-primer_grafo/con_restriccion_extra/primer_restr_aer_gamma_fun}{Función gamma. Con restricción extra}
   \centering
   \includegraphics[scale=0.5]{primer-grafo/con_restriccion_extra/primer_restr_aer_gamma_fun.png}
 \end{figure}
@@ -44,9 +44,9 @@ En definitiva, aunque sí se obtienen unos resultados con un mayor índice de la
 
 \subsection{Omitir variabilidad en puertas $Rz$}
 
-Como primera modificación se ha omitido la variable $\gamma$ de los operadores $Rz$, haciendo así que se cometa una imprecisión igual a la del artículo publicado por Urgelles et al.\cite{multi-objective_routing_optimization}.
+Como primera modificación se ha omitido la variable $\gamma$ de los operadores $Rz$, haciendo así que se cometa una imprecisión igual a la del artículo publicado por Urgelles et al. (2022)\cite{multi-objective_routing_optimization}.
 
-\begin{table}[Resultados QAOA {--} artículo de Shan et al. {--} puertas $Rz$ constantes]{tab:5-zhiqiang-aer_estadisticas}{Ejecución de QAOA del camino más corto en grafo de la \textit{fig.~\ref{fig:4-zhiqiang_grafo}}}
+\begin{table}[Resultados QAOA {--} artículo de Fan et al. (2023) {--} puertas $Rz$ constantes]{tab:5-zhiqiang-aer_estadisticas}{Ejecución de QAOA del camino más corto en grafo de la \textit{fig.~\ref{fig:4-zhiqiang_grafo}}}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline
@@ -77,7 +77,7 @@ Este parámetro del algoritmo representa, como ha sido explicado anteriormente, 
 
 Con el fin de obtener una diferencia mayor en el coste entre los caminos válidos e inválidos se realizan pruebas sobre el caso mostrado en la \textit{tabla~\ref{tab:5-zhiqiang_mod-orig_estadisticas}} cambiando el valor del modificador de Lagrange a P=40.
 
-\begin{table}[Resultados QAOA {--} artículo de Shan et al. {--} $P = 40$]{tab:5-zhiqiang_mod-orig_estadisticas_p-40}{Resultados de la ejecución de QAOA del tercer grafo. P=40}
+\begin{table}[Resultados QAOA {--} artículo de Fan et al. (2023) {--} $P = 40$]{tab:5-zhiqiang_mod-orig_estadisticas_p-40}{Resultados de la ejecución de QAOA del tercer grafo. P=40}
   \centering
   \begin{tabular}{|c|r|r|}
     \hline

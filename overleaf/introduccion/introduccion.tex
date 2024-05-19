@@ -48,7 +48,7 @@ Este sistema es un dispositivo cuya función es resolver problemas de tipo QUBO\
 La formulación QUBO se ha convertido en un formato de entrada estándar para los \textit{quantum annealers}, al que se convierten los problemas de aplicaciones prácticas de interés.
 \\
 El cálculo se realiza mediante un algoritmo heurístico de optimización cuántica.
-Las ideas de la computación cuántica adiabática (E.Farhi et al., 2000~\cite{aqc}) son similares al algoritmo de recocido simulado clásico (simulated annealing), donde las fluctuaciones térmicas permiten que el sistema salte entre diferentes mínimos locales en la función de coste.
+Las ideas de la computación cuántica adiabática (Farhi et al., 2000~\cite{aqc}) son similares al algoritmo de recocido simulado clásico (simulated annealing), donde las fluctuaciones térmicas permiten que el sistema salte entre diferentes mínimos locales en la función de coste.
 \\
 En el \textit{quantum annealing}, las transiciones del sistema son impulsadas por el efecto túnel cuántico.
 Una propiedad que todas las QPU (\textit{Quantum Processing Units}) tienen es que la disposición física de los qubits es fija.
@@ -66,7 +66,7 @@ En este trabajo se tratarán sendos algoritmos de las dos tecnologías de comput
   La forma de implementarlo será al más bajo nivel, es decir, a nivel de puertas cuánticas, que es el equivalente a puertas lógicas en álgebra booleana, utilizando las librerías de Qiskit (IBM-Q) para su ejecución.
   En este trabajo será el algoritmo de mayor importancia, ya que el segundo se utilizará como comparación con este.\footnote{
     Existe un segundo significado de QAOA, Quantum Alternating Operator Ansatz~\cite{quantum_alternating_operator_ansatz}, que es una generalización del primero, con los operadores que se utilizan y la utilización de qudits (qubits de n-dimensiones) en lugar de qubits.
-    En este trabajo siempre que se mencione QAOA se referirá al primero, definido en el artículo de Farhi et al.~\cite{qaoa_paper_original}.
+    En este trabajo siempre que se mencione QAOA se referirá al primero, definido en el artículo de Farhi et al. (2014)\cite{qaoa_paper_original}.
   }
 
 \item El segundo algoritmo, ya introducido, será el de \textbf{Quantum Annealing} (QA).

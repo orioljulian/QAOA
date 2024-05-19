@@ -1,6 +1,6 @@
 Debido a los resultados obtenidos en el problema del camino más corto estudiado anteriormente (\textit{sección~\ref{sec:5-primer_grafo}}), se decide aplicar las mismas pruebas sobre otro grafo con el mismo problema.
 
-\begin{figure}[Grafo para estudio de capas {--} camino más corto]{fig:4-zhiqiang_grafo}{Grafo del problema (Shan et al., 2022\cite{solving_shortest_path_with_qaoa})}
+\begin{figure}[Grafo para estudio de capas {--} camino más corto]{fig:4-zhiqiang_grafo}{Grafo del problema (Fan et al., 2023\cite{solving_shortest_path_with_qaoa})}
   \centering
   \includegraphics[scale=0.75]{zhiqiang-grafo/zhiqiang-grafo.png}
 \end{figure}
@@ -64,17 +64,17 @@ Con el \textit{hamiltoniano de mezcla} y el vector inicial, definidos en la \tex
 
 \paragraph{Discusión de la diferencia entre circuitos de distintas implementaciones de QAOA}
 
-\begin{figure}[Circuito {--} shortest path de Shan et al.\ propio]{fig:4-zhiqiang_circuito}{ Circuito obtenido con la implementación de QAOA del TFG ($p=1$) }
+\begin{figure}[Circuito {--} shortest path de Fan et al. (2023) propio]{fig:4-zhiqiang_circuito}{ Circuito obtenido con la implementación de QAOA del TFG ($p=1$) }
   \centering
   \includegraphics[scale=0.4]{circuits/zhiqiang/zhiqiang-circuit-p1-var.png}
 \end{figure}
 
-\begin{figure}[Circuito {--} shortest path de Shan et al.\ de QAOAAnsatz]{fig:4-zhiqiang_QAOAAnsatz_circuito}{ Circuito generado por QAOAAnsatz ($p=1$) }
+\begin{figure}[Circuito {--} shortest path de Fan et al. (2023) de QAOAAnsatz]{fig:4-zhiqiang_QAOAAnsatz_circuito}{ Circuito generado por QAOAAnsatz ($p=1$) }
   \centering
   \includegraphics[scale=0.45]{circuits/zhiqiang/zhiqiang-circuit-qaoaAnsatz-p1.png}
 \end{figure}
 
-En el artículo por Shan et al.\cite{solving_shortest_path_with_qaoa}, del que se ha obtenido el problema, no se muestra la construcción del circuito de QAOA, por lo que el resultado obtenido en la \textit{fig.~\ref{fig:4-zhiqiang_circuito}} solo puede ser comparado con el circuito generado por la función \textit{QAOAAnsatz()} (fig.~\ref{fig:4-zhiqiang_QAOAAnsatz_circuito}).
+En el artículo por Fan et al. (2023)\cite{solving_shortest_path_with_qaoa}, del que se ha obtenido el problema, no se muestra la construcción del circuito de QAOA, por lo que el resultado obtenido en la \textit{fig.~\ref{fig:4-zhiqiang_circuito}} solo puede ser comparado con el circuito generado por la función \textit{QAOAAnsatz()} (fig.~\ref{fig:4-zhiqiang_QAOAAnsatz_circuito}).
 \\
 Como los circuitos son equivalentes se asume que la implementación del circuito parametrizado es correcta.
 
