@@ -15,7 +15,7 @@ En el libro de Nielsen \& Chuang (2010)\cite{Nielsen_Chuang_2010} se definen cua
   El estado de un sistema, en este caso el qubit/s, viene dado por un vector unitario en el espacio de estados.
   
   Por ejemplo los qubits $\ket{0} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ y $\ket{1} = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$ se denominan la base computacional y en función de ella se describe cualquier qubit.
-  Por supuesto se podrían usar cualquier otra base con dos vectores ortonormales, pero se acepta la base computacional como estándar.
+  Por supuesto se podría emplear cualquier otra base con dos vectores ortonormales, pero se acepta la base computacional como estándar.
   
 \item \textbf{Evolución de un sistema}:
   \\
@@ -29,11 +29,11 @@ En el libro de Nielsen \& Chuang (2010)\cite{Nielsen_Chuang_2010} se definen cua
   \\
   El acto de medir un estado cuántico modifica su propio valor.
   \\
-  Es posible medir en cualquier base, pero típicamente se mide en la base computacional, tal que el resultado de medir un estado cuántico será $\ket{0}$ o $\ket{1}$ con una probabilidad que será mayor a más cercano esté el estado de dicho vector de la base.
+  Es posible medir en cualquier base, pero típicamente se mide en la base computacional, tal que el resultado de medir un estado cuántico será $\ket{0}$ o $\ket{1}$ con una probabilidad que será mayor a más cercano sea el estado a dicho vector de la base.
 
 \item \textbf{Sistemas compuestos}
 
-  Al unir dos o más qubits entre sí se crea un sistema compuesto, tal que el espacio de Hilbert asociado aumenta (para $n$ qubits tiene $2^n$ dimensiones).
+  Al unir dos o más qubits entre sí se crea un sistema compuesto, tal que la dimensión del espacio de Hilbert asociado aumenta (para $n$ qubits tiene $2^n$ dimensiones).
   La operación utilizada para esto se denomina producto tensorial, y se escribe como ``$\otimes$''.
 
 \end{enumerate}
@@ -55,7 +55,7 @@ Cuando las amplitudes $i$ se definen en función de la base computacional (${\{\
   P_{\ket{\psi}}(\ket{i}) = |i|^2
 \end{align}
 
-Ejemplo: En el estado $\ket{\psi} = a\ket{0} + b\ket{1}$ se tiene que al medir en la base computacional $P_{\ket{\psi}}(\ket{0}) = |a|^2$.
+Ejemplo: En el estado $\ket{\psi} = a\ket{0} + b\ket{1}$, al medir en la base computacional $P_{\ket{\psi}}(\ket{0}) = |a|^2$.
 
 \section{Energía\label{sec:8-concepto-energia}}
 
@@ -90,7 +90,7 @@ Un ejemplo de este operador es el de la \textit{ecuación~\ref{eq:apendice_ejemp
 \\
 El operador $C$ tiene como energía el coste de la función clásica asociada.
 \\
-De esta forma, cuando en QAOA se habla del estado fundamental del operador $C$ se puede hablar de forma equivalente del mínimo de la función de coste.
+De esta forma, cuando en QAOA se habla del estado fundamental del operador $C$ se puede hablar de forma equivalente del estado que minimiza la función de coste.
 
 
 \section{Operador diagonal\label{sec:8-concepto-diagonal}}

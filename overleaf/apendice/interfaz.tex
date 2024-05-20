@@ -19,7 +19,7 @@ Por esto es necesario utilizar las mismas versiones de Qiskit, ya que en otro ca
   \end{tabular}
 \end{table}
 
-Concretamente se emplea el entorno de \textit{Qiskit Runtime}, que es el más nuevo hasta la fecha.
+Concretamente se emplea el entorno de \textit{Qiskit Runtime}, que es el más utilizado actualmente.
 
 \paragraph{Ejemplo de ejecución en simulador}
 
@@ -40,7 +40,7 @@ qc.measure_all()  # Instrucción para medir
 result = sampler.run(qc).result()  # Ejecutar circuito
 
 probabilities = result.quasi_dists[0]  # Resultados obtenidos en la ejecución
-# {0: 0.51, 3: 0.49}S
+# {0: 0.51, 3: 0.49}
 
 quasi_probabilities = probabilities.binary_probabilities()
 # {00: 0.51, 11: 0.49}
@@ -68,8 +68,8 @@ Para ejecutar en un simulador existen las llamadas primitivas \textit{qiskit.pri
   En el trabajo este objeto no ha sido utilizado, ya que el valor esperado necesario en QAOA (\textit{paso~\ref{it:3-algoritmo_valor_esperado}} del algoritmo) se puede calcular de manera clásica, a partir de la función de coste.
 \end{itemize}
 
-El circuito se ejecuta inicializando un objeto \textit{Sampler} con los parámetros necesarios, como el número de muestras (\textit{shots}).
-La ejecución se realiza en la línea 16 y el resto de instrucciones son para obtener los datos en un diccionario ``\{bits: probabilidades\}'' para obtener su histograma con \textit{qiskit.visualization.plot\_histogram}.
+El circuito del \textit{código~\ref{cod:8-ejecucion_qiskit_simulador}} se ejecuta inicializando un objeto \textit{Sampler} con los parámetros necesarios, como el número de muestras (\textit{shots}).
+La ejecución se realiza en la línea 16 y el resto de instrucciones son para obtener los datos en un diccionario ``\{bits: probabilidades\}'' para después obtener su histograma con \textit{qiskit.visualization.plot\_histogram}.
 
 
 \paragraph{Ejemplo de ejecución en ordenador real}
@@ -126,7 +126,7 @@ Los paquetes utilizados son los siguientes:
   \end{tabular}
 \end{table}
 
-\begin{lstlisting}[language=Python,label=cod:8-ejecucion_qiskit,caption={Ejemplo de ejecución en simulador de Qiskit},style=numbered]
+\begin{lstlisting}[language=Python,label=cod:8-ejecucion_qiskit,caption={Ejemplo de ejecución en D-Wave},style=numbered]
 from dimod import BinaryQuadraticModel
 # Inicializar modelo
 bqm = BinaryQuadraticModel("BINARY")
@@ -139,7 +139,7 @@ for variable in ["x", "y"]:
 # Añadir restriccion: 3x + 2y - 9 = 0
 bqm.add_linear_equality_constraint([("x", 3), ("y", 2)], constant=-9, lagrange_multiplier=P)
 
-# Execute program
+# Ejecutar programa
 sampler = EmbeddingComposite(DWaveSampler())
 sampleset = sampler.sample(bqm, num_reads=1024)
 print(sampleset)
@@ -149,7 +149,7 @@ En D-Wave el objeto \textit{dimod.BinaryQuadraticModel} (línea 3 del \textit{c�
 En este caso la inicialización a ``BINARY'' quiere decir que es tipo QBO, en el otro caso sería ``SPIN''.
 
 Tanto la introducción de la función de coste como la introducción de restricciones se realizan de formas similares a las líneas 8 y 11 del \textit{código~\ref{cod:8-ejecucion_qiskit}}.
-El argumento \textit{lagrange\_multiplier} corresponde con el modificador de Lagrange, utilizado para pasar de modelo QBO a QUBO\@.
+El argumento \textit{lagrange\_multiplier} corresponde al modificador de Lagrange, utilizado para pasar de modelo QBO a QUBO\@.
 
 Las sentencias posteriores (líneas 14, 15 del \textit{código~\ref{cod:8-ejecucion_qiskit}}) ejecutan el modelo creado en un ordenador de D-Wave, con una cantidad de muestras \textit{num\_reads}.
 
