@@ -1,22 +1,20 @@
-In the current context, in which the increase of technologies based in \textit{Big Data} is getting bigger, it is not unusal having problems considered trivial now being irresolvable in practice, due to their magnitude.
-\\
-It is crucial to find the most efficient methods for solving these problems, as they do not only make it possible to solve a problem with a lower cost, but to solve now unsolvable problems.
-\\\\
-The paradigm of quantum computation, which applies principles of quantum mechanics to computation, promises to be a tool to manage these problems with a time cost lower than the actual.
-\\
-Specifically in the context of optimization problems, in which the maximum or minimum of a cost function is searched, there are several algorithms that use quantum technologies to try to improve the already existing classical solutions.
-\\
-This is why in this writing an in-depth study about one of these algorithms, QAOA (\textit{Quantum Approximate Optimization Algorithm}) has been conducted.
-\\
-To acomplish this, a complete implementation of the algorithm has been developed and tried against optimization problems obtained from different sources.
-\\
-Also, the QA (\textit{Quantum Annealing}) algorithm has been used to compare with the results of these problems obtained by QAOA\@.
-\\\\
-Thus, the work developed has two main purposes.
+The paradigm of quantum computation, which applies principles of quantum mechanics to computation, promises to be a tool to manage problems that, due to the big amount of data or the extent of the search space, are not solvable at the moment with the available resources in classic computation, at the same time that a reduction of the execution time is achieved.
+
+This end-of-degree project is developed in the context of optimization problems and studies the application of algorithms in which the maximum or minimum of a cost function is searched.
+Trying to improve the available classical solutions, two quantum technologies have been used.
+
+Specifically, three optimization problems have been used to validate the hybrid functioning of QAOA (\textit{Quantum Approximate Optimization Algorithm}), that combines quantum computing, to obtain the optimal result of the cost function, and classical computing, to find the parameters that optimize the functioning of the circuit that evaluates said cost function.
+
+The result obtained with QAOA in generic quantum computers has been compared with the results obtained by QA (\textit{Quantum Annealing}) in D-Wave's quantum systems, specifically designed to solve optimization problems.
+
+Additionally, statistical analysis have been carried out on the obtained results, comparing the values published in two international articles with the ones obtained in this work and with the ones resulting from using methods available in the Qiskit programming environment.
+
+This end-of-degree project has been developed with two different objectives:
+
 \begin{itemize}
-\item A didactic purpose, for which a complete explanation of how and why QAOA works has been made, giving also a systematized construction of the algorithm.
-  
-\item A statistical purpose, for which the behaviour of the algorithm in different situations has been explored.
+\item A training and didactic objective, with a complete explanation of how and why QAOA works and how it compares with QA\@.
+
+\item The evaluation of the practical application of these algorithms with current quantum technologies, doing a statistical analysis to estimate the validity of the obtained results.
 \end{itemize}
 
 

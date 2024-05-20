@@ -1,22 +1,21 @@
-En el contexto actual, donde la presencia de tecnologías basadas en \textit{Big Data} es cada vez mayor, es muy común que problemas que antes se consideraban triviales sean ahora irresolubles en la práctica por su magnitud.
-\\
-Es crucial encontrar los métodos más eficientes para resolver estos problemas, ya que no solo hacen que un problema pueda ser resuelto con un coste menor, sino que problemas irresolubles puedan ser resueltos.
-\\\\
-El paradigma de la computación cuántica, que aplica principios de la mecánica cuántica a la computación, promete ser una herramienta para tratar estos problemas con un coste temporal menor al actual.
-\\
-Concretamente en el contexto de los problemas de optimización, en los que se busca el extremo de una función de coste, existen numerosos algoritmos que utilizan tecnologías cuánticas para tratar de mejorar las soluciones clásicas.
-\\
-Es por esto que en este trabajo se realiza un estudio en profundidad sobre el funcionamiento y rendimiento de uno de estos algoritmos, QAOA (\textit{Quantum Approximate Optimization Algorithm})\@.
-\\
-Para ello se ha realizado una implementación completa del algoritmo y se ha aplicado a problemas de optimización obtenidos de diferentes fuentes.
-\\
-Además, se ha utilizado el algoritmo de QA (\textit{Quantum Annealing}) para comparar con los resultados dados por QAOA a estos problemas.
-\\\\
-De esta forma se ha obtenido un trabajo con dos fines distintos.
-\begin{itemize}
-\item Un fin didáctico, por el cual se ha realizado una explicación completa de cómo y por qué funciona QAOA\@, dando también una construcción sistematizada del algoritmo.
+La computación cuántica, que aplica principios de la mecánica cuántica a la computación, promete ser una herramienta para tratar problemas que, por la gran cantidad de datos o por la dimensión del espacio de búsqueda, no son resolubles actualmente con los recursos disponibles en computación clásica, a la vez que se consigue disminuir el tiempo de ejecución.
 
-\item Un fin estadístico, por el que se ha explorado cómo se comporta el algoritmo en distintas situaciones.
+Este TFG se desarrolla en el contexto de los problemas de optimización y estudia la aplicación de algoritmos en los que se busca el extremo de una función de coste.
+Se ha evaluado la utilización de dos tecnologías cuánticas diferentes para tratar de mejorar las soluciones clásicas. 
+
+Concretamente, se han utilizado tres problemas de optimización para validar el funcionamiento híbrido del algoritmo QAOA (\textit{Quantum Approximate Optimization Algorithm}) que combina computación cuántica, para obtener el resultado óptimo de la función de coste, y computación clásica, para encontrar los parámetros que optimizan el funcionamiento del circuito que calcula dicha función de coste.
+
+Se han comparado  los resultados obtenidos con QAOA en ordenadores cuánticos generalistas, con los obtenidos por QA (\textit{Quantum Annealing}) en sistemas cuánticos D-Wave, específicos para problemas de optimización.
+
+Adicionalmente se han realizado análisis estadísticos de los resultados obtenidos, comparando los valores publicados en dos artículos internacionales con los que se obtienen en este TFG y con los que resultan de utilizar métodos de librería disponibles en el entorno de programación Qiskit.
+Para esto, se ha realizado la implementación completa del algoritmo QAOA\@.
+
+Este TFG ha sido desarrollado con dos objetivos distintos:
+
+\begin{itemize}
+\item Un objetivo formativo y didáctico, con una explicación completa de cómo y por qué funciona el algoritmo QAOA y cómo se compara con QA\@.
+
+\item La evaluación de la aplicación práctica de estos algoritmos con las tecnologías cuánticas actuales, realizando un análisis estadístico de la validez de los resultados obtenidos.
 \end{itemize}
 
 

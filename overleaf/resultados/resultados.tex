@@ -3,29 +3,29 @@ Así, cuando se habla del resultado de la ejecución de un circuito cuántico, c
 se refiere a probabilidades asociadas a cada estado de la base computacional, que han sido calculadas mediante sucesivas ejecuciones del programa.
 La cantidad de veces que se ejecuta cada circuito, viene dado por el número de \textit{muestras} (\textit{shots}).
 
-Todas las ejecuciones de Qiskit, salvo en casos señalados, han sido ejecutadas en un simulador en local utilizando los métodos de \textit{Qiskit Runtime}.
+Todas las ejecuciones de Qiskit, salvo en casos señalados, han sido ejecutadas en un simulador en local utilizando los métodos de \textit{Qiskit Runtime} y para las estadísticas necesarias han sido repetidas 1000 veces, que constituye el total de ejecuciones (\textit{TE}).
 
 Para los resultados de QAOA, con el fin de medir la eficacia de distintas ejecuciones, se han utilizado las siguientes métricas:
 
 \begin{enumerate}
 \item \textbf{NA/TE}:
   Con esta métrica se busca despreciar el ruido presente en cada ejecución.
-  Para ello se realizan \textit{n} ejecuciones distintas del algoritmo para un número \textit{p} de capas y se calcula el porcentaje de ejecuciones en los que se ha obtenido como resultado el camino óptimo del problema.
+  Para ello se realizan \textit{TE} ejecuciones distintas del algoritmo para un número \textit{p} de capas y se calcula el porcentaje de ejecuciones en los que se ha obtenido como resultado el camino óptimo del problema.
 
   \begin{align}
     \textnormal{NA/TE} = \frac{\textit{NA}}{\textit{TE}}
   \end{align}
 
-  Donde \textit{NA} (número de aciertos) es la cantidad de ejecuciones en las que se ha encontrado el camino óptimo y $\textit{TE} = n$ es el total de ejecuciones realizadas.
+  Donde \textit{NA} (número de aciertos) es la cantidad de ejecuciones en las que se ha encontrado el camino óptimo y $\textit{TE} = 1000$ es el total de ejecuciones realizadas.
 
   \paragraph{Ejemplo:}
-  Tomando como ejemplo de salida de QAOA la mostrada en la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} esto sumaría al cálculo de \textbf{NA/TE} $\frac{1}{n}$, ya que el camino óptimo es el obtenido en la mayor cantidad de muestras en la ejecución del circuito.
+  Tomando como ejemplo de salida de QAOA la mostrada en la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}} esto sumaría al cálculo de \textbf{NA/TE} $\frac{1}{n}$, ya que el camino óptimo es el obtenido con mayor probabilidad en la ejecución.
   
 \item \textbf{MM/TE}:
 
   Lo que se busca con esta métrica es la media de veces que el camino óptimo aparece en la ejecución del circuito de QAOA\@.
 
-  Como ya ha sido explicado, al ejecutar el circuito de QAOA en el último paso con $(\gamma_{opt}, \beta_{opt})$ el resultado obtenido tendrá tantos valores como \textit{muestras} tenga la instrucción (por defecto 1024)
+  Como ya ha sido explicado, al ejecutar el circuito de QAOA en el último paso con $(\gamma_{opt}, \beta_{opt})$ el resultado obtenido tendrá tantos valores como \textit{muestras} se indiquen al ejecutar el circuito (por defecto 1024)
 
   Es el caso de gráficas como la de la \textit{fig.~\ref{fig:5-primer_grafo/sin_restriccion_extra/primer-runtime-mod_paper-1_capa-nairobi_aer}}
   en la que el eje vertical muestra la probabilidad aproximada de cada valor.
@@ -43,11 +43,11 @@ Para los resultados de QAOA, con el fin de medir la eficacia de distintas ejecuc
   
 \item \textbf{Función gamma:}
   Se ha utilizado para comprobar la forma general que tiene la función \textit{execute\_circuit()}, a minimizar por el optimizador clásico.
-  Esta función pretende representar cómo varía el valor esperado del algoritmo con la variación del parámetro $\gamma_0$ para una versión del circuito correspondiente con $p = 1$.
-  Para esto se ha utilizado la función \textit{execute\_circuit()}, tomando un $\beta = 1$ constante y calculando el resultado para distintos valores de $\gamma$.
+  Esta función pretende representar cómo cambia el valor esperado del algoritmo con la variación del parámetro $\gamma_0$ para una versión del circuito correspondiente con $p = 1$.
+  Para esto se ha calculado el resultado del método \textit{execute\_circuit()}, con $\beta = 1$ constante para distintos valores de $\gamma$.
   Se ha elegido mantener $\beta$ constante porque, como ha sido explicado en la definición del hamiltoniano de mezcla (\textit{sección~\ref{sec:3-problem_y_mixer_hamiltonian}}), este sirve solo para convertir los cambios de fase generados por el hamiltoniano del problema en cambios en la amplitud, pero se ve afectado por la definición del problema específico a resolver.
 
-  Al variar \(\gamma\) y graficar la función resultante se puede intuir cómo de posible es encontrar mínimos locales de energía en lugar del mínimo global.
+  Al variar \(\gamma\) y representar la función resultante se puede intuir cómo de posible es encontrar mínimos locales de energía en lugar del mínimo global.
   Esto se traduce como la posibilidad de encontrar un resultado subóptimo para el problema, es decir, que el algoritmo falle.
 \end{enumerate}
 

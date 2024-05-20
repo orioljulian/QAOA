@@ -50,6 +50,7 @@ De acuerdo con los pasos descritos en la \textit{sección~\ref{sec:3-problemas d
 \end{align}
 
 El número de qubits del sistema cuántico es igual a la cantidad de variables de la función de coste, esto es, la cantidad de ejes del grafo.
+Por lo tanto se emplean 5 qubits.
 
 El paso de la función a formato Ising, explicado en la \textit{sección~\ref{sec:3-operador_c}}, para la conversión de la función de coste al circuito ansatz se realiza teniendo en cuenta que las variables $X$ toman valores 0 y 1.
 En este caso la correspondencia entre $X_{ij}$ y $z_k$ es la siguiente:
@@ -116,7 +117,7 @@ El circuito generado por el artículo (fig.~\ref{fig:4-primer_paper_circuito}) s
 
 Por esto se concluye que existe una imprecisión en la implementación del artículo y se notifica debidamente a los autores.
 \\
-Se han realizado pruebas utilizando ambos circuitos, para realizar las comparaciones debidas.
+Se han realizado pruebas utilizando ambos circuitos para realizar comparaciones y se ha comprobado que la implementación de este TFG coincide con la de la librería Qiskit.
 
 
 %%% Local Variables:

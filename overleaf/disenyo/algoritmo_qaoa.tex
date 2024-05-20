@@ -45,7 +45,7 @@ Para el estado construido se cumple que para un número de capas $p \rightarrow 
 
 Esto es equivalente a decir que el estado fundamental (sección~\ref{sec:8-concepto-estado_fundamental}) del sistema corresponde al valor mínimo de la función de coste.
 
-De esta forma, el optimizador clásico llamará en repetidas iteraciones a una función \textit{execute\_circuit()} con una entrada $(\vec{\beta}, \vec{\gamma})$ que devolverá como salida un valor mayor o igual al mínimo de la función de coste.
+De esta forma, el optimizador clásico llamará en repetidas iteraciones a una función con una entrada $(\vec{\beta}, \vec{\gamma})$ que devolverá como salida un valor mayor o igual al mínimo de la función de coste.
 Este resultado es el que el optimizador debe minimizar.
 
 En este caso el optimizador clásico que se utilizará es COBYLA (\textit{Constrained Optimization BY Linear Approximation}), de la librería de \textit{Python} \textit{scipy.minimize}.

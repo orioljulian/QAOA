@@ -1,21 +1,19 @@
-En este capítulo de la memoria se darán unas conclusiones sobre el aprendizaje que ha supuesto este proyecto y un planteamiento de trabajos futuros en los que aplicar estos algoritmos.
-
 \paragraph{Conclusiones}
 Se ha hecho una comparativa entre algoritmos de optimización en dos tecnologías de computación cuántica.
-De los resultados obtenidos se concluye que la tecnología de \textit{quantum annealing} actualmente presenta una mayor facilidad para la implementación inmediata de los problemas abordados, además de una mayor tasa de obtención del óptimo.
+De los resultados obtenidos se concluye que la tecnología de \textit{quantum annealing} actualmente presenta una mayor facilidad para la implementación inmediata de los problemas QUBO abordados, además de una mayor tasa de obtención del óptimo.
 \\
 En D-Wave la implementación de problemas de optimización es más directa.
-Se puede realizar una ejecución del algoritmo introduciendo la función de coste y restricciones del problema en el formato adecuado, ya que la aplicación del algoritmo es un sistema de caja negra.
+Se puede realizar una ejecución del algoritmo introduciendo la función de coste y restricciones del problema en el formato tipo QUBO, ya que la aplicación del algoritmo es un sistema de caja negra.
 \\
 Los resultados en D-Wave no muestran incongruencias, ya que todos los resultados inválidos quedan claramente diferenciados en la baja cantidad de muestras en las que se obtienen.
 Dentro de los caminos válidos, aunque todos resultan con una cantidad de muestras altas, el camino óptimo se diferencia por su menor energía, la cual es equivalente al coste de la función.
 
-Las principales aportaciones de este trabajo han sido:
+En cuanto a la ejecución de algoritmos de optimización en computadores cuánticos basados en circuitos, las principales aportaciones de este trabajo han sido:
 
 \begin{itemize}
 \item Realizar una explicación completa sobre el funcionamiento e implementación necesarios para resolver un problema de optimización combinatoria cualquiera utilizando QAOA\@.
   
-\item Desarrollar un código en el que se sistematiza la implementación del algoritmo partiendo de una función de coste cualquiera en formato Ising.
+\item Desarrollar un código en el que se sistematiza la implementación del algoritmo en un circuito cuántico partiendo de una función de coste cualquiera en formato Ising.
 
 \item Comparar ejecuciones en computadores reales tanto de D-Wave como de IBM-Q.
 \end{itemize}

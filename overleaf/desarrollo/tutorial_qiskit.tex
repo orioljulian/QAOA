@@ -22,7 +22,7 @@ Estas condiciones hacen que el algoritmo trabaje sobre un circuito pequeño, tan
 
 \end{itemize}
 
-Como \textit{QAOA} sirve para encontrar el mínimo de una función, se tomará la (\textit{ecuación \ref{eq:4-tutorial qiskit objetivo}}) $*-1$.
+Como \textit{QAOA} sirve para encontrar el mínimo de una función, se multiplicará la (\textit{ecuación \ref{eq:4-tutorial qiskit objetivo}}) $*-1$.
 \\
 De esta forma se tiene que la función de coste a minimizar para este problema en particular es la siguiente:
 
@@ -30,7 +30,7 @@ De esta forma se tiene que la función de coste a minimizar para este problema e
   f(x) = \sum_{(i, j) \in E} (x_i * (x_j - 1) + x_j * (x_i - 1))
 \end{align}
 
-Así, cada cláusula será $-1$ para una arista con dos nodos de distinto valor y 0 en otro caso.
+Así, cada cláusula del sumatorio será $-1$ para una arista con dos nodos de distinto valor y 0 en otro caso.
 
 Como el problema no tiene restricciones y las variables de entrada son $x_i \in \{0, 1\}$, el problema ya se encuentra en formato QUBO\@.
 El paso a formato Ising se realiza de acuerdo con lo descrito en la \textit{sección~\ref{sec:3-operador_c}}.
@@ -45,13 +45,13 @@ Además se debe tener en cuenta que debido al postulado de medición en mecánic
 \\
 Esto significa que dado un operador lineal $A$ y $n \in \mathbb{R}$: $e^{i \gamma n} \cdot e^{i \gamma A} = e^{i \gamma A}$
 
-También se emplean las siguientes definiciones:  % TODO: Mover las definiciones de puertas al apéndice. Tienen que ser referenciadas por distintas secciones
+Y teniendo en cuenta las siguientes definiciones:
 \begin{itemize}
 \item $ Rz_i(\lambda) = \exp(-i\frac{\lambda}{2}\sigma_i^z) $
 \item $ Rz_i z_j(\lambda) = \exp(-i\frac{\lambda}{2}\sigma_i^z \otimes \sigma_j^z) $
 \end{itemize}
 
-De esta forma:
+Se obtiene:
 
 \begin{align}
   U(C, \gamma) &=  \exp(-i*\gamma*C) = \exp(-i*\gamma* \sum_{(i, j) \in E} \frac{\sigma_i^z \otimes \sigma_j^z - 1}{2}) = \nonumber \\
@@ -79,9 +79,10 @@ Con el operador \(U(B, \beta)\) y el vector inicial, definidos en la \textit{sec
   \includegraphics[scale=0.6]{circuits/qiskit/qiskit-circuit-qaoaAnsatz-p1.png}
 \end{figure}
 
-El circuito generado con la implementación propia del código (\textit{fig.~\ref{fig:4-qiskit_circuito}}) y el generado por la función \textit{QAOAAnsatz} (\textit{fig.~\ref{fig:4-qiskit_QAOAAnsatz_circuito}}) son equivalentes, ya que las diferencias son únicamente visuales con respecto a la disposición de las puertas.
+El circuito generado con el desarrollo de este TFG (\textit{fig.~\ref{fig:4-qiskit_circuito}}) y el generado por la función \textit{QAOAAnsatz} de la librería Qiskit (\textit{fig.~\ref{fig:4-qiskit_QAOAAnsatz_circuito}}) son equivalentes.
+Las diferencias son únicamente visuales con respecto a la disposición de las puertas.
 
-El circuito obtenido de la fuente del problema (\textit{fig.~\ref{fig:4-qiskit_tutorial_circuito}}) corresponde a desarrollar los mismos cálculos solo que con $f_2(x) = 2*f(x)$ como función de coste.
+El circuito obtenido de la página web tutorial de Qiskit\cite{qiskit_tutorial_antiguo} (\textit{fig.~\ref{fig:4-qiskit_tutorial_circuito}}) corresponde a desarrollar los mismos cálculos solo que con $f_2(x) = 2*f(x)$ como función de coste.
 \\
 Aunque las puertas \textit{Rzz} tengan coeficientes distintos ambas son correctas.
 Esto es porque ambos circuitos resultantes tienen un mismo estado fundamental, solo que uno lo tiene con el doble de energía que el otro.
