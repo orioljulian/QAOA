@@ -3,7 +3,7 @@
 Este repositorio corresponde al TFG contenido en el mismo.
 Aquí se encuentra todo el texto escrito en LaTeX, así como el código empleado para el trabajo.
 
-En la sección "Repositorio de código" del apéndice se encuentra una explicación de los cuadernos utilizados.
+En la sección "Repositorio de código" del apéndice de *./tfg.pdf* se encuentra una explicación de los cuadernos utilizados.
 
 ## Entorno de ejecución
 

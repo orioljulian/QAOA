@@ -6,7 +6,7 @@
 !requirements_qiskit.txt
 !requirements_dwave.txt
 !readme.md
-!esquema.pptx
+!tfg.pdf
 
 !overleaf/
 overleaf/*.bash
